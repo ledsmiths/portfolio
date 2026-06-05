@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VitaPaw — Add New Pet</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Add Pet page ─────────────────────────────────────────────── */
+    .ap-body {
+      display: flex; flex-direction: column; height: 100%; background: #f0f2f7;
+    }
+
+    /* Nav */
+    .ap-nav {
+      display: flex; align-items: center; justify-content: center;
+      padding: 10px 16px 10px; position: relative;
+      background: #f7fafe; flex-shrink: 0;
+      border-bottom: 0.5px solid rgba(203,223,250,0.5);
+    }
+    .ap-back {
+      position: absolute; left: 16px; cursor: pointer;
+      width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+    }
+    .ap-nav-title { font-size: 16px; font-weight: 600; color: #2A282F; }
+
+    /* Scrollable area */
+    .ap-scroll { flex: 1; overflow-y: auto; padding: 20px 16px 12px; }
+    .ap-scroll::-webkit-scrollbar { display: none; }
+
+    /* Avatar */
+    .ap-avatar-wrap { display: flex; justify-content: center; margin-bottom: 20px; }
+    .ap-avatar-btn {
+      position: relative; width: 66px; height: 66px;
+      border-radius: 50%; cursor: pointer; flex-shrink: 0;
+      background: none; border: none; padding: 0;
+    }
+    .ap-avatar-btn:active { opacity: .85; }
+    .ap-avatar {
+      width: 66px; height: 66px; border-radius: 50%; overflow: hidden;
+      border: 2px solid rgba(110,118,254,0.25); background: #e8d5c4;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ap-avatar-badge {
+      position: absolute; bottom: 1px; right: 1px;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: #6e76fe; display: flex; align-items: center; justify-content: center;
+      border: 2px solid #f0f2f7;
+    }
+
+    /* Heading */
+    .ap-heading {
+      font-size: 20px; font-weight: 700; color: #2A282F;
+      margin-bottom: 14px; letter-spacing: -0.4px; padding: 0 2px;
+    }
+
+    /* Form card */
+    .ap-card {
+      background: #fff; border-radius: 14px; overflow: hidden;
+      box-shadow: 0 1px 12px rgba(203,223,250,0.45); margin-bottom: 18px;
+    }
+
+    /* Horizontal divider — inset 16px each side to match field padding */
+    .ap-div { height: 1px; background: #edf0f7; margin: 0 16px; }
+
+    /* Field rows */
+    .ap-field-row { padding: 14px 16px; }
+
+    .ap-field-label {
+      font-size: 11px; color: #5F6C85; letter-spacing: 0.1px;
+      display: block; margin-bottom: 8px;
+    }
+
+    /* Text inputs */
+    .ap-field-input {
+      width: 100%; border: none; outline: none;
+      font-size: 15px; color: #2A282F; font-weight: 500;
+      font-family: inherit; background: transparent; padding: 0;
+    }
+    .ap-field-input::placeholder { color: #c0c8d8; font-weight: 400; }
+
+    /* Textarea */
+    .ap-field-textarea {
+      width: 100%; border: none; outline: none;
+      font-size: 14px; color: #2A282F; font-family: inherit;
+      background: transparent; resize: none; min-height: 56px;
+      line-height: 1.5; padding: 0;
+    }
+    .ap-field-textarea::placeholder { color: #c0c8d8; }
+
+    /* Pill toggle (Gender / Neutered) */
+    .ap-pill-group { display: flex; gap: 8px; }
+    .ap-pill {
+      flex: 1; height: 28px; border-radius: 6px;
+      border: 1.5px solid #e0e4ee; background: #f7fafe;
+      color: #5F6C85; font-size: 12px; font-weight: 500;
+      cursor: pointer; font-family: inherit;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .ap-pill.active { background: #868DFF; color: #fff; border-color: #868DFF; }
+    .ap-pill:not(.active):active { background: #edf0f7; }
+
+    /* ── Medical History ─────────────────────────────────── */
+
+    /* Disease tags area */
+    .ap-med-tags {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px;
+    }
+
+    /* Each disease tag — same style as the add button */
+    .ap-med-tag {
+      display: inline-flex; align-items: center; gap: 7px;
+      border: 1.5px solid #868DFF; border-radius: 6px;
+      padding: 5px 10px 5px 14px; font-size: 13px; color: #868DFF;
+      font-weight: 500; background: none;
+    }
+    .ap-tag-x {
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; opacity: 0.7; line-height: 1;
+      transition: opacity 0.15s;
+    }
+    .ap-tag-x:hover { opacity: 1; }
+
+    /* Search input for medical history */
+    .ap-med-input {
+      width: 100%; border: none; border-bottom: 1.5px solid #c0c8d8; outline: none;
+      font-size: 14px; color: #2A282F; font-family: inherit;
+      background: transparent; padding: 4px 0; transition: border-color 0.2s;
+    }
+    .ap-med-input:focus { border-bottom-color: #868DFF; }
+    .ap-med-input::placeholder { color: #c0c8d8; }
+
+    /* Confirm + Cancel action row (below the input) */
+    .ap-med-actions {
+      display: flex; align-items: center; gap: 12px; margin-top: 10px;
+    }
+
+    /* Confirm button inside medical search */
+    .ap-med-confirm-btn {
+      height: 30px; padding: 0 16px;
+      border-radius: 6px; border: none;
+      background: #868DFF; color: #fff;
+      font-size: 12px; font-weight: 600;
+      cursor: pointer; font-family: inherit;
+    }
+    .ap-med-confirm-btn:active { opacity: 0.85; }
+
+    /* Cancel — plain text only, no border / background */
+    .ap-med-cancel-text {
+      font-size: 13px; color: #5F6C85; cursor: pointer;
+      font-weight: 500; background: none; border: none;
+      font-family: inherit; padding: 0;
+    }
+    .ap-med-cancel-text:active { opacity: 0.6; }
+
+    /* Add button */
+    .ap-add-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      border: 1.5px solid #868DFF; border-radius: 6px;
+      padding: 5px 14px; font-size: 13px; color: #868DFF;
+      font-weight: 500; background: none; cursor: pointer;
+      font-family: inherit; white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .ap-add-btn:active { background: rgba(134,141,255,0.08); }
+
+
+    /* ── Confirm + Delete row ───────────────────────────── */
+    .ap-action-row {
+      display: flex; gap: 10px; align-items: center;
+    }
+
+    /* Delete button — Ignore button style, icon-only, square */
+    .ap-delete-btn {
+      flex-shrink: 0;
+      width: 46px; height: 46px;
+      border-radius: 6px;
+      border: 2px solid #868DFF;
+      background: #fff; color: #868DFF;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s;
+    }
+    .ap-delete-btn:active { background: rgba(134,141,255,0.10); }
+
+    /* ── Delete confirmation modal ───────────────────────── */
+    .ap-modal-overlay {
+      position: absolute; inset: 0; z-index: 200;
+      background: rgba(42,40,47,0.45);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ap-modal {
+      background: #fff; border-radius: 14px;
+      margin: 0 28px; padding: 24px 20px 20px;
+      width: 100%;
+    }
+    .ap-modal-title {
+      font-size: 16px; font-weight: 700; color: #2A282F;
+      margin-bottom: 10px; letter-spacing: -0.3px;
+    }
+    .ap-modal-body {
+      font-size: 13px; color: #5F6C85; line-height: 1.5; margin-bottom: 22px;
+    }
+    .ap-modal-btns {
+      display: flex; gap: 10px;
+    }
+    .ap-modal-cancel {
+      flex: 1; height: 44px; border-radius: 6px;
+      border: 1.5px solid #d0d6e0; background: #fff;
+      color: #5F6C85; font-size: 14px; font-weight: 600;
+      cursor: pointer; font-family: inherit;
+    }
+    .ap-modal-cancel:active { background: #f7fafe; }
+    .ap-modal-confirm-del {
+      flex: 1; height: 44px; border-radius: 6px;
+      border: none; background: #FF4D4D;
+      color: #fff; font-size: 14px; font-weight: 600;
+      cursor: pointer; font-family: inherit;
+    }
+    .ap-modal-confirm-del:active { opacity: 0.88; }
+
+    /* ── Confirm button (matches Mark as seen shape) ─────── */
+    .ap-confirm-btn {
+      width: 100%; height: 46px; border-radius: 6px; border: none;
+      font-size: 14px; font-weight: 600; cursor: default;
+      font-family: inherit; letter-spacing: -0.1px;
+      transition: background 0.3s ease, color 0.3s ease;
+      background: rgba(134,141,255,0.18); color: #868DFF;
+    }
+    .ap-confirm-btn.ready {
+      background: #868DFF; color: #fff; cursor: pointer;
+    }
+    .ap-confirm-btn.ready:active { opacity: 0.88; }
+
+    /* Home indicator */
+    .home-ind {
+      height: 28px; display: flex; align-items: center; justify-content: center;
+      background: #f0f2f7; flex-shrink: 0;
+    }
+    .home-bar { width: 120px; height: 4px; border-radius: 2px; background: rgba(42,40,47,0.18); }
+  </style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="ca" viewBox="0 0 72 72">
+      <circle cx="36" cy="36" r="36" fill="#e8d5c4"/>
+      <ellipse cx="36" cy="42" rx="18" ry="16" fill="#d4b89a"/>
+      <circle cx="28" cy="32" r="7" fill="#fff"/><circle cx="44" cy="32" r="7" fill="#fff"/>
+      <circle cx="29" cy="33" r="4" fill="#4a3728"/><circle cx="45" cy="33" r="4" fill="#4a3728"/>
+      <circle cx="30" cy="32" r="1.5" fill="#fff"/><circle cx="46" cy="32" r="1.5" fill="#fff"/>
+      <ellipse cx="36" cy="40" rx="4" ry="3" fill="#c9967a"/>
+      <path d="M32 44 Q36 47 40 44" stroke="#8b5e3c" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      <line x1="20" y1="38" x2="12" y2="36" stroke="#8b5e3c" stroke-width="1"/>
+      <line x1="20" y1="40" x2="11" y2="40" stroke="#8b5e3c" stroke-width="1"/>
+      <line x1="52" y1="38" x2="60" y2="36" stroke="#8b5e3c" stroke-width="1"/>
+      <line x1="52" y1="40" x2="61" y2="40" stroke="#8b5e3c" stroke-width="1"/>
+      <polygon points="18,14 24,26 12,26" fill="#e8d5c4"/>
+      <polygon points="54,14 60,26 48,26" fill="#e8d5c4"/>
+      <polygon points="19,16 23,24 15,24" fill="#f0a0a0"/>
+      <polygon points="53,16 57,24 49,24" fill="#f0a0a0"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="screen-wrap">
+  <div class="screen">
+    <div class="ap-body">
+
+      <!-- Status bar -->
+      <div class="status-bar sb-light">
+        <span>9:41</span>
+        <div class="status-icons">
+          <svg width="15" height="11" viewBox="0 0 15 11" fill="#171717"><rect x="0" y="4" width="3" height="7" rx="1"/><rect x="4" y="2.5" width="3" height="8.5" rx="1"/><rect x="8" y="1" width="3" height="10" rx="1"/><rect x="12" y="0" width="3" height="11" rx="1" opacity="0.25"/></svg>
+          <svg width="13" height="11" viewBox="0 0 13 11" fill="none" stroke="#171717" stroke-width="1.2"><path d="M6.5 4C8 2.5 10.2 2.5 11.7 4" opacity="0.35"/><path d="M6.5 4C5 2.5 2.8 2.5 1.3 4" opacity="0.35"/><path d="M4.5 6C5.3 5 7.7 5 8.5 6"/><circle cx="6.5" cy="8.5" r="1" fill="#171717" stroke="none"/></svg>
+          <svg width="23" height="11" viewBox="0 0 23 11" fill="none"><rect x="0.5" y="0.5" width="19" height="10" rx="3.5" stroke="#171717"/><path d="M20.5 3.5C21.8 3.8 22.5 4.5 22.5 5.5C22.5 6.5 21.8 7.2 20.5 7.5" stroke="#171717" stroke-width="1.1"/><rect x="2" y="2" width="15" height="7" rx="2" fill="#171717"/></svg>
+        </div>
+      </div>
+
+      <!-- Nav -->
+      <div class="ap-nav">
+        <div class="ap-back" onclick="history.back()">
+          <svg width="10" height="17" viewBox="0 0 10 17" fill="none">
+            <path d="M9 1L1 8.5L9 16" stroke="#2A282F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="ap-nav-title">Add New Pets</span>
+      </div>
+
+      <!-- Scrollable content -->
+      <div class="ap-scroll">
+
+        <!-- Avatar -->
+        <div class="ap-avatar-wrap">
+          <button class="ap-avatar-btn" onclick="document.getElementById('ap-avatar-input').click()" type="button">
+            <div class="ap-avatar" id="ap-avatar-display">
+              <svg viewBox="0 0 72 72" width="66" height="66" id="ap-avatar-svg">
+                <use href="#ca" width="72" height="72"/>
+              </svg>
+            </div>
+            <div class="ap-avatar-badge">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                <circle cx="12" cy="13" r="4"/>
+              </svg>
+            </div>
+          </button>
+          <input id="ap-avatar-input" type="file" accept="image/*" style="display:none;" onchange="previewAvatar(event)"/>
+        </div>
+
+        <!-- Heading -->
+        <div class="ap-heading">Pet Details</div>
+
+        <!-- Form card -->
+        <div class="ap-card">
+
+          <!-- Name (required) -->
+          <div class="ap-field-row">
+            <label class="ap-field-label">Name *</label>
+            <input class="ap-field-input" type="text" placeholder="Enter pet name"
+                   id="f-name" oninput="updateConfirm()" />
+          </div>
+          <div class="ap-div"></div>
+
+          <!-- Birthday -->
+          <div class="ap-field-row">
+            <label class="ap-field-label">Birthday</label>
+            <input class="ap-field-input" type="text" placeholder="MM/DD/YYYY" id="f-birthday" />
+          </div>
+          <div class="ap-div"></div>
+
+          <!-- Breed (auto-detected, editable) -->
+          <div class="ap-field-row">
+            <label class="ap-field-label">Breed · Auto-detected</label>
+            <input class="ap-field-input" type="text" value="Domestic Shorthair" id="f-breed" />
+          </div>
+          <div class="ap-div"></div>
+
+          <!-- Gender -->
+          <div class="ap-field-row">
+            <label class="ap-field-label">Gender</label>
+            <div class="ap-pill-group">
+              <button class="ap-pill active" id="pill-male"   onclick="selectPill('gender','pill-male')">Male</button>
+              <button class="ap-pill"        id="pill-female" onclick="selectPill('gender','pill-female')">Female</button>
+            </div>
+          </div>
+          <div class="ap-div"></div>
+
+          <!-- Neutered Status -->
+          <div class="ap-field-row">
+            <label class="ap-field-label">Neutered Status</label>
+            <div class="ap-pill-group">
+              <button class="ap-pill active" id="pill-neutered" onclick="selectPill('neuter','pill-neutered')">Neutered</button>
+              <button class="ap-pill"        id="pill-intact"   onclick="selectPill('neuter','pill-intact')">Intact</button>
+            </div>
+          </div>
+          <div class="ap-div"></div>
+
+          <!-- Weight -->
+          <div class="ap-field-row">
+            <label class="ap-field-label">Weight</label>
+            <input class="ap-field-input" type="text" placeholder="e.g. 5 kg" id="f-weight" />
+          </div>
+          <div class="ap-div"></div>
+
+          <!-- Medical History -->
+          <div class="ap-field-row">
+            <label class="ap-field-label">Medical History</label>
+
+            <!-- Added disease tags -->
+            <div class="ap-med-tags" id="med-tags"></div>
+
+            <!-- Search mode: input + Confirm / Cancel on same row (hidden by default) -->
+            <div id="med-search" style="display:none; margin-bottom:10px;">
+              <input class="ap-med-input" type="text" id="med-input"
+                     placeholder="Type disease name..." />
+              <div class="ap-med-actions">
+                <button class="ap-med-confirm-btn" onclick="submitDisease()">Confirm</button>
+                <button class="ap-med-cancel-text" onclick="closeMedMode()">Cancel</button>
+              </div>
+            </div>
+
+            <!-- Add button (shown when search is closed) -->
+            <button class="ap-add-btn" id="med-btn" onclick="openMedMode()">
+              add
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#868DFF" stroke-width="2.5" stroke-linecap="round">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </button>
+          </div>
+          <div class="ap-div"></div>
+
+          <!-- Additional Information -->
+          <div class="ap-field-row">
+            <label class="ap-field-label">Additional Information</label>
+            <textarea class="ap-field-textarea"
+                      placeholder="Please fill in other special behaviours or information..."
+                      id="f-additional"></textarea>
+          </div>
+
+        </div><!-- /ap-card -->
+
+        <!-- Confirm + Delete row -->
+        <div class="ap-action-row">
+          <!-- Delete button (shown only in edit mode) -->
+          <button class="ap-delete-btn" id="delete-btn" style="display:none;" onclick="openDeleteModal()" title="Delete profile">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="3 6 5 6 21 6"/>
+              <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+              <path d="M10 11v6M14 11v6"/>
+              <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+            </svg>
+          </button>
+          <button class="ap-confirm-btn" id="confirm-btn" onclick="confirmAdd()">Confirm</button>
+        </div>
+
+        <div style="height:12px;"></div>
+      </div><!-- /ap-scroll -->
+
+      <div class="home-ind"><div class="home-bar"></div></div>
+
+    </div><!-- /ap-body -->
+
+    <!-- Delete confirmation modal (covers the whole screen) -->
+    <div class="ap-modal-overlay" id="delete-modal" style="display:none;">
+      <div class="ap-modal">
+        <div class="ap-modal-title">Delete profile?</div>
+        <div class="ap-modal-body" id="modal-body-text">This pet will be permanently removed from your list.</div>
+        <div class="ap-modal-btns">
+          <button class="ap-modal-cancel" onclick="closeDeleteModal()">Cancel</button>
+          <button class="ap-modal-confirm-del" onclick="confirmDelete()">Delete</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script>
+  /* ── Avatar preview ──────────────────────────────────── */
+  function previewAvatar(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const display = document.getElementById('ap-avatar-display');
+      let img = display.querySelector('img.ap-avatar-img');
+      if (!img) {
+        img = document.createElement('img');
+        img.className = 'ap-avatar-img';
+        img.style.cssText = 'width:66px;height:66px;border-radius:50%;object-fit:cover;position:absolute;top:0;left:0;';
+        display.appendChild(img);
+      }
+      img.src = e.target.result;
+      document.getElementById('ap-avatar-svg').style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  /* ── Pill toggles ─────────────────────────────────────── */
+  const pillGroups = {
+    gender: ['pill-male', 'pill-female'],
+    neuter: ['pill-neutered', 'pill-intact'],
+  };
+  function selectPill(group, activeId) {
+    pillGroups[group].forEach(id =>
+      document.getElementById(id).classList.toggle('active', id === activeId)
+    );
+  }
+
+  /* ── Confirm button: active when Name is filled ───────── */
+  function updateConfirm() {
+    const hasName = document.getElementById('f-name').value.trim() !== '';
+    document.getElementById('confirm-btn').classList.toggle('ready', hasName);
+  }
+
+  /* ── Edit-mode state ─────────────────────────────────── */
+  let _editPetId = null;
+  let _editOriginal = null;
+
+  function collectFormData() {
+    const val = id => document.getElementById(id).value.trim();
+    const activePill = group =>
+      document.querySelector('#' + pillGroups[group].join(',#') + '.active')
+        ?.textContent.trim() || '';
+    const medicalHistory = [...document.querySelectorAll('#med-tags .ap-med-tag')]
+      .map(tag => tag.firstChild.textContent.trim()).filter(Boolean);
+
+    return {
+      name:           val('f-name'),
+      weight:         val('f-weight')   || 'N/A',
+      birthday:       val('f-birthday') || 'N/A',
+      breed:          val('f-breed')    || 'N/A',
+      neuteredStatus: activePill('neuter') || 'Neutered',
+      gender:         activePill('gender') || 'Male',
+      address:        val('f-additional'),
+      medicalHistory,
+    };
+  }
+
+  function confirmAdd() {
+    if (!document.getElementById('confirm-btn').classList.contains('ready')) return;
+
+    const data = collectFormData();
+
+    if (_editPetId) {
+      /* ── Edit mode: merge new data into original pet object ── */
+      const updated = { ..._editOriginal, ...data };
+      saveOrUpdatePet(updated);
+      location.href = 'pet-info.html?id=' + _editPetId;
+    } else {
+      /* ── Add mode: create new pet ── */
+      const newPet = {
+        id:           'custom_' + Date.now(),
+        avatar:       'ca',
+        recentEvents: [],
+        isNew:        true,
+        ...data,
+      };
+      saveOrUpdatePet(newPet);
+      location.href = 'pets.html';
+    }
+  }
+
+  /* ── Delete modal ────────────────────────────────────── */
+  function openDeleteModal() {
+    document.getElementById('delete-modal').style.display = 'flex';
+  }
+  function closeDeleteModal() {
+    document.getElementById('delete-modal').style.display = 'none';
+  }
+  function confirmDelete() {
+    if (!_editPetId) return;
+    // Remove from customPets (static pets stay in PETS; override is removed)
+    const list = getCustomPets().filter(p => p.id !== _editPetId);
+    localStorage.setItem('customPets', JSON.stringify(list));
+    location.href = 'pets.html';
+  }
+
+  /* ── Edit-mode init (called after DOMContentLoaded) ─── */
+  function initEditMode(petId) {
+    const pet = getAllPets().find(p => p.id === petId);
+    if (!pet) return;
+    _editPetId   = petId;
+    _editOriginal = pet;
+
+    // Show delete button
+    document.getElementById('delete-btn').style.display = 'flex';
+    // Update modal body with pet name
+    document.getElementById('modal-body-text').textContent =
+      `"${pet.name}" will be permanently removed from your list.`;
+
+    // Nav title
+    document.querySelector('.ap-nav-title').textContent = 'Edit Pet Info';
+    // Back → pet info page
+    document.querySelector('.ap-back').onclick = () =>
+      location.href = 'pet-info.html?id=' + petId;
+
+    // Pre-fill text fields
+    const setVal = (id, v) => { document.getElementById(id).value = v || ''; };
+    setVal('f-name',       pet.name);
+    setVal('f-birthday',   pet.birthday   === 'N/A' ? '' : pet.birthday);
+    setVal('f-breed',      pet.breed      === 'N/A' ? '' : pet.breed);
+    setVal('f-weight',     pet.weight     === 'N/A' ? '' : pet.weight);
+    setVal('f-additional', pet.address);
+
+    // Gender pill
+    const genderPill = pet.gender === 'Female' ? 'pill-female' : 'pill-male';
+    selectPill('gender', genderPill);
+
+    // Neutered status pill
+    const neuterPill = (pet.neuteredStatus === 'Intact' || pet.neuteredStatus === 'Not neutered')
+      ? 'pill-intact' : 'pill-neutered';
+    selectPill('neuter', neuterPill);
+
+    // Medical history tags
+    if (pet.medicalHistory && pet.medicalHistory.length > 0) {
+      pet.medicalHistory.forEach(d => addDiseaseTag(d));
+    }
+
+    // Activate confirm since name is already filled
+    updateConfirm();
+  }
+
+  /* ── Medical History ──────────────────────────────────── */
+  function openMedMode() {
+    document.getElementById('med-search').style.display = 'block';
+    document.getElementById('med-btn').style.display    = 'none';
+    document.getElementById('med-input').focus();
+  }
+
+  function closeMedMode() {
+    document.getElementById('med-search').style.display = 'none';
+    document.getElementById('med-btn').style.display    = 'inline-flex';
+    document.getElementById('med-input').value = '';
+  }
+
+  function addDiseaseTag(name) {
+    const tagsEl = document.getElementById('med-tags');
+
+    const tag = document.createElement('div');
+    tag.className = 'ap-med-tag';
+    tag.innerHTML =
+      name +
+      `<span class="ap-tag-x" onclick="removeTag(this)">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+             stroke="#868DFF" stroke-width="2.8" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </span>`;
+    tagsEl.appendChild(tag);
+  }
+
+  function removeTag(el) {
+    el.closest('.ap-med-tag').remove();
+  }
+
+  function submitDisease() {
+    const val = document.getElementById('med-input').value.trim();
+    if (!val) return;
+    addDiseaseTag(val);
+    closeMedMode();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Medical history: Enter key to confirm
+    document.getElementById('med-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); submitDisease(); }
+    });
+
+    // Edit mode: pre-fill if ?edit=<id> is in URL
+    const editId = new URLSearchParams(location.search).get('edit');
+    if (editId) initEditMode(editId);
+  });
+</script>
+</body>
+</html>

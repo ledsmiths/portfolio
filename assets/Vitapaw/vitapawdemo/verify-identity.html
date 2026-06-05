@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VitaPaw — Verify Identity</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="icon-chevron-left" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"/>
+    </symbol>
+    <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+      <polyline points="22,6 12,13 2,6"/>
+    </symbol>
+    <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.24h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="screen-wrap">
+  <div class="screen" style="background:#f2f4f8;">
+
+    <!-- Status bar -->
+    <div class="status-bar sb-light" style="background:#f2f4f8;">
+      <span>9:41</span>
+      <div class="status-icons">
+        <svg width="15" height="11" viewBox="0 0 15 11" fill="#171717"><rect x="0" y="4" width="3" height="7" rx="1"/><rect x="4" y="2.5" width="3" height="8.5" rx="1"/><rect x="8" y="1" width="3" height="10" rx="1"/><rect x="12" y="0" width="3" height="11" rx="1" opacity="0.25"/></svg>
+        <svg width="13" height="11" viewBox="0 0 13 11" fill="none" stroke="#171717" stroke-width="1.2"><path d="M6.5 4C8 2.5 10.2 2.5 11.7 4" opacity="0.35"/><path d="M6.5 4C5 2.5 2.8 2.5 1.3 4" opacity="0.35"/><path d="M4.5 6C5.3 5 7.7 5 8.5 6"/><circle cx="6.5" cy="8.5" r="1" fill="#171717" stroke="none"/></svg>
+        <svg width="23" height="11" viewBox="0 0 23 11" fill="none"><rect x="0.5" y="0.5" width="19" height="10" rx="3.5" stroke="#171717"/><path d="M20.5 3.5C21.8 3.8 22.5 4.5 22.5 5.5C22.5 6.5 21.8 7.2 20.5 7.5" stroke="#171717" stroke-width="1.1"/><rect x="2" y="2" width="15" height="7" rx="2" fill="#171717"/></svg>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <div class="ac-nav">
+      <div class="ac-back" onclick="history.back()">
+        <svg width="24" height="24"><use href="#icon-chevron-left" width="24" height="24" stroke="#2A282F"/></svg>
+      </div>
+      <span class="ac-title">Verify Identity</span>
+      <div style="width:32px;"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="scroll-content" style="background:#f2f4f8;overflow-x:hidden;">
+      <div style="padding:28px 20px;display:flex;flex-direction:column;gap:24px;box-sizing:border-box;width:100%;">
+
+        <!-- Description -->
+        <div style="font-size:15px;color:#5F6C85;line-height:1.6;" id="vi-desc"></div>
+
+        <!-- Send method — two compact pills in one row -->
+        <div>
+          <div style="font-size:12px;font-weight:600;color:#9aa0ae;margin-bottom:10px;letter-spacing:.4px;text-transform:uppercase;">Send code via</div>
+          <div style="display:flex;gap:8px;">
+
+            <button class="vi-pill vi-pill-on" id="opt-email" onclick="selectMethod('email')">
+              <span class="vi-pill-radio vi-pill-radio-on"></span>
+              <svg width="13" height="13" style="flex-shrink:0;"><use href="#icon-mail" width="13" height="13" stroke="currentColor"/></svg>
+              <span class="vi-pill-label">Email</span>
+              <span class="vi-pill-badge" id="email-display" style="color:#6e76fe;opacity:.7;"></span>
+            </button>
+
+            <button class="vi-pill vi-pill-off" id="opt-mobile" onclick="selectMethod('mobile')" disabled>
+              <span class="vi-pill-radio"></span>
+              <svg width="13" height="13" style="flex-shrink:0;"><use href="#icon-phone" width="13" height="13" stroke="currentColor"/></svg>
+              <span class="vi-pill-label">Mobile</span>
+              <span class="vi-pill-badge">Not set</span>
+            </button>
+
+          </div>
+        </div>
+
+        <!-- Verification code -->
+        <div style="width:100%;box-sizing:border-box;">
+          <div style="font-size:12px;font-weight:600;color:#9aa0ae;margin-bottom:10px;letter-spacing:.4px;text-transform:uppercase;">Verification Code</div>
+          <div style="display:flex;gap:8px;width:100%;box-sizing:border-box;">
+            <input class="vi-code-input" id="code-input" type="text" inputmode="numeric"
+                   maxlength="6" placeholder="Enter 6-digit code" autocomplete="one-time-code"
+                   style="flex:1;min-width:0;"/>
+            <button class="vi-send-btn" id="send-btn" onclick="sendCode()">Send Code</button>
+          </div>
+          <div class="vi-code-hint" id="code-hint"></div>
+        </div>
+
+        <!-- Next button -->
+        <button class="vi-next-btn" id="next-btn" onclick="goNext()" disabled>Next</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ── init ── */
+  const target       = new URLSearchParams(location.search).get('target') || 'email';
+  const storedMobile = sessionStorage.getItem('userMobile') || '';
+  const storedEmail  = sessionStorage.getItem('userEmail')  || 'emily@example.com';
+
+  // description
+  const descMap = {
+    email:  'To change your email, please verify your identity first. Choose where to receive the code.',
+    mobile: 'To set your mobile number, please verify your identity first. Choose where to receive the code.',
+  };
+  document.getElementById('vi-desc').textContent = descMap[target] || descMap.email;
+
+  // email pill display
+  document.getElementById('email-display').textContent = storedEmail;
+
+  // mobile pill — enable only if already set
+  if (storedMobile) {
+    const mobileBtn = document.getElementById('opt-mobile');
+    mobileBtn.disabled = false;
+    mobileBtn.classList.remove('vi-pill-off');
+    mobileBtn.querySelector('.vi-pill-badge').textContent = storedMobile;
+  }
+
+  /* ── state ── */
+  let selectedMethod = 'email';
+  let countdownTimer = null;
+  const MOCK_CODE = '123456';
+
+  /* ── method selector ── */
+  function selectMethod(m) {
+    if (m === 'mobile' && !storedMobile) return;
+    selectedMethod = m;
+
+    const emailBtn  = document.getElementById('opt-email');
+    const mobileBtn = document.getElementById('opt-mobile');
+
+    emailBtn.classList.toggle('vi-pill-on', m === 'email');
+    emailBtn.querySelector('.vi-pill-radio').classList.toggle('vi-pill-radio-on', m === 'email');
+
+    mobileBtn.classList.toggle('vi-pill-on', m === 'mobile');
+    mobileBtn.querySelector('.vi-pill-radio').classList.toggle('vi-pill-radio-on', m === 'mobile');
+  }
+
+  /* ── send code ── */
+  function sendCode() {
+    const dest = selectedMethod === 'email' ? storedEmail : storedMobile;
+    const hint = document.getElementById('code-hint');
+    hint.style.color = '#5F6C85';
+    hint.textContent = `Code sent to ${dest}  (demo: ${MOCK_CODE})`;
+
+    startCountdown();
+
+    // auto-fill after 2 s (demo UX)
+    setTimeout(() => {
+      const inp = document.getElementById('code-input');
+      inp.value = '';
+      let i = 0;
+      const fill = setInterval(() => {
+        inp.value += MOCK_CODE[i++];
+        if (i >= MOCK_CODE.length) { clearInterval(fill); checkCode(); }
+      }, 80);
+    }, 2000);
+  }
+
+  /* ── countdown ── */
+  function startCountdown() {
+    clearInterval(countdownTimer);
+    let sec = 60;
+    const btn = document.getElementById('send-btn');
+    btn.disabled = true;
+    btn.classList.add('vi-send-btn-counting');
+    btn.textContent = `${sec}s`;
+    countdownTimer = setInterval(() => {
+      sec--;
+      if (sec <= 0) {
+        clearInterval(countdownTimer);
+        btn.disabled = false;
+        btn.classList.remove('vi-send-btn-counting');
+        btn.textContent = 'Resend';
+      } else {
+        btn.textContent = `${sec}s`;
+      }
+    }, 1000);
+  }
+
+  /* ── validate code ── */
+  function checkCode() {
+    const val = document.getElementById('code-input').value.trim();
+    const nextBtn = document.getElementById('next-btn');
+    const hint = document.getElementById('code-hint');
+    if (val === MOCK_CODE) {
+      nextBtn.disabled = false;
+      hint.style.color = '#52c471';
+      hint.textContent = '✓ Code verified';
+    } else if (val.length === 6) {
+      nextBtn.disabled = true;
+      hint.style.color = '#ff4d4d';
+      hint.textContent = 'Incorrect code, please try again.';
+    } else {
+      nextBtn.disabled = true;
+    }
+  }
+  document.getElementById('code-input').addEventListener('input', checkCode);
+
+  /* ── next step ── */
+  function goNext() {
+    window.location.href = target === 'mobile' ? 'new-mobile.html' : 'new-email.html';
+  }
+</script>
+
+</body>
+</html>

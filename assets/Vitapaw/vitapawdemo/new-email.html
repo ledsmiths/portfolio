@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VitaPaw — New Email</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="icon-chevron-left" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"/>
+    </symbol>
+    <symbol id="icon-check-circle" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+      <polyline points="22 4 12 14.01 9 11.01"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="screen-wrap">
+  <div class="screen" style="background:#f2f4f8;">
+
+    <!-- Status bar -->
+    <div class="status-bar sb-light" style="background:#f2f4f8;">
+      <span>9:41</span>
+      <div class="status-icons">
+        <svg width="15" height="11" viewBox="0 0 15 11" fill="#171717"><rect x="0" y="4" width="3" height="7" rx="1"/><rect x="4" y="2.5" width="3" height="8.5" rx="1"/><rect x="8" y="1" width="3" height="10" rx="1"/><rect x="12" y="0" width="3" height="11" rx="1" opacity="0.25"/></svg>
+        <svg width="13" height="11" viewBox="0 0 13 11" fill="none" stroke="#171717" stroke-width="1.2"><path d="M6.5 4C8 2.5 10.2 2.5 11.7 4" opacity="0.35"/><path d="M6.5 4C5 2.5 2.8 2.5 1.3 4" opacity="0.35"/><path d="M4.5 6C5.3 5 7.7 5 8.5 6"/><circle cx="6.5" cy="8.5" r="1" fill="#171717" stroke="none"/></svg>
+        <svg width="23" height="11" viewBox="0 0 23 11" fill="none"><rect x="0.5" y="0.5" width="19" height="10" rx="3.5" stroke="#171717"/><path d="M20.5 3.5C21.8 3.8 22.5 4.5 22.5 5.5C22.5 6.5 21.8 7.2 20.5 7.5" stroke="#171717" stroke-width="1.1"/><rect x="2" y="2" width="15" height="7" rx="2" fill="#171717"/></svg>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <div class="ac-nav">
+      <div class="ac-back" onclick="history.back()">
+        <svg width="24" height="24"><use href="#icon-chevron-left" width="24" height="24" stroke="#2A282F"/></svg>
+      </div>
+      <span class="ac-title">Change Email</span>
+      <div style="width:32px;"></div>
+    </div>
+
+    <!-- ── Main view ── -->
+    <div class="scroll-content" style="background:#f2f4f8;overflow-x:hidden;" id="main-view">
+      <div style="padding:28px 20px;display:flex;flex-direction:column;gap:24px;box-sizing:border-box;width:100%;">
+
+        <!-- Description -->
+        <div style="font-size:15px;color:#5F6C85;line-height:1.6;">
+          Enter your new email address. We'll send a confirmation code to it.
+        </div>
+
+        <!-- New email input card -->
+        <div class="ac-form-card">
+          <div class="ac-field">
+            <label class="ac-field-label">New Email Address</label>
+            <input class="ac-field-input" id="new-email-input" type="email"
+                   placeholder="example@email.com" autocomplete="off"
+                   oninput="onEmailInput()"/>
+          </div>
+        </div>
+
+        <!-- Code section (hidden until email entered) -->
+        <div id="code-section" style="opacity:0;pointer-events:none;transition:opacity .3s;width:100%;box-sizing:border-box;">
+          <div style="font-size:12px;font-weight:600;color:#9aa0ae;margin-bottom:10px;letter-spacing:.4px;text-transform:uppercase;">Confirmation Code</div>
+          <div style="display:flex;gap:8px;width:100%;box-sizing:border-box;">
+            <input class="vi-code-input" id="new-code-input" type="text" inputmode="numeric"
+                   maxlength="6" placeholder="Enter 6-digit code" autocomplete="one-time-code"
+                   oninput="checkNewCode()" style="flex:1;min-width:0;"/>
+            <button class="vi-send-btn" id="new-send-btn" onclick="sendNewCode()">Send Code</button>
+          </div>
+          <div class="vi-code-hint" id="new-code-hint"></div>
+        </div>
+
+        <!-- Confirm button -->
+        <button class="vi-next-btn" id="confirm-btn" onclick="confirmNewEmail()" disabled>Confirm</button>
+
+      </div>
+    </div>
+
+    <!-- ── Success view ── -->
+    <div id="success-view" style="display:none;flex:1;flex-direction:column;align-items:center;justify-content:center;padding:40px 32px;gap:20px;">
+      <div style="width:72px;height:72px;border-radius:50%;background:#eaf9f0;display:flex;align-items:center;justify-content:center;">
+        <svg width="36" height="36"><use href="#icon-check-circle" width="36" height="36" stroke="#52c471"/></svg>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:18px;font-weight:600;color:#2A282F;margin-bottom:8px;">Email Updated!</div>
+        <div style="font-size:14px;color:#5F6C85;line-height:1.6;" id="success-text">
+          Your email has been successfully changed.
+        </div>
+      </div>
+      <button class="vi-next-btn" style="margin-top:12px;" onclick="window.location.href='account-setting.html'">Back to Account</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const MOCK_CODE = '123456';
+  let countdownTimer = null;
+  let emailReady = false;
+
+  /* show code section once email is typed */
+  function onEmailInput() {
+    const val = document.getElementById('new-email-input').value.trim();
+    const section = document.getElementById('code-section');
+    emailReady = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+    section.style.opacity = emailReady ? '1' : '0';
+    section.style.pointerEvents = emailReady ? 'auto' : 'none';
+    if (!emailReady) {
+      document.getElementById('confirm-btn').disabled = true;
+      document.getElementById('new-code-hint').textContent = '';
+      document.getElementById('new-code-input').value = '';
+    }
+  }
+
+  /* send code to new email */
+  function sendNewCode() {
+    const email = document.getElementById('new-email-input').value.trim();
+    if (!email) return;
+    const hint = document.getElementById('new-code-hint');
+    hint.style.color = '#5F6C85';
+    hint.textContent = `Code sent to ${email}  (demo: ${MOCK_CODE})`;
+
+    startCountdown();
+
+    // auto-fill after 2 s
+    setTimeout(() => {
+      const inp = document.getElementById('new-code-input');
+      inp.value = '';
+      let i = 0;
+      const fill = setInterval(() => {
+        inp.value += MOCK_CODE[i++];
+        if (i >= MOCK_CODE.length) { clearInterval(fill); checkNewCode(); }
+      }, 80);
+    }, 2000);
+  }
+
+  function startCountdown() {
+    clearInterval(countdownTimer);
+    let sec = 60;
+    const btn = document.getElementById('new-send-btn');
+    btn.disabled = true;
+    btn.classList.add('vi-send-btn-counting');
+    btn.textContent = `${sec}s`;
+    countdownTimer = setInterval(() => {
+      sec--;
+      if (sec <= 0) {
+        clearInterval(countdownTimer);
+        btn.disabled = false;
+        btn.classList.remove('vi-send-btn-counting');
+        btn.textContent = 'Resend';
+      } else {
+        btn.textContent = `${sec}s`;
+      }
+    }, 1000);
+  }
+
+  function checkNewCode() {
+    const val = document.getElementById('new-code-input').value.trim();
+    const hint = document.getElementById('new-code-hint');
+    const btn  = document.getElementById('confirm-btn');
+    if (val === MOCK_CODE) {
+      btn.disabled = false;
+      hint.style.color = '#52c471';
+      hint.textContent = '✓ Code verified';
+    } else if (val.length === 6) {
+      btn.disabled = true;
+      hint.style.color = '#ff4d4d';
+      hint.textContent = 'Incorrect code, please try again.';
+    } else {
+      btn.disabled = true;
+    }
+  }
+
+  function confirmNewEmail() {
+    const email = document.getElementById('new-email-input').value.trim();
+    // persist to sessionStorage so account-setting can read it
+    sessionStorage.setItem('userEmail', email);
+    // show success
+    document.getElementById('main-view').style.display = 'none';
+    const sv = document.getElementById('success-view');
+    sv.style.display = 'flex';
+    document.getElementById('success-text').textContent =
+      `Your email has been changed to ${email}.`;
+  }
+</script>
+
+</body>
+</html>

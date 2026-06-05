@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VitaPaw — Add Device</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .ad-body { display:flex; flex-direction:column; height:100%; background:#f2f4f8; font-family:'Inter',-apple-system,sans-serif; }
+
+    .ad-nav { display:flex; align-items:center; padding:8px 16px 10px; position:relative; flex-shrink:0; }
+    .ad-back { width:32px; height:32px; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+
+    .ad-content { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 28px 32px; gap:32px; }
+
+    /* QR state */
+    .ad-qr-wrap { display:flex; flex-direction:column; align-items:center; gap:28px; width:100%; transition:opacity .4s, transform .4s; }
+    .ad-qr-text { font-size:22px; font-weight:700; color:#2A282F; line-height:1.35; text-align:center; letter-spacing:-0.4px; }
+    .ad-qr-card { background:#fff; border-radius:16px; padding:20px; box-shadow:0 2px 16px rgba(0,0,0,0.08); }
+
+    /* Success / setup state */
+    .ad-success { display:none; flex-direction:column; gap:16px; width:100%; opacity:0; transform:translateY(12px); transition:opacity .4s, transform .4s; }
+    .ad-success.show { opacity:1; transform:translateY(0); }
+    .ad-setup-title { font-size:18px; font-weight:700; color:#2A282F; letter-spacing:-0.4px; margin-bottom:2px; }
+    .ad-btn-primary { width:100%; height:46px; border-radius:8px; border:none; background:#868DFF; color:#fff; font-size:14px; font-weight:600; cursor:pointer; font-family:inherit; transition:opacity .15s; margin-top:4px; }
+    .ad-btn-primary:active { opacity:.85; }
+
+    /* Scan ring animation */
+    .ad-scan-ring { position:absolute; inset:-6px; border-radius:12px; border:2px solid transparent; animation:none; pointer-events:none; }
+    .ad-scan-ring.scanning { border-color:rgba(134,141,255,0.5); animation:ringPulse 1.2s ease-in-out infinite; }
+    @keyframes ringPulse { 0%,100%{opacity:.4;transform:scale(1)} 50%{opacity:1;transform:scale(1.02)} }
+    .ad-qr-card-wrap { position:relative; }
+  </style>
+</head>
+<body>
+
+<div class="screen-wrap">
+  <div class="screen" style="background:#f2f4f8;">
+    <div class="ad-body">
+
+      <!-- Status bar -->
+      <div class="status-bar sb-light" style="background:#f2f4f8;">
+        <span>9:41</span>
+        <div class="status-icons">
+          <svg width="15" height="11" viewBox="0 0 15 11" fill="#171717"><rect x="0" y="4" width="3" height="7" rx="1"/><rect x="4" y="2.5" width="3" height="8.5" rx="1"/><rect x="8" y="1" width="3" height="10" rx="1"/><rect x="12" y="0" width="3" height="11" rx="1" opacity="0.25"/></svg>
+          <svg width="13" height="11" viewBox="0 0 13 11" fill="none" stroke="#171717" stroke-width="1.2"><path d="M6.5 4C8 2.5 10.2 2.5 11.7 4" opacity="0.35"/><path d="M6.5 4C5 2.5 2.8 2.5 1.3 4" opacity="0.35"/><path d="M4.5 6C5.3 5 7.7 5 8.5 6"/><circle cx="6.5" cy="8.5" r="1" fill="#171717" stroke="none"/></svg>
+          <svg width="23" height="11" viewBox="0 0 23 11" fill="none"><rect x="0.5" y="0.5" width="19" height="10" rx="3.5" stroke="#171717"/><path d="M20.5 3.5C21.8 3.8 22.5 4.5 22.5 5.5C22.5 6.5 21.8 7.2 20.5 7.5" stroke="#171717" stroke-width="1.1"/><rect x="2" y="2" width="15" height="7" rx="2" fill="#171717"/></svg>
+        </div>
+      </div>
+
+      <!-- Nav -->
+      <div class="ad-nav">
+        <div class="ad-back" onclick="history.back()">
+          <svg width="10" height="17" viewBox="0 0 10 17" fill="none">
+            <path d="M9 1L1 8.5L9 16" stroke="#2A282F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Main content -->
+      <div class="ad-content">
+
+        <!-- QR state -->
+        <div class="ad-qr-wrap" id="qr-wrap">
+          <div class="ad-qr-text">Please use your pet camera to scan this QR code</div>
+          <div class="ad-qr-card-wrap">
+            <div class="ad-scan-ring scanning" id="scan-ring"></div>
+            <div class="ad-qr-card">
+              <!-- QR Code SVG -->
+              <svg width="200" height="200" viewBox="0 0 21 21" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
+                <rect width="21" height="21" fill="#fff"/>
+                <!-- Top-left finder -->
+                <rect x="0" y="0" width="7" height="7" fill="#000"/>
+                <rect x="1" y="1" width="5" height="5" fill="#fff"/>
+                <rect x="2" y="2" width="3" height="3" fill="#000"/>
+                <!-- Top-right finder -->
+                <rect x="14" y="0" width="7" height="7" fill="#000"/>
+                <rect x="15" y="1" width="5" height="5" fill="#fff"/>
+                <rect x="16" y="2" width="3" height="3" fill="#000"/>
+                <!-- Bottom-left finder -->
+                <rect x="0" y="14" width="7" height="7" fill="#000"/>
+                <rect x="1" y="15" width="5" height="5" fill="#fff"/>
+                <rect x="2" y="16" width="3" height="3" fill="#000"/>
+                <!-- Data modules (simulated pattern) -->
+                <rect x="7" y="0" fill="#000" width="1" height="1"/>
+                <rect x="9" y="0" fill="#000" width="1" height="1"/>
+                <rect x="11" y="0" fill="#000" width="1" height="1"/>
+                <rect x="8" y="1" fill="#000" width="1" height="1"/>
+                <rect x="10" y="1" fill="#000" width="1" height="1"/>
+                <rect x="12" y="1" fill="#000" width="1" height="1"/>
+                <rect x="7" y="2" fill="#000" width="1" height="1"/>
+                <rect x="9" y="2" fill="#000" width="1" height="1"/>
+                <rect x="11" y="2" fill="#000" width="1" height="1"/>
+                <rect x="13" y="2" fill="#000" width="1" height="1"/>
+                <rect x="8" y="3" fill="#000" width="1" height="1"/>
+                <rect x="10" y="3" fill="#000" width="1" height="1"/>
+                <rect x="12" y="3" fill="#000" width="1" height="1"/>
+                <rect x="7" y="4" fill="#000" width="1" height="1"/>
+                <rect x="9" y="4" fill="#000" width="1" height="1"/>
+                <rect x="13" y="4" fill="#000" width="1" height="1"/>
+                <rect x="8" y="5" fill="#000" width="1" height="1"/>
+                <rect x="11" y="5" fill="#000" width="1" height="1"/>
+                <rect x="7" y="6" fill="#000" width="1" height="1"/>
+                <rect x="9" y="6" fill="#000" width="1" height="1"/>
+                <rect x="12" y="6" fill="#000" width="1" height="1"/>
+                <rect x="0" y="7" fill="#000" width="1" height="1"/>
+                <rect x="2" y="7" fill="#000" width="1" height="1"/>
+                <rect x="4" y="7" fill="#000" width="1" height="1"/>
+                <rect x="6" y="7" fill="#000" width="1" height="1"/>
+                <rect x="8" y="7" fill="#000" width="1" height="1"/>
+                <rect x="10" y="7" fill="#000" width="1" height="1"/>
+                <rect x="12" y="7" fill="#000" width="1" height="1"/>
+                <rect x="14" y="7" fill="#000" width="1" height="1"/>
+                <rect x="16" y="7" fill="#000" width="1" height="1"/>
+                <rect x="18" y="7" fill="#000" width="1" height="1"/>
+                <rect x="20" y="7" fill="#000" width="1" height="1"/>
+                <rect x="1" y="8" fill="#000" width="1" height="1"/>
+                <rect x="3" y="8" fill="#000" width="1" height="1"/>
+                <rect x="7" y="8" fill="#000" width="1" height="1"/>
+                <rect x="9" y="8" fill="#000" width="1" height="1"/>
+                <rect x="11" y="8" fill="#000" width="1" height="1"/>
+                <rect x="13" y="8" fill="#000" width="1" height="1"/>
+                <rect x="15" y="8" fill="#000" width="1" height="1"/>
+                <rect x="17" y="8" fill="#000" width="1" height="1"/>
+                <rect x="19" y="8" fill="#000" width="1" height="1"/>
+                <rect x="0" y="9" fill="#000" width="1" height="1"/>
+                <rect x="4" y="9" fill="#000" width="1" height="1"/>
+                <rect x="6" y="9" fill="#000" width="1" height="1"/>
+                <rect x="8" y="9" fill="#000" width="1" height="1"/>
+                <rect x="10" y="9" fill="#000" width="1" height="1"/>
+                <rect x="12" y="9" fill="#000" width="1" height="1"/>
+                <rect x="16" y="9" fill="#000" width="1" height="1"/>
+                <rect x="18" y="9" fill="#000" width="1" height="1"/>
+                <rect x="20" y="9" fill="#000" width="1" height="1"/>
+                <rect x="2" y="10" fill="#000" width="1" height="1"/>
+                <rect x="5" y="10" fill="#000" width="1" height="1"/>
+                <rect x="7" y="10" fill="#000" width="1" height="1"/>
+                <rect x="9" y="10" fill="#000" width="1" height="1"/>
+                <rect x="11" y="10" fill="#000" width="1" height="1"/>
+                <rect x="14" y="10" fill="#000" width="1" height="1"/>
+                <rect x="17" y="10" fill="#000" width="1" height="1"/>
+                <rect x="19" y="10" fill="#000" width="1" height="1"/>
+                <rect x="0" y="11" fill="#000" width="1" height="1"/>
+                <rect x="3" y="11" fill="#000" width="1" height="1"/>
+                <rect x="6" y="11" fill="#000" width="1" height="1"/>
+                <rect x="8" y="11" fill="#000" width="1" height="1"/>
+                <rect x="10" y="11" fill="#000" width="1" height="1"/>
+                <rect x="12" y="11" fill="#000" width="1" height="1"/>
+                <rect x="15" y="11" fill="#000" width="1" height="1"/>
+                <rect x="18" y="11" fill="#000" width="1" height="1"/>
+                <rect x="20" y="11" fill="#000" width="1" height="1"/>
+                <rect x="1" y="12" fill="#000" width="1" height="1"/>
+                <rect x="4" y="12" fill="#000" width="1" height="1"/>
+                <rect x="7" y="12" fill="#000" width="1" height="1"/>
+                <rect x="9" y="12" fill="#000" width="1" height="1"/>
+                <rect x="13" y="12" fill="#000" width="1" height="1"/>
+                <rect x="16" y="12" fill="#000" width="1" height="1"/>
+                <rect x="19" y="12" fill="#000" width="1" height="1"/>
+                <rect x="0" y="13" fill="#000" width="1" height="1"/>
+                <rect x="2" y="13" fill="#000" width="1" height="1"/>
+                <rect x="5" y="13" fill="#000" width="1" height="1"/>
+                <rect x="8" y="13" fill="#000" width="1" height="1"/>
+                <rect x="10" y="13" fill="#000" width="1" height="1"/>
+                <rect x="12" y="13" fill="#000" width="1" height="1"/>
+                <rect x="14" y="13" fill="#000" width="1" height="1"/>
+                <rect x="17" y="13" fill="#000" width="1" height="1"/>
+                <rect x="20" y="13" fill="#000" width="1" height="1"/>
+                <!-- Row 14-20: data area -->
+                <rect x="7" y="14" fill="#000" width="1" height="1"/>
+                <rect x="9" y="14" fill="#000" width="1" height="1"/>
+                <rect x="11" y="14" fill="#000" width="1" height="1"/>
+                <rect x="13" y="14" fill="#000" width="1" height="1"/>
+                <rect x="15" y="14" fill="#000" width="1" height="1"/>
+                <rect x="17" y="14" fill="#000" width="1" height="1"/>
+                <rect x="19" y="14" fill="#000" width="1" height="1"/>
+                <rect x="8" y="15" fill="#000" width="1" height="1"/>
+                <rect x="10" y="15" fill="#000" width="1" height="1"/>
+                <rect x="12" y="15" fill="#000" width="1" height="1"/>
+                <rect x="14" y="15" fill="#000" width="1" height="1"/>
+                <rect x="16" y="15" fill="#000" width="1" height="1"/>
+                <rect x="18" y="15" fill="#000" width="1" height="1"/>
+                <rect x="20" y="15" fill="#000" width="1" height="1"/>
+                <rect x="7" y="16" fill="#000" width="1" height="1"/>
+                <rect x="9" y="16" fill="#000" width="1" height="1"/>
+                <rect x="13" y="16" fill="#000" width="1" height="1"/>
+                <rect x="15" y="16" fill="#000" width="1" height="1"/>
+                <rect x="17" y="16" fill="#000" width="1" height="1"/>
+                <rect x="19" y="16" fill="#000" width="1" height="1"/>
+                <rect x="8" y="17" fill="#000" width="1" height="1"/>
+                <rect x="11" y="17" fill="#000" width="1" height="1"/>
+                <rect x="14" y="17" fill="#000" width="1" height="1"/>
+                <rect x="16" y="17" fill="#000" width="1" height="1"/>
+                <rect x="18" y="17" fill="#000" width="1" height="1"/>
+                <rect x="20" y="17" fill="#000" width="1" height="1"/>
+                <rect x="7" y="18" fill="#000" width="1" height="1"/>
+                <rect x="10" y="18" fill="#000" width="1" height="1"/>
+                <rect x="12" y="18" fill="#000" width="1" height="1"/>
+                <rect x="15" y="18" fill="#000" width="1" height="1"/>
+                <rect x="17" y="18" fill="#000" width="1" height="1"/>
+                <rect x="19" y="18" fill="#000" width="1" height="1"/>
+                <rect x="8" y="19" fill="#000" width="1" height="1"/>
+                <rect x="9" y="19" fill="#000" width="1" height="1"/>
+                <rect x="11" y="19" fill="#000" width="1" height="1"/>
+                <rect x="13" y="19" fill="#000" width="1" height="1"/>
+                <rect x="16" y="19" fill="#000" width="1" height="1"/>
+                <rect x="18" y="19" fill="#000" width="1" height="1"/>
+                <rect x="20" y="19" fill="#000" width="1" height="1"/>
+                <rect x="7" y="20" fill="#000" width="1" height="1"/>
+                <rect x="10" y="20" fill="#000" width="1" height="1"/>
+                <rect x="12" y="20" fill="#000" width="1" height="1"/>
+                <rect x="14" y="20" fill="#000" width="1" height="1"/>
+                <rect x="17" y="20" fill="#000" width="1" height="1"/>
+                <rect x="19" y="20" fill="#000" width="1" height="1"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Setup state (shown after scan) -->
+        <div class="ad-success" id="success-wrap">
+          <div class="ad-setup-title">Set up your camera</div>
+
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div class="ac-field">
+              <label class="ac-field-label">Camera Name</label>
+              <input class="ac-field-input" id="setup-name" type="text" placeholder="e.g. Living Room Cam" autocomplete="off"/>
+            </div>
+            <div class="ac-field">
+              <label class="ac-field-label">Place</label>
+              <input class="ac-field-input" id="setup-location" type="text" placeholder="e.g. Livingroom" autocomplete="off"/>
+            </div>
+          </div>
+
+          <button class="cm-zone-btn" onclick="location.href='monitor.html?mode=zone'" style="background:#fff;">
+            <div class="cm-zone-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <rect x="2" y="2" width="16" height="16" rx="3" stroke="#6e76fe" stroke-width="1.6"/>
+                <rect x="4.5" y="4.5" width="5" height="5" rx="1.2" fill="#6e76fe" opacity="0.55"/>
+                <rect x="10.5" y="10.5" width="5" height="5" rx="1.2" fill="#6e76fe" opacity="0.55"/>
+              </svg>
+            </div>
+            <div style="flex:1;">
+              <div class="cm-zone-label">Set Pet Zones</div>
+              <div class="cm-zone-hint">Draw a zone to track your pet's feeding and toilet habits.</div>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="#c8cdd8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+
+          <button class="ad-btn-primary" onclick="confirmSetup()">Confirm</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const qrWrap      = document.getElementById('qr-wrap');
+    const successWrap = document.getElementById('success-wrap');
+    const scanRing    = document.getElementById('scan-ring');
+
+    setTimeout(() => {
+      qrWrap.style.opacity   = '0';
+      qrWrap.style.transform = 'scale(0.94)';
+      scanRing.classList.remove('scanning');
+
+      setTimeout(() => {
+        qrWrap.style.display      = 'none';
+        successWrap.style.display = 'flex';
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => successWrap.classList.add('show'));
+        });
+      }, 400);
+    }, 3000);
+  });
+
+  function confirmSetup() {
+    const name = document.getElementById('setup-name').value.trim();
+    const loc  = document.getElementById('setup-location').value.trim();
+
+    // Read existing cameras from sessionStorage (same key as camera-management.html)
+    const cameras = JSON.parse(sessionStorage.getItem('cameras') || 'null') || [
+      { name: 'Camera 1', location: 'Livingroom', online: true }
+    ];
+
+    cameras.push({
+      name:     name     || 'New Camera',
+      location: loc      || 'Unknown',
+      online:   true
+    });
+
+    sessionStorage.setItem('cameras', JSON.stringify(cameras));
+    location.href = 'camera-management.html';
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Supply Zone Analysis - Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="supply-case.css" />
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">Muhua Qin</a>
+    <div class="links">
+      <a href="index.html#contact">About</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero" data-screen-label="Hero">
+  <div class="blobfield"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span></div>
+  <div class="wrap">
+    <div class="kicker">Case study - UX / UI redesign</div>
+    <h1>Rebuilding a supply-zone<br />analysis workspace</h1>
+    <div class="rule"></div>
+    <p class="lead">An internal analytics system for exploring supply-zone data and reviewing anomaly-detection results. It supported the core analysis tasks - but was difficult to use in practice. I redesigned the information architecture and interface to improve usability and clarity while preserving the original analytical workflow.</p>
+    <dl class="metagrid">
+      <dt>Project Type</dt><dd>Professional project</dd>
+      <dt>My Role</dt><dd>UX Designer &amp; UI Designer</dd>
+      <dt>Duration</dt><dd>4 weeks (Apr 2022)</dd>
+      <dt>Tools</dt><dd>Figma</dd>
+      <dt>Focus</dt><dd>Heuristic evaluation - usability testing - IA &amp; workflow redesign</dd>
+    </dl>
+  </div>
+</header>
+
+<div class="divider"></div>
+
+<!-- ================= BACKGROUND ================= -->
+<section data-screen-label="Background">
+  <div class="wrap">
+    <div class="eyebrow">Background</div>
+    <h2>A capable system that was hard to actually use</h2>
+    <div class="note" style="border-style: solid">
+      <div class="nl">The brief</div>
+      <p>This project involved redesigning an existing internal system for supply-zone analysis. While the original system supported the core analysis tasks, it was difficult to use in practice. The goal was to <b>improve usability and clarity while preserving the original analytical workflow</b> - not to reinvent what the tool did, but to make it feel coherent to the people who relied on it every day.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECT OVERVIEW ================= -->
+<section class="overview" data-screen-label="Overview">
+  <div class="blobfield"><span class="blob b2"></span><span class="blob b3"></span><span class="blob b4"></span></div>
+  <div class="wrap">
+    <div class="eyebrow">Project overview</div>
+    <h2>Challenge, solution, outcome</h2>
+    <div class="ovcards">
+      <div class="card ovcard c1">
+        <div class="ovk">The challenge</div>
+        <p>Fragmented upload and processing steps required frequent page switching - creating high cognitive load and an interrupted user journey from the moment a task began.</p>
+      </div>
+      <div class="card ovcard c2">
+        <div class="ovk">The solution</div>
+        <p>Restructured the information architecture to consolidate the core workflow into a single-page interface, while revamping the UI layout to split complex data charts and reduce visual noise.</p>
+      </div>
+      <div class="card ovcard c3">
+        <div class="ovk">The outcome</div>
+        <p>A streamlined, single-stream workflow that removed redundant navigation, clarified the data charts, and let users move from upload to results without losing context - validated against the friction points surfaced in testing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= USER JOURNEY MAP ================= -->
+<section data-screen-label="User Journey Map">
+  <div class="wrap">
+    <div class="eyebrow">User journey</div>
+    <h2>Mapping the file-processing flow</h2>
+    <p>Before touching the interface, I mapped the end-to-end journey of processing a file - from entering the platform to checking analysis results - to locate exactly where the experience broke down.</p>
+    <figure class="journeyfig">
+      <div class="journey panel" style="padding:14px;">
+        <table class="jtable">
+          <thead>
+            <tr>
+              <th class="corner"></th>
+              <th>Enter the platform</th>
+              <th>Upload files</th>
+              <th>Processing files</th>
+              <th>Download files</th>
+              <th>Check analysis results</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="rowlab">Actions</td>
+              <td class="cellbox"><ol><li>Opens platform</li><li>Clicks "Sign up"</li><li>Logs in to homepage</li></ol></td>
+              <td class="cellbox"><ol><li>Go to task management</li><li>Click "Add" for new task</li><li>Fill out file-detail form</li></ol></td>
+              <td class="cellbox"><ol><li>Go to task scheduler</li><li>Pick a processing method</li><li>Start processing</li></ol></td>
+              <td class="cellbox"><ol><li>Click download</li><li>Get processed files</li></ol></td>
+              <td class="cellbox"><ol><li>Back to task overview</li><li>Review results &amp; insights</li></ol></td>
+            </tr>
+            <tr>
+              <td class="rowlab">Thoughts</td>
+              <td class="cellbox">"Looks professional, and it's fast."</td>
+              <td class="cellbox">"Where do I process the file after uploading?"</td>
+              <td class="cellbox">"The next step is unclear."</td>
+              <td class="cellbox">"I have to guess what these icons mean."</td>
+              <td class="cellbox">"The chart is too cluttered to read."</td>
+            </tr>
+            <tr>
+              <td class="rowlab">Pain points</td>
+              <td class="cellbox">Meets expectations.</td>
+              <td class="cellbox"><span class="pain">Fragmented workflow:</span> upload and processing feel disconnected.</td>
+              <td class="cellbox">Needs clearer next-step guidance.</td>
+              <td class="cellbox"><span class="pain">Low clarity:</span> ambiguous icons cause hesitation.</td>
+              <td class="cellbox"><span class="pain">High load:</span> charts are hard to interpret.</td>
+            </tr>
+            <tr>
+              <td class="rowlab">Emotions</td>
+              <td class="emoji">😀</td>
+              <td class="emoji">🤔</td>
+              <td class="emoji">😤</td>
+              <td class="emoji">😕</td>
+              <td class="emoji">😵‍💫</td>
+            </tr>
+            <tr>
+              <td class="rowlab">Opportunities</td>
+              <td class="opp" colspan="5">
+                <ol>
+                  <li><span class="ol">Streamline the workflow:</span> merge upload and processing into one flow.</li>
+                  <li><span class="ol">Standardize icons &amp; labels:</span> use familiar icons with clear text.</li>
+                  <li><span class="ol">Simplify the charts:</span> use progressive disclosure to cut cognitive load.</li>
+                </ol>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <figcaption>Fig. 1 - User journey map of the file-processing flow, with pain points and opportunities per stage.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= PHASE 1 - INITIAL EVALUATION ================= -->
+<section data-screen-label="Phase 1 - Initial Evaluation">
+  <div class="wrap">
+    <div class="phasehead"><span class="pidx">01</span><span class="eyebrow" style="margin:0;">Initial evaluation</span></div>
+    <h2>A heuristic pass to surface the friction</h2>
+    <p>I started with a heuristic evaluation to identify potential friction points in the existing information hierarchy and workflow logic - pairing each observation with a screenshot from the original system.</p>
+
+    <figure>
+      <div class="frictiongrid">
+        <div class="shot">
+          <img src="assets/supplyzone/Poor%20information%20hierarchy.png" alt="Original analysis overview showing poor information hierarchy" />
+        </div>
+        <div class="painblock">
+          <h4>Poor information hierarchy</h4>
+          <p class="pp"><b>Pain point:</b> the charts lack a clear information hierarchy, requiring users to actively distinguish and interpret the data in order to understand the statistical insights.</p>
+        </div>
+
+        <div class="painblock">
+          <h4>Weak visual feedback</h4>
+          <p class="pp"><b>Pain point:</b> users struggle to distinguish "Calculation" from "Analysis" at a glance.</p>
+        </div>
+        <div class="shot">
+          <img src="assets/supplyzone/weak%20visual.png" alt="Original task scheduler with weak visual feedback" />
+        </div>
+
+        <div class="shot">
+          <img src="assets/supplyzone/Task%20Management.png" alt="Original task management screen with fragmented workflow" />
+        </div>
+        <div class="painblock">
+          <h4>Fragmented workflow</h4>
+          <p class="pp"><b>Pain point:</b> management and scheduling are logically sequential but presented as parallel pages.</p>
+        </div>
+      </div>
+      <figcaption>Fig. 2 - Three friction themes from the heuristic evaluation, mapped to the original screens.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= PHASE 2 - RAPID UI FIX ================= -->
+<section data-screen-label="Phase 2 - Rapid UI Fix">
+  <div class="wrap">
+    <div class="phasehead"><span class="pidx">02</span><span class="eyebrow" style="margin:0;">Rapid UI fix</span></div>
+    <h2>A testable baseline</h2>
+    <p>Based on initial observations, I addressed basic visual inconsistencies and immediate usability glitches to create a testable baseline - something concrete to put in front of users.</p>
+    <figure>
+      <div class="rapidgrid">
+        <div class="shot">
+          <img src="assets/supplyzone/rapidbefore.png" alt="Rapid UI fix task scheduler screen" />
+        </div>
+        <div class="shot">
+          <img src="assets/supplyzone/rapid%20after.png" alt="Rapid UI fix analysis chart with adjusted legend, color, and spacing" />
+        </div>
+      </div>
+      <div class="rapidnote">
+        <p>Rapid UI fixes were used to <b>validate initial usability assumptions</b>.</p>
+        <p>These changes improved surface-level clarity but <b>did not address structural workflow issues</b>, confirming the problem ran deeper than the visuals.</p>
+      </div>
+      <figcaption>Fig. 3 - Surface-level UI fixes applied to create a baseline prototype for testing.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= PHASE 3 - USABILITY TESTING ================= -->
+<section data-screen-label="Phase 3 - Usability Testing">
+  <div class="wrap">
+    <div class="phasehead"><span class="pidx">03</span><span class="eyebrow" style="margin:0;">Usability testing</span></div>
+    <h2>Testing the baseline with real users</h2>
+    <p>A prototype incorporating the rapid UI fixes was tested with users to validate the initial assumptions and to deeply understand their interaction challenges.</p>
+    <figure>
+      <div class="findings">
+        <div class="flead">
+          <div class="ficon">💬</div>
+          <h3>Key findings</h3>
+          <div class="fsub">from usability testing</div>
+        </div>
+        <div class="findlist">
+          <div class="finditem">
+            <h4>Workflow fragmentation</h4>
+            <p>Users struggled with the illogical separation between task configuration and scheduling.</p>
+          </div>
+          <div class="finditem">
+            <h4>Data-hierarchy issues</h4>
+            <p>Despite the UI improvements, users still found it difficult to prioritize critical information.</p>
+          </div>
+          <div class="finditem">
+            <h4>Redundant steps</h4>
+            <p>Content overlap between pages led to unnecessary navigation and added cognitive load.</p>
+          </div>
+        </div>
+      </div>
+      <figcaption>Fig. 4 - Usability testing confirmed the issues were structural, not cosmetic.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= PHASE 4 - REDESIGN IA ================= -->
+<section data-screen-label="Phase 4 - Redesign IA">
+  <div class="wrap">
+    <div class="phasehead"><span class="pidx">04</span><span class="eyebrow" style="margin:0;">Redesign - IA &amp; workflow</span></div>
+    <h2>Reworking the information architecture</h2>
+    <p>I created a new information architecture and workflow based on the usability-testing findings - auditing the original structure to decide what to keep, merge, or remove, then rebuilding around clearer task initiation and a process-now / save-for-later decision point.</p>
+
+    <figure>
+      <div class="iacompare">
+        <div class="iacol before">
+          <div class="iatag">Original IA</div>
+          <div class="panel tree" style="padding:24px 22px;">
+          <ul>
+            <li>
+              <span class="tnode root">Original system</span>
+              <ul>
+                <li>
+                  <span class="tnode">Task Overview</span>
+                  <ul>
+                    <li><span class="tnode">Dual-axis bar + line analysis chart</span></li>
+                    <li><span class="tnode removed">Result table <span class="badge">removed</span></span></li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="tnode">Task Scheduler</span>
+                  <ul>
+                    <li><span class="tnode">Analyze uploaded files</span></li>
+                    <li><span class="tnode">Run calculations on uploaded files</span></li>
+                    <li><span class="tnode">Download results files</span></li>
+                    <li><span class="tnode">Task status</span></li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="tnode removed">Task Management <span class="badge">merged</span></span>
+                  <ul>
+                    <li><span class="tnode removed">Upload file</span></li>
+                    <li><span class="tnode removed">Delete file</span></li>
+                    <li><span class="tnode removed">Edit file</span></li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="tnode">Task Results</span>
+                  <ul>
+                    <li><span class="tnode">Results table</span>
+                      <ul><li><span class="tnode">Delete results</span></li></ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="tnode removed">File Management <span class="badge">removed</span></span>
+                  <ul>
+                    <li><span class="tnode removed">Uploaded files table -> Delete files</span></li>
+                    <li><span class="tnode removed">Results table -> Delete result</span></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          </div>
+        </div>
+        <div class="iacol after">
+          <div class="iatag">New IA</div>
+          <div class="panel tree" style="padding:24px 22px;">
+          <ul>
+            <li>
+              <span class="tnode root">New system</span>
+              <ul>
+                <li>
+                  <span class="tnode kept">Task Overview</span>
+                  <ul>
+                    <li><span class="tnode added">Task Performance Overview <span class="badge">new</span></span></li>
+                    <li><span class="tnode added">Task Results Overview <span class="badge">new</span></span></li>
+                    <li><span class="tnode added">Task Processing Efficiency <span class="badge">new</span></span></li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="tnode kept">Task Scheduler</span>
+                  <ul>
+                    <li><span class="tnode added">Upload file</span>
+                      <ul>
+                        <li><span class="tnode">Analyze uploaded files</span></li>
+                        <li><span class="tnode">Run calculations on uploaded files</span></li>
+                        <li><span class="tnode added">Save for later <span class="badge">new</span></span></li>
+                      </ul>
+                    </li>
+                    <li><span class="tnode">Task status</span></li>
+                    <li><span class="tnode">Download results files</span></li>
+                    <li><span class="tnode added">Save-for-later table <span class="badge">new</span></span>
+                      <ul>
+                        <li><span class="tnode">Edit file</span></li>
+                        <li><span class="tnode">Delete file</span></li>
+                        <li><span class="tnode added">Process uploaded files <span class="badge">new</span></span></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="tnode kept">Task Results</span>
+                  <ul>
+                    <li><span class="tnode">Results table</span>
+                      <ul>
+                        <li><span class="tnode">Download results</span></li>
+                        <li><span class="tnode">Delete</span></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          </div>
+        </div>
+      </div>
+      <div class="legend">
+        <span><i class="kept"></i> kept / clarified</span>
+        <span><i class="removed"></i> removed or merged</span>
+        <span><i class="added"></i> newly added</span>
+      </div>
+      <div class="iachanges">
+        <div class="iachange">
+          <h4>Task Overview</h4>
+          <p>The result table was simplified because a dedicated Task Results page already exists.</p>
+        </div>
+        <div class="iachange">
+          <h4>Task Management</h4>
+          <p>Removed and merged into the Task Scheduler, since file management is required before using it.</p>
+        </div>
+        <div class="iachange">
+          <h4>File Management</h4>
+          <p>Removed for functional overlap with Task Results. Related actions were consolidated to avoid redundancy.</p>
+        </div>
+      </div>
+      <figcaption>Fig. 5 - Original vs. new IA: what was kept, merged, removed, and newly added.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= WORKFLOW COMPARISON ================= -->
+<section data-screen-label="Workflow comparison">
+  <div class="wrap">
+    <div class="eyebrow">Workflow comparison</div>
+    <h2>Before &amp; after the redesign</h2>
+    <figure>
+      <div class="flowstack">
+
+        <!-- BEFORE -->
+        <div class="flowsvgwrap">
+          <div class="flowsvghead before">Before</div>
+          <svg class="flowsvg" viewBox="0 0 620 1015" role="img" aria-label="Before workflow">
+            <defs>
+              <marker id="arrB" markerWidth="9" markerHeight="9" refX="5.5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#8a847b"/></marker>
+            </defs>
+            <g fill="none" stroke="#8a847b" stroke-width="1.6" marker-end="url(#arrB)">
+              <line x1="310" y1="118" x2="310" y2="159"/>
+              <line x1="310" y1="230" x2="310" y2="299"/>
+              <line x1="310" y1="364" x2="310" y2="429"/>
+              <line x1="310" y1="500" x2="310" y2="559"/>
+              <line x1="310" y1="624" x2="310" y2="684"/>
+              <line x1="310" y1="749" x2="310" y2="809"/>
+              <line x1="310" y1="874" x2="310" y2="888"/>
+              <line x1="230" y1="332" x2="183" y2="332"/>
+              <line x1="390" y1="332" x2="437" y2="332"/>
+            </g>
+            <!-- circles -->
+            <circle cx="310" cy="62" r="56" fill="#f6dfa6" stroke="#14110d" stroke-width="1.5"/>
+            <circle cx="310" cy="945" r="56" fill="#f6dfa6" stroke="#14110d" stroke-width="1.5"/>
+            <!-- boxes -->
+            <rect x="230" y="160" width="160" height="70" rx="10" fill="#d7e5fb" stroke="#14110d" stroke-width="1.5"/>
+            <rect x="20"  y="300" width="160" height="64" rx="10" fill="#d7e5fb" stroke="#14110d" stroke-width="1.5"/>
+            <rect x="230" y="300" width="160" height="64" rx="10" fill="#d7e5fb" stroke="#14110d" stroke-width="1.5"/>
+            <rect x="440" y="300" width="160" height="64" rx="10" fill="#d7e5fb" stroke="#14110d" stroke-width="1.5"/>
+            <rect x="230" y="430" width="160" height="70" rx="10" fill="#d7e5fb" stroke="#14110d" stroke-width="1.5"/>
+            <rect x="230" y="560" width="160" height="64" rx="10" fill="#d7e5fb" stroke="#14110d" stroke-width="1.5"/>
+            <rect x="230" y="685" width="160" height="64" rx="10" fill="#d7e5fb" stroke="#14110d" stroke-width="1.5"/>
+            <rect x="230" y="810" width="160" height="64" rx="10" fill="#d7e5fb" stroke="#14110d" stroke-width="1.5"/>
+            <!-- labels -->
+            <text x="310" y="66" text-anchor="middle" font-size="13">Enter website</text>
+            <text x="310" y="191" text-anchor="middle" font-size="13"><tspan x="310">Go to task</tspan><tspan x="310" dy="16">management page</tspan></text>
+            <text x="100" y="336" text-anchor="middle" font-size="13">Delete files</text>
+            <text x="310" y="336" text-anchor="middle" font-size="13">Upload files</text>
+            <text x="520" y="336" text-anchor="middle" font-size="13">Edit files</text>
+            <text x="310" y="461" text-anchor="middle" font-size="13"><tspan x="310">Go to task scheduler</tspan><tspan x="310" dy="16">page</tspan></text>
+            <text x="310" y="596" text-anchor="middle" font-size="13">Choose files</text>
+            <text x="310" y="721" text-anchor="middle" font-size="13">Choose process type</text>
+            <text x="310" y="846" text-anchor="middle" font-size="13">Start tasks</text>
+            <text x="310" y="949" text-anchor="middle" font-size="13">Download results</text>
+          </svg>
+        </div>
+
+        <!-- AFTER -->
+        <div class="flowsvgwrap">
+          <div class="flowsvghead after">After</div>
+          <svg class="flowsvg" viewBox="0 0 700 770" role="img" aria-label="After workflow">
+            <defs>
+              <marker id="arrA" markerWidth="9" markerHeight="9" refX="5.5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#8a847b"/></marker>
+            </defs>
+            <!-- connectors without arrows -->
+            <g fill="none" stroke="#8a847b" stroke-width="1.6" stroke-linejoin="round">
+              <path d="M380,186 H418"/>
+              <path d="M418,126 V286"/>
+              <path d="M630,126 H665 V700 H358" marker-end="url(#arrA)"/>
+            </g>
+            <!-- arrowed connectors -->
+            <g fill="none" stroke="#8a847b" stroke-width="1.6" marker-end="url(#arrA)">
+              <line x1="300" y1="114" x2="300" y2="149"/>
+              <line x1="300" y1="222" x2="300" y2="299"/>
+              <line x1="300" y1="364" x2="300" y2="419"/>
+              <line x1="300" y1="484" x2="300" y2="539"/>
+              <line x1="300" y1="604" x2="300" y2="645"/>
+              <line x1="220" y1="186" x2="183" y2="186"/>
+              <line x1="418" y1="126" x2="448" y2="126"/>
+              <line x1="418" y1="286" x2="448" y2="286"/>
+            </g>
+            <!-- circles -->
+            <circle cx="300" cy="60"  r="54" fill="#c7e7d2" stroke="#14110d" stroke-width="1.5"/>
+            <circle cx="300" cy="700" r="54" fill="#c7e7d2" stroke="#14110d" stroke-width="1.5"/>
+            <!-- boxes -->
+            <rect x="220" y="150" width="160" height="72" rx="10" fill="#e2ddf4" stroke="#14110d" stroke-width="1.5"/>
+            <rect x="10"  y="146" width="170" height="80" rx="10" fill="#e2ddf4" stroke="#14110d" stroke-width="1.5"/>
+            <rect x="450" y="86"  width="180" height="80" rx="10" fill="#e2ddf4" stroke="#14110d" stroke-width="1.5"/>
+            <rect x="450" y="246" width="180" height="80" rx="10" fill="#e2ddf4" stroke="#14110d" stroke-width="1.5"/>
+            <rect x="220" y="300" width="160" height="64" rx="10" fill="#e2ddf4" stroke="#14110d" stroke-width="1.5"/>
+            <rect x="220" y="420" width="160" height="64" rx="10" fill="#e2ddf4" stroke="#14110d" stroke-width="1.5"/>
+            <rect x="220" y="540" width="160" height="64" rx="10" fill="#e2ddf4" stroke="#14110d" stroke-width="1.5"/>
+            <!-- labels -->
+            <text x="300" y="64" text-anchor="middle" font-size="13">Enter website</text>
+            <text x="300" y="182" text-anchor="middle" font-size="13"><tspan x="300">Go to task</tspan><tspan x="300" dy="16">scheduler page</tspan></text>
+            <text x="95" y="174" text-anchor="middle" font-size="13"><tspan x="95">Delete files form</tspan><tspan x="95" dy="16">save for later</tspan><tspan x="95" dy="16">section</tspan></text>
+            <text x="540" y="114" text-anchor="middle" font-size="13"><tspan x="540">start process form</tspan><tspan x="540" dy="16">save for later</tspan><tspan x="540" dy="16">section</tspan></text>
+            <text x="540" y="274" text-anchor="middle" font-size="13"><tspan x="540">Edit files form</tspan><tspan x="540" dy="16">save for later</tspan><tspan x="540" dy="16">section</tspan></text>
+            <text x="300" y="336" text-anchor="middle" font-size="13">Upload files</text>
+            <text x="300" y="456" text-anchor="middle" font-size="13">Choose process type</text>
+            <text x="300" y="576" text-anchor="middle" font-size="13">Start process</text>
+            <text x="300" y="704" text-anchor="middle" font-size="13">Download results</text>
+          </svg>
+        </div>
+
+      </div>
+      <div class="compnote">
+        <h4>Workflow comparison</h4>
+        <p>Streamlined the workflow and information architecture by consolidating file uploading and processing into a single page. This eliminated redundant steps and significantly reduced user friction - the "save for later" branch keeps edit/delete reachable without leaving the main flow.</p>
+      </div>
+      <figcaption>Fig. 7 - Before vs. after task flow. The redesigned path collapses two page jumps into one scheduler.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= UI COMPARISON ================= -->
+<section data-screen-label="UI comparison">
+  <div class="wrap">
+    <div class="eyebrow">UI comparison</div>
+    <h2>Reducing visual noise, raising readability</h2>
+    <figure>
+      <div class="uigrid">
+        <div class="uicol before">
+          <div class="uilab">Before</div>
+          <div class="shot">
+            <img src="assets/supplyzone/before%20analysis.png" alt="Original analysis overview with dense dual-axis chart" />
+          </div>
+          <div class="shot">
+            <img src="assets/supplyzone/rapidbefore.png" alt="Original task scheduler with cluttered table and ambiguous icons" />
+          </div>
+        </div>
+        <div class="uicol after">
+          <div class="uilab">After</div>
+          <div class="shot">
+            <img src="assets/supplyzone/afteranalysis.png" alt="Redesigned dashboard with KPI tiles and clearer chart views" />
+          </div>
+          <div class="shot">
+            <img src="assets/supplyzone/after%20taskschedualer.png" alt="Redesigned upload and processing workflow with clear icons and labels" />
+          </div>
+        </div>
+      </div>
+      <div class="compnote">
+        <h4>UI comparison</h4>
+        <p>Redesigned the UI to minimize visual noise and enhance data readability. Key improvements include restructuring the page layout, splitting a complex chart into two intuitive views, and replacing vague icons with clear, self-explanatory imagery.</p>
+      </div>
+      <figcaption>Fig. 8 - Before vs. after interface: dense original screens compared with the redesigned dashboard and single-page processing flow.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= OUTCOME ================= -->
+<section class="endnote" data-screen-label="Outcome">
+  <div class="blobfield"><span class="blob b2"></span><span class="blob b4"></span></div>
+  <div class="wrap">
+    <div class="card outcard">
+      <div class="eyebrow">Outcome</div>
+      <h2>One coherent workflow, end to end</h2>
+      <p>By consolidating upload and processing into a single page, standardizing the iconography, and rebuilding the analytics views around progressive disclosure, the redesign turned a capable-but-confusing tool into one that supports the analyst's real flow - from entering the platform to reading the results.</p>
+      <div class="metrics">
+        <div class="metric"><div class="mv">2->1</div><div class="mk">page jumps collapsed into a single scheduler.</div></div>
+        <div class="metric"><div class="mv">3</div><div class="mk">redundant sections removed or merged in the new IA.</div></div>
+        <div class="metric"><div class="mv">1->2</div><div class="mk">dense chart split into two scannable views.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="foot" data-screen-label="Footer">
+  <div class="wrap">
+    <a class="fbrand" href="index.html">Muhua Qin</a>
+    <div class="flinks">
+      <a href="index.html#contact">About</a>
+    </div>
+  </div>
+</footer>
+
+<div id="tweaks-root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="supply-tweaks.jsx"></script>
+<script>
+  (function(){
+    var nav = document.querySelector('.nav');
+    if(!nav) return;
+    var onScroll = function(){
+      if (window.scrollY > 24) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, {passive:true});
+  })();
+</script>
+
+</body>
+</html>

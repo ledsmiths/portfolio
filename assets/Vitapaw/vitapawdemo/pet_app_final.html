@@ -1,0 +1,319 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.screen-wrap { display: flex; justify-content: center; }
+.screen { width: 320px; height: 693px; overflow: hidden; font-family: 'Inter', -apple-system, sans-serif; display: flex; flex-direction: column; position: relative; background: #f7fafe; }
+.status-bar { display: flex; justify-content: space-between; align-items: center; padding: 12px 18px 4px; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sb-light { background: #f7fafe; color: #171717; }
+.sb-dark  { background: #0d1117; color: #fff; }
+.sb-white { background: #fff; color: #171717; }
+.status-icons { display: flex; gap: 4px; align-items: center; }
+.header { background: #f7fafe; padding: 10px 20px 8px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
+.greeting { display: flex; align-items: center; gap: 10px; }
+.greeting-text { font-size: 22px; font-weight: 500; color: #171717; letter-spacing: -0.66px; }
+.tabs { background: #f7fafe; display: flex; padding: 0 23px; gap: 20px; flex-shrink: 0; }
+.tab { padding: 6px 0 8px; font-size: 16px; font-weight: 700; color: rgba(23,23,23,0.4); cursor: pointer; border-bottom: 2.5px solid transparent; letter-spacing: -0.48px; transition: all 0.2s; }
+.tab.active { color: #171717; border-bottom-color: rgba(64,75,255,0.6); }
+.scroll-content { flex: 1; overflow-y: auto; background: #f7fafe; }
+.scroll-content::-webkit-scrollbar { display: none; }
+.scroll-area { padding: 12px 20px; display: flex; flex-direction: column; gap: 12px; }
+.urgent-card { border-radius: 8px; background: linear-gradient(135deg,#D8FFDA 0%,#F8B179 25%,#FF9783 50%,#F8B179 70%,#D8FFDA 100%); padding: 14px 16px; cursor: pointer; transition: transform .15s; }
+.urgent-card:active { transform: scale(.98); }
+.urgent-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.urgent-pet-avatar { width: 72px; height: 72px; border-radius: 50%; border: 2px solid rgba(255,255,255,.6); overflow: hidden; flex-shrink: 0; background: rgba(255,255,255,.2); }
+.uname { font-size: 18px; font-weight: 700; color: #fff; }
+.udesc { font-size: 12px; font-weight: 600; color: #fff; margin-top: 4px; line-height: 1.4; }
+.utime { font-size: 12px; color: rgba(255,255,255,.9); margin-top: 6px; }
+.urgent-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,.35); padding-top: 10px; }
+.urgent-footer span { font-size: 14px; font-weight: 600; color: #fff; }
+.chevron-circle { width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,.3); display: flex; align-items: center; justify-content: center; }
+.alert-card { background: #fff; border-radius: 8px; display: flex; align-items: stretch; cursor: pointer; overflow: hidden; box-shadow: 0 .2px 12px 0 rgba(203,223,250,.6); transition: transform .15s; }
+.alert-card:active { transform: scale(.98); }
+.alert-bar-wrap { width: 13px; flex-shrink: 0; position: relative; }
+.alert-bar-inner { position: absolute; left: 0; top: 12px; width: 5px; height: 18px; border-radius: 100px; }
+.bar-orange { background: #ffc847; }
+.bar-red    { background: #ff4d4d; }
+.alert-inner { flex: 1; display: flex; align-items: center; gap: 10px; padding: 12px 14px 12px 6px; }
+.alert-info { flex: 1; }
+.alert-name { font-size: 16px; font-weight: 600; color: #2a282f; }
+.alert-desc { font-size: 14px; color: #313131; margin-top: 2px; }
+.alert-time { font-size: 14px; color: #5f6c85; margin-top: 2px; }
+.alert-pet  { width: 38px; height: 38px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+.tab-bar { background: rgba(245,250,254,.95); border-top: .5px solid rgba(203,223,250,.4); display: flex; padding: 10px 0 14px; flex-shrink: 0; }
+.tab-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; }
+.tab-lbl { font-size: 10px; color: #6e76fe; }
+.tab-lbl.muted { color: #bbb; }
+.detail-screen { display: none; flex-direction: column; height: 100%; background: #fff; overflow: hidden; }
+.detail-nav { display: flex; align-items: center; justify-content: center; padding: 10px 16px 8px; position: relative; flex-shrink: 0; background: #fff; }
+.detail-back { position: absolute; left: 16px; cursor: pointer; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+.detail-title { font-size: 16px; font-weight: 600; color: #171717; }
+.chart-area { width: 100%; height: 200px; background: #f7fafe; flex-shrink: 0; position: relative; overflow: hidden; }
+.detail-body { flex: 1; overflow: hidden; padding: 16px 20px 0; display: flex; flex-direction: column; }
+.alarm-title { font-size: 20px; font-weight: 700; color: #171717; letter-spacing: -0.5px; margin-bottom: 8px; }
+.alarm-desc-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 18px; }
+.alarm-desc-text { font-size: 13px; color: #5f6c85; line-height: 1.4; }
+.section-title { font-size: 16px; font-weight: 700; color: #171717; margin-bottom: 10px; }
+.suggestion-list { display: flex; flex-direction: column; gap: 8px; }
+.suggestion-item { display: flex; align-items: flex-start; gap: 10px; }
+.green-dot { width: 8px; height: 8px; border-radius: 50%; background: #52c471; flex-shrink: 0; margin-top: 4px; }
+.suggestion-text { font-size: 13px; color: #313131; line-height: 1.4; }
+.detail-footer { flex-shrink: 0; background: #fff; padding: 12px 20px 18px; display: flex; gap: 12px; }
+.monitor-screen { display: none; flex-direction: column; height: 100%; background: #0d1117; }
+.monitor-nav { display: flex; align-items: center; justify-content: center; padding: 8px 16px 6px; position: relative; flex-shrink: 0; }
+.back-btn { position: absolute; left: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; }
+.monitor-area { flex: 1; position: relative; overflow: hidden; }
+.monitor-area::after { content:''; position:absolute; inset:0; background: repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.07) 3px,rgba(0,0,0,.07) 4px); pointer-events:none; z-index:10; }
+.rec-badge { position:absolute; top:12px; right:12px; display:flex; align-items:center; gap:5px; z-index:20; background:rgba(0,0,0,.4); padding:3px 8px; border-radius:20px; }
+.rec-dot { width:7px; height:7px; border-radius:50%; background:#ff4d4d; animation:blink 1.2s ease-in-out infinite; }
+.rec-text { font-size:10px; font-weight:700; color:#fff; letter-spacing:1px; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+.ts-label { position:absolute; bottom:14px; left:14px; font-size:10px; color:rgba(100,220,100,.85); font-family:monospace; z-index:20; }
+.cam-label { position:absolute; bottom:14px; right:14px; font-size:10px; color:rgba(255,255,255,.5); font-family:monospace; z-index:20; }
+.cat-wrap { position:absolute; z-index:5; }
+.cat-glow { filter: drop-shadow(0 0 5px rgba(80,180,80,.5)); }
+</style>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="ca" viewBox="0 0 72 72"><circle cx="36" cy="36" r="36" fill="#e8d5c4"/><ellipse cx="36" cy="42" rx="18" ry="16" fill="#d4b89a"/><circle cx="28" cy="32" r="7" fill="#fff"/><circle cx="44" cy="32" r="7" fill="#fff"/><circle cx="29" cy="33" r="4" fill="#4a3728"/><circle cx="45" cy="33" r="4" fill="#4a3728"/><circle cx="30" cy="32" r="1.5" fill="#fff"/><circle cx="46" cy="32" r="1.5" fill="#fff"/><ellipse cx="36" cy="40" rx="4" ry="3" fill="#c9967a"/><path d="M32 44 Q36 47 40 44" stroke="#8b5e3c" stroke-width="1.2" fill="none" stroke-linecap="round"/><line x1="20" y1="38" x2="12" y2="36" stroke="#8b5e3c" stroke-width="1"/><line x1="20" y1="40" x2="11" y2="40" stroke="#8b5e3c" stroke-width="1"/><line x1="52" y1="38" x2="60" y2="36" stroke="#8b5e3c" stroke-width="1"/><line x1="52" y1="40" x2="61" y2="40" stroke="#8b5e3c" stroke-width="1"/><polygon points="18,14 24,26 12,26" fill="#e8d5c4"/><polygon points="54,14 60,26 48,26" fill="#e8d5c4"/><polygon points="19,16 23,24 15,24" fill="#f0a0a0"/><polygon points="53,16 57,24 49,24" fill="#f0a0a0"/></symbol>
+    <symbol id="cb" viewBox="0 0 72 72"><circle cx="36" cy="36" r="36" fill="#c8d8e8"/><ellipse cx="36" cy="42" rx="18" ry="16" fill="#aec4d8"/><circle cx="28" cy="32" r="7" fill="#fff"/><circle cx="44" cy="32" r="7" fill="#fff"/><circle cx="29" cy="33" r="4" fill="#2d4a6b"/><circle cx="45" cy="33" r="4" fill="#2d4a6b"/><circle cx="30" cy="32" r="1.5" fill="#fff"/><circle cx="46" cy="32" r="1.5" fill="#fff"/><ellipse cx="36" cy="40" rx="4" ry="3" fill="#e8a0b0"/><path d="M32 44 Q36 47 40 44" stroke="#6b8aaa" stroke-width="1.2" fill="none" stroke-linecap="round"/><line x1="20" y1="38" x2="12" y2="36" stroke="#6b8aaa" stroke-width="1"/><line x1="20" y1="40" x2="11" y2="40" stroke="#6b8aaa" stroke-width="1"/><line x1="52" y1="38" x2="60" y2="36" stroke="#6b8aaa" stroke-width="1"/><line x1="52" y1="40" x2="61" y2="40" stroke="#6b8aaa" stroke-width="1"/><polygon points="18,14 24,26 12,26" fill="#c8d8e8"/><polygon points="54,14 60,26 48,26" fill="#c8d8e8"/><polygon points="19,16 23,24 15,24" fill="#d0b0c8"/><polygon points="53,16 57,24 49,24" fill="#d0b0c8"/></symbol>
+    <symbol id="cc" viewBox="0 0 72 72"><circle cx="36" cy="36" r="36" fill="#d4c8b8"/><ellipse cx="36" cy="42" rx="18" ry="16" fill="#bfb0a0"/><circle cx="28" cy="32" r="7" fill="#fff"/><circle cx="44" cy="32" r="7" fill="#fff"/><circle cx="29" cy="33" r="4" fill="#3d2e1e"/><circle cx="45" cy="33" r="4" fill="#3d2e1e"/><circle cx="30" cy="32" r="1.5" fill="#fff"/><circle cx="46" cy="32" r="1.5" fill="#fff"/><ellipse cx="36" cy="40" rx="4" ry="3" fill="#c47060"/><path d="M32 44 Q36 47 40 44" stroke="#7a5a40" stroke-width="1.2" fill="none" stroke-linecap="round"/><line x1="20" y1="38" x2="12" y2="36" stroke="#7a5a40" stroke-width="1"/><line x1="20" y1="40" x2="11" y2="40" stroke="#7a5a40" stroke-width="1"/><line x1="52" y1="38" x2="60" y2="36" stroke="#7a5a40" stroke-width="1"/><line x1="52" y1="40" x2="61" y2="40" stroke="#7a5a40" stroke-width="1"/><polygon points="18,14 24,26 12,26" fill="#d4c8b8"/><polygon points="54,14 60,26 48,26" fill="#d4c8b8"/><polygon points="19,16 23,24 15,24" fill="#e8b090"/><polygon points="53,16 57,24 49,24" fill="#e8b090"/></symbol>
+    <symbol id="nv-cat" viewBox="0 0 100 130"><ellipse cx="50" cy="105" rx="26" ry="14"/><rect x="30" y="68" width="40" height="44" rx="12"/><circle cx="50" cy="52" r="22"/><polygon points="30,36 24,14 40,32"/><polygon points="70,36 76,14 60,32"/><path d="M72 85 Q88 74 92 60 Q95 50 85 53" fill="none" stroke="inherit" stroke-width="7" stroke-linecap="round"/><rect x="26" y="108" width="10" height="18" rx="5"/><rect x="40" y="110" width="10" height="18" rx="5"/><rect x="54" y="110" width="10" height="18" rx="5"/><rect x="68" y="108" width="10" height="18" rx="5"/></symbol>
+    <!-- tab bar icons as reusable symbols -->
+    <symbol id="icon-bell" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+      <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+    </symbol>
+    <symbol id="icon-clipboard" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+      <line x1="9" y1="12" x2="15" y2="12"/>
+      <line x1="9" y1="16" x2="13" y2="16"/>
+    </symbol>
+    <symbol id="icon-settings" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="3"/>
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+    </symbol>
+    <symbol id="icon-chevron-right" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="9 18 15 12 9 6"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="screen-wrap">
+ <div class="screen">
+
+  <!-- HOME -->
+  <div id="home-view" style="display:flex;flex-direction:column;height:100%;">
+    <div class="status-bar sb-light"><span>9:41</span><div class="status-icons"><svg width="15" height="11" viewBox="0 0 15 11" fill="#171717"><rect x="0" y="4" width="3" height="7" rx="1"/><rect x="4" y="2.5" width="3" height="8.5" rx="1"/><rect x="8" y="1" width="3" height="10" rx="1"/><rect x="12" y="0" width="3" height="11" rx="1" opacity="0.25"/></svg><svg width="13" height="11" viewBox="0 0 13 11" fill="none" stroke="#171717" stroke-width="1.2"><path d="M6.5 4C8 2.5 10.2 2.5 11.7 4" opacity="0.35"/><path d="M6.5 4C5 2.5 2.8 2.5 1.3 4" opacity="0.35"/><path d="M4.5 6C5.3 5 7.7 5 8.5 6"/><circle cx="6.5" cy="8.5" r="1" fill="#171717" stroke="none"/></svg><svg width="23" height="11" viewBox="0 0 23 11" fill="none"><rect x="0.5" y="0.5" width="19" height="10" rx="3.5" stroke="#171717"/><path d="M20.5 3.5C21.8 3.8 22.5 4.5 22.5 5.5C22.5 6.5 21.8 7.2 20.5 7.5" stroke="#171717" stroke-width="1.1"/><rect x="2" y="2" width="15" height="7" rx="2" fill="#171717"/></svg></div></div>
+    <div class="header">
+      <div class="greeting">
+        <svg width="36" height="36" style="border-radius:50%;flex-shrink:0;"><use href="#ca" width="36" height="36"/></svg>
+        <span class="greeting-text">Hello, Emily!</span>
+      </div>
+      <!-- Live button: static dot, no animation -->
+      <button onclick="openMonitor()" style="background:#6e76fe;border:none;border-radius:999px;padding:6px 16px 6px 12px;display:flex;align-items:center;gap:6px;cursor:pointer;height:34px;">
+        <div style="width:8px;height:8px;border-radius:50%;background:#fff;flex-shrink:0;"></div>
+        <span style="font-size:13px;font-weight:500;color:#fff;">Live</span>
+      </button>
+    </div>
+    <div class="tabs">
+      <div class="tab active" id="tab-new" onclick="switchTab('new')">New</div>
+      <div class="tab" id="tab-seen" onclick="switchTab('seen')">Seen</div>
+    </div>
+    <div class="scroll-content">
+      <div id="new-content"><div class="scroll-area">
+        <div class="urgent-card" onclick="openDetail('Luna','Reduced activity and abnormal posture','Today · 10:32','video')">
+          <div class="urgent-top"><div class="urgent-pet-avatar"><svg width="72" height="72" viewBox="0 0 72 72"><use href="#cb" width="72" height="72"/></svg></div><div><div class="uname">Luna</div><div class="udesc">Reduced activity and abnormal posture</div><div class="utime">Today · 10:32</div></div></div>
+          <div class="urgent-footer"><span>Attention required</span><div class="chevron-circle"><svg width="14" height="14"><use href="#icon-chevron-right" width="14" height="14" stroke="#fff"/></svg></div></div>
+        </div>
+        <div class="alert-card" onclick="openDetail('Coco','Abnormal posture','Yesterday · 21:10','video')"><div class="alert-bar-wrap"><div class="alert-bar-inner bar-red"></div></div><div class="alert-inner"><div class="alert-info"><div class="alert-name">Coco</div><div class="alert-desc">Abnormal posture</div><div class="alert-time">Yesterday · 21:10</div></div><div class="alert-pet"><svg width="38" height="38" viewBox="0 0 72 72"><use href="#ca" width="72" height="72"/></svg></div><svg width="16" height="16"><use href="#icon-chevron-right" width="16" height="16" stroke="#cbdffa"/></svg></div></div>
+        <div class="alert-card" onclick="openDetail('Luna','Abnormal Litter Box Frequency','12 Mar · 10:32','chart')"><div class="alert-bar-wrap"><div class="alert-bar-inner bar-orange"></div></div><div class="alert-inner"><div class="alert-info"><div class="alert-name">Luna</div><div class="alert-desc">Abnormal Litter Box Frequency</div><div class="alert-time">12 Mar · 10:32</div></div><div class="alert-pet"><svg width="38" height="38" viewBox="0 0 72 72"><use href="#cb" width="72" height="72"/></svg></div><svg width="16" height="16"><use href="#icon-chevron-right" width="16" height="16" stroke="#cbdffa"/></svg></div></div>
+        <div class="alert-card" onclick="openDetail('Mike','Abnormal Litter Box Frequency','11 Mar · 10:32','chart')"><div class="alert-bar-wrap"><div class="alert-bar-inner bar-orange"></div></div><div class="alert-inner"><div class="alert-info"><div class="alert-name">Mike</div><div class="alert-desc">Abnormal Litter Box Frequency</div><div class="alert-time">11 Mar · 10:32</div></div><div class="alert-pet"><svg width="38" height="38" viewBox="0 0 72 72"><use href="#cc" width="72" height="72"/></svg></div><svg width="16" height="16"><use href="#icon-chevron-right" width="16" height="16" stroke="#cbdffa"/></svg></div></div>
+      </div></div>
+      <div id="seen-content" style="display:none;"><div class="scroll-area">
+        <div class="alert-card" onclick="openDetail('Luna','Reduced activity and abnormal posture','Today · 10:32','video')"><div class="alert-bar-wrap"><div class="alert-bar-inner bar-red"></div></div><div class="alert-inner"><div class="alert-info"><div class="alert-name">Luna</div><div class="alert-desc">Reduced activity and abnormal posture</div><div class="alert-time">Today · 10:32</div></div><div class="alert-pet"><svg width="38" height="38" viewBox="0 0 72 72"><use href="#cb" width="72" height="72"/></svg></div><svg width="16" height="16"><use href="#icon-chevron-right" width="16" height="16" stroke="#cbdffa"/></svg></div></div>
+        <div class="alert-card" onclick="openDetail('Coco','Abnormal posture','Yesterday · 21:10','video')"><div class="alert-bar-wrap"><div class="alert-bar-inner bar-red"></div></div><div class="alert-inner"><div class="alert-info"><div class="alert-name">Coco</div><div class="alert-desc">Abnormal posture</div><div class="alert-time">Yesterday · 21:10</div></div><div class="alert-pet"><svg width="38" height="38" viewBox="0 0 72 72"><use href="#ca" width="72" height="72"/></svg></div><svg width="16" height="16"><use href="#icon-chevron-right" width="16" height="16" stroke="#cbdffa"/></svg></div></div>
+        <div class="alert-card" onclick="openDetail('Luna','Abnormal Litter Box Frequency','12 Mar · 10:32','chart')"><div class="alert-bar-wrap"><div class="alert-bar-inner bar-orange"></div></div><div class="alert-inner"><div class="alert-info"><div class="alert-name">Luna</div><div class="alert-desc">Abnormal Litter Box Frequency</div><div class="alert-time">12 Mar · 10:32</div></div><div class="alert-pet"><svg width="38" height="38" viewBox="0 0 72 72"><use href="#cb" width="72" height="72"/></svg></div><svg width="16" height="16"><use href="#icon-chevron-right" width="16" height="16" stroke="#cbdffa"/></svg></div></div>
+      </div></div>
+    </div>
+    <!-- Tab bar with inline SVG icons -->
+    <div class="tab-bar">
+      <div class="tab-item">
+        <svg width="24" height="24"><use href="#icon-bell" width="24" height="24" stroke="#6e76fe"/></svg>
+        <span class="tab-lbl">Alarm</span>
+      </div>
+      <div class="tab-item">
+        <svg width="24" height="24"><use href="#icon-clipboard" width="24" height="24" stroke="#bbb"/></svg>
+        <span class="tab-lbl muted">Manage</span>
+      </div>
+      <div class="tab-item">
+        <svg width="24" height="24"><use href="#icon-settings" width="24" height="24" stroke="#bbb"/></svg>
+        <span class="tab-lbl muted">Settings</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DETAIL -->
+  <div id="detail-view" class="detail-screen">
+    <div class="status-bar sb-white"><span>9:41</span><div class="status-icons"><svg width="15" height="11" viewBox="0 0 15 11" fill="#171717"><rect x="0" y="4" width="3" height="7" rx="1"/><rect x="4" y="2.5" width="3" height="8.5" rx="1"/><rect x="8" y="1" width="3" height="10" rx="1"/><rect x="12" y="0" width="3" height="11" rx="1" opacity="0.25"/></svg><svg width="13" height="11" viewBox="0 0 13 11" fill="none" stroke="#171717" stroke-width="1.2"><path d="M6.5 4C8 2.5 10.2 2.5 11.7 4" opacity="0.35"/><path d="M6.5 4C5 2.5 2.8 2.5 1.3 4" opacity="0.35"/><path d="M4.5 6C5.3 5 7.7 5 8.5 6"/><circle cx="6.5" cy="8.5" r="1" fill="#171717" stroke="none"/></svg><svg width="23" height="11" viewBox="0 0 23 11" fill="none"><rect x="0.5" y="0.5" width="19" height="10" rx="3.5" stroke="#171717"/><path d="M20.5 3.5C21.8 3.8 22.5 4.5 22.5 5.5C22.5 6.5 21.8 7.2 20.5 7.5" stroke="#171717" stroke-width="1.1"/><rect x="2" y="2" width="15" height="7" rx="2" fill="#171717"/></svg></div></div>
+    <div class="detail-nav">
+      <div class="detail-back" onclick="closeDetail()"><svg width="10" height="17" viewBox="0 0 10 17" fill="none"><path d="M9 1L1 8.5L9 16" stroke="#171717" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <span class="detail-title">Alarm details</span>
+    </div>
+    <div id="video-section" class="chart-area" style="cursor:pointer;" onclick="toggleVideo()">
+      <video id="alert-video" src="127621-739144659.mp4" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" preload="metadata" playsinline></video>
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,0.18);"></div>
+      <div id="play-btn" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60px;height:60px;border-radius:50%;border:3px solid #868DFF;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;">
+        <svg width="28" height="28" viewBox="0 0 28 28"><polygon points="9,4 25,14 9,24" fill="#868DFF"/></svg>
+      </div>
+      <div id="video-playing" style="display:none;position:absolute;inset:0;background:rgba(0,0,0,0.3);align-items:center;justify-content:center;flex-direction:column;gap:10px;">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect x="8" y="8" width="7" height="20" rx="2" fill="#fff"/><rect x="21" y="8" width="7" height="20" rx="2" fill="#fff"/></svg>
+        <div style="width:80%;height:3px;background:rgba(255,255,255,.3);border-radius:2px;"><div id="progress-fill" style="height:100%;background:#868DFF;border-radius:2px;width:0%;"></div></div>
+      </div>
+    </div>
+    <div id="chart-section" class="chart-area" style="display:none;">
+      <svg width="320" height="200" viewBox="0 0 320 200">
+        <rect width="320" height="200" fill="#f7fafe"/>
+        <text x="16" y="18" font-size="11" font-weight="700" fill="#2a282f" font-family="Inter,sans-serif">7-Day Litter Box</text>
+        <text x="304" y="18" font-size="10" fill="#bbb" font-family="Inter,sans-serif" text-anchor="end">times / day</text>
+        <line x1="30" y1="55" x2="304" y2="55" stroke="#edf0f7" stroke-width="1"/>
+        <line x1="30" y1="85" x2="304" y2="85" stroke="#edf0f7" stroke-width="1"/>
+        <line x1="30" y1="115" x2="304" y2="115" stroke="#edf0f7" stroke-width="1"/>
+        <line x1="30" y1="145" x2="304" y2="145" stroke="#edf0f7" stroke-width="1"/>
+        <line x1="30" y1="85" x2="304" y2="85" stroke="#868DFF" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+        <text x="308" y="89" font-size="8" fill="#868DFF" font-family="Inter,sans-serif">avg</text>
+        <text x="26" y="59" font-size="9" fill="#ccc" font-family="monospace" text-anchor="end">6</text>
+        <text x="26" y="89" font-size="9" fill="#ccc" font-family="monospace" text-anchor="end">4</text>
+        <text x="26" y="119" font-size="9" fill="#ccc" font-family="monospace" text-anchor="end">2</text>
+        <text x="26" y="149" font-size="9" fill="#ccc" font-family="monospace" text-anchor="end">0</text>
+        <path d="M39,55 h10 a6,6 0 0,1 6,6 v84 h-22 v-84 a6,6 0 0,1 6,-6 z" fill="#4EC1EB" opacity="0.85"/>
+        <path d="M78,55 h10 a6,6 0 0,1 6,6 v84 h-22 v-84 a6,6 0 0,1 6,-6 z" fill="#4EC1EB" opacity="0.85"/>
+        <path d="M117,25 h10 a6,6 0 0,1 6,6 v114 h-22 v-114 a6,6 0 0,1 6,-6 z" fill="#4EC1EB" opacity="0.85"/>
+        <path d="M156,25 h10 a6,6 0 0,1 6,6 v114 h-22 v-114 a6,6 0 0,1 6,-6 z" fill="#4EC1EB" opacity="0.85"/>
+        <path d="M195,85 h10 a6,6 0 0,1 6,6 v54 h-22 v-54 a6,6 0 0,1 6,-6 z" fill="#F9E66C"/>
+        <path d="M234,85 h10 a6,6 0 0,1 6,6 v54 h-22 v-54 a6,6 0 0,1 6,-6 z" fill="#ED9E59"/>
+        <path d="M273,115 h10 a6,6 0 0,1 6,6 v24 h-22 v-24 a6,6 0 0,1 6,-6 z" fill="#F5756C"/>
+        <text x="50" y="162" font-size="9" fill="#aaa" font-family="Inter,sans-serif" text-anchor="middle">Mon</text>
+        <text x="89" y="162" font-size="9" fill="#aaa" font-family="Inter,sans-serif" text-anchor="middle">Tue</text>
+        <text x="128" y="162" font-size="9" fill="#aaa" font-family="Inter,sans-serif" text-anchor="middle">Wed</text>
+        <text x="167" y="162" font-size="9" fill="#aaa" font-family="Inter,sans-serif" text-anchor="middle">Thu</text>
+        <text x="206" y="162" font-size="9" fill="#aaa" font-family="Inter,sans-serif" text-anchor="middle">Fri</text>
+        <text x="245" y="162" font-size="9" fill="#aaa" font-family="Inter,sans-serif" text-anchor="middle">Sat</text>
+        <text x="284" y="162" font-size="9" fill="#F5756C" font-weight="700" font-family="Inter,sans-serif" text-anchor="middle">Sun</text>
+        <text x="50" y="178" font-size="9" fill="#4EC1EB" font-family="monospace" text-anchor="middle">3</text>
+        <text x="89" y="178" font-size="9" fill="#4EC1EB" font-family="monospace" text-anchor="middle">3</text>
+        <text x="128" y="178" font-size="9" fill="#4EC1EB" font-family="monospace" text-anchor="middle">4</text>
+        <text x="167" y="178" font-size="9" fill="#4EC1EB" font-family="monospace" text-anchor="middle">4</text>
+        <text x="206" y="178" font-size="9" fill="#F9E66C" font-family="monospace" text-anchor="middle">2</text>
+        <text x="245" y="178" font-size="9" fill="#ED9E59" font-family="monospace" text-anchor="middle">2</text>
+        <text x="284" y="178" font-size="9" fill="#F5756C" font-weight="bold" font-family="monospace" text-anchor="middle">1</text>
+      </svg>
+    </div>
+    <div class="detail-body">
+      <div class="alarm-title" id="detail-alarm-title">Unsteady Walking</div>
+      <div class="alarm-desc-row">
+        <svg style="width:16px;height:16px;flex-shrink:0;margin-top:2px;" viewBox="0 0 18 18" fill="none"><path d="M9 1.5C9 1.5 4 4 4 9.5V13H14V9.5C14 4 9 1.5 9 1.5Z" fill="#ffc847"/><path d="M7 13C7 14.1 7.9 15 9 15C10.1 15 11 14.1 11 13" stroke="#ffc847" stroke-width="1.2" fill="none"/></svg>
+        <span class="alarm-desc-text" id="detail-alarm-desc">Unstable gait detected within the last 5 minutes.</span>
+      </div>
+      <div class="section-title">Suggestion</div>
+      <div class="suggestion-list">
+        <div class="suggestion-item"><div class="green-dot"></div><span class="suggestion-text" id="sug1">Observe closely for the next 30–60 minutes</span></div>
+        <div class="suggestion-item"><div class="green-dot"></div><span class="suggestion-text" id="sug2">Check the surrounding environment</span></div>
+        <div class="suggestion-item"><div class="green-dot"></div><span class="suggestion-text" id="sug3">Review recent behaviour patterns</span></div>
+      </div>
+    </div>
+    <div class="detail-footer">
+      <button style="flex:1;height:46px;border-radius:6px;border:2px solid #868DFF;background:#fff;color:#868DFF;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;">Feedback</button>
+      <button id="mark-btn" style="flex:2;height:46px;border-radius:6px;border:none;background:#868DFF;color:#fff;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;" onclick="toggleMark()">Mark as seen</button>
+    </div>
+  </div>
+
+  <!-- MONITOR -->
+  <div id="monitor-view" class="monitor-screen">
+    <div class="status-bar sb-dark"><span>9:41</span><div class="status-icons"><svg width="15" height="11" viewBox="0 0 15 11" fill="#fff"><rect x="0" y="4" width="3" height="7" rx="1"/><rect x="4" y="2.5" width="3" height="8.5" rx="1"/><rect x="8" y="1" width="3" height="10" rx="1"/><rect x="12" y="0" width="3" height="11" rx="1" opacity="0.3"/></svg><svg width="13" height="11" viewBox="0 0 13 11" fill="none" stroke="#fff" stroke-width="1.2"><path d="M6.5 4C8 2.5 10.2 2.5 11.7 4" opacity="0.4"/><path d="M6.5 4C5 2.5 2.8 2.5 1.3 4" opacity="0.4"/><path d="M4.5 6C5.3 5 7.7 5 8.5 6"/><circle cx="6.5" cy="8.5" r="1" fill="#fff" stroke="none"/></svg><svg width="23" height="11" viewBox="0 0 23 11" fill="none"><rect x="0.5" y="0.5" width="19" height="10" rx="3.5" stroke="#fff"/><path d="M20.5 3.5C21.8 3.8 22.5 4.5 22.5 5.5C22.5 6.5 21.8 7.2 20.5 7.5" stroke="#fff" stroke-width="1.1"/><rect x="2" y="2" width="15" height="7" rx="2" fill="#fff"/></svg></div></div>
+    <div class="monitor-nav">
+      <div class="back-btn" onclick="closeMonitor()"><svg width="10" height="17" viewBox="0 0 10 17" fill="none"><path d="M9 1L1 8.5L9 16" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <span style="font-size:16px;font-weight:600;color:#fff;">Monitor</span>
+    </div>
+    <div class="monitor-area">
+      <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 320 560" preserveAspectRatio="xMidYMid slice">
+        <rect width="320" height="560" fill="#0f1520"/><rect y="370" width="320" height="190" fill="#0a0e13"/>
+        <rect x="30" y="240" width="190" height="110" rx="10" fill="#1a2535"/><rect x="20" y="220" width="20" height="130" rx="6" fill="#1e2c40"/><rect x="210" y="220" width="20" height="130" rx="6" fill="#1e2c40"/><rect x="30" y="220" width="190" height="36" rx="6" fill="#1e2c40"/>
+        <rect x="84" y="34" width="148" height="118" rx="4" fill="#0a1520"/><rect x="86" y="36" width="144" height="114" rx="3" fill="#111e30"/>
+        <line x1="158" y1="36" x2="158" y2="150" stroke="#1a2a40" stroke-width="3"/><line x1="86" y1="93" x2="230" y2="93" stroke="#1a2a40" stroke-width="3"/>
+        <ellipse cx="130" cy="420" rx="96" ry="30" fill="#131c28"/>
+        <radialGradient id="vig6" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="rgba(0,0,0,0.55)"/></radialGradient>
+        <rect width="320" height="560" fill="url(#vig6)"/>
+      </svg>
+      <div class="cat-wrap" style="bottom:218px;left:82px;width:72px;"><svg class="cat-glow" viewBox="0 0 100 130" fill="#4a7a4a"><use href="#nv-cat" fill="#4a7a4a"/><circle cx="41" cy="51" r="5" fill="#7afc7a" opacity="0.9"/><circle cx="59" cy="51" r="5" fill="#7afc7a" opacity="0.9"/></svg></div>
+      <div class="cat-wrap" style="bottom:80px;left:14px;width:90px;"><svg class="cat-glow" viewBox="0 0 100 130" fill="#3d6a3d"><use href="#nv-cat" fill="#3d6a3d"/><circle cx="41" cy="51" r="5" fill="#7afc7a" opacity="0.9"/><circle cx="59" cy="51" r="5" fill="#7afc7a" opacity="0.9"/></svg></div>
+      <div class="cat-wrap" style="bottom:258px;right:18px;width:56px;"><svg class="cat-glow" viewBox="0 0 100 130" fill="#4a7a4a"><use href="#nv-cat" fill="#4a7a4a"/><circle cx="41" cy="51" r="5" fill="#7afc7a" opacity="0.9"/><circle cx="59" cy="51" r="5" fill="#7afc7a" opacity="0.9"/></svg></div>
+      <div class="rec-badge"><div class="rec-dot"></div><span class="rec-text">REC</span></div>
+      <div class="ts-label">10:32:14 · NV-ON</div>
+      <div class="cam-label">CAM-01 · Living Room</div>
+    </div>
+  </div>
+
+ </div>
+</div>
+
+<script>
+const descMap = {
+  'Reduced activity and abnormal posture': 'Reduced movement and unusual resting posture detected.',
+  'Abnormal posture': 'Cat has been holding an abnormal body posture for an extended period.',
+  'Abnormal Litter Box Frequency': 'Visits dropped significantly this week — only 1 today vs. avg of 4/day.',
+  'Unsteady walking': 'Unstable gait detected within the last 5 minutes.',
+};
+const sugMap = {
+  'Abnormal Litter Box Frequency': [
+    'Check litter box cleanliness and placement',
+    'Monitor whether water intake has also decreased',
+    'Watch for signs of straining when urinating',
+  ],
+};
+let marked = false;
+function switchTab(tab) {
+  const n=document.getElementById('new-content'),s=document.getElementById('seen-content');
+  const tn=document.getElementById('tab-new'),ts=document.getElementById('tab-seen');
+  if(tab==='new'){n.style.display='block';s.style.display='none';tn.className='tab active';ts.className='tab';}
+  else{n.style.display='none';s.style.display='block';tn.className='tab';ts.className='tab active';}
+}
+function openDetail(name, alarm, time, type) {
+  document.getElementById('home-view').style.display='none';
+  document.getElementById('detail-view').style.display='flex';
+  document.getElementById('detail-alarm-title').textContent = alarm;
+  document.getElementById('detail-alarm-desc').textContent = descMap[alarm] || 'Abnormal behaviour detected.';
+  const sugs = sugMap[alarm] || ['Observe closely for the next 30–60 minutes','Check the surrounding environment','Review recent behaviour patterns'];
+  document.getElementById('sug1').textContent = sugs[0];
+  document.getElementById('sug2').textContent = sugs[1];
+  document.getElementById('sug3').textContent = sugs[2];
+  if(type==='chart'){document.getElementById('video-section').style.display='none';document.getElementById('chart-section').style.display='block';}
+  else{document.getElementById('video-section').style.display='block';document.getElementById('chart-section').style.display='none';}
+  stopVideo(); marked=false; resetMarkBtn();
+}
+function resetMarkBtn(){const b=document.getElementById('mark-btn');b.textContent='Mark as seen';b.style.background='#868DFF';b.style.color='#fff';}
+function toggleMark(){const b=document.getElementById('mark-btn');if(!marked){marked=true;b.textContent='✓ Marked as seen';b.style.background='#4CD087';}else{marked=false;resetMarkBtn();}}
+function closeDetail(){stopVideo();document.getElementById('detail-view').style.display='none';document.getElementById('home-view').style.display='flex';}
+function toggleVideo(){
+  const video=document.getElementById('alert-video'),vp=document.getElementById('video-playing'),pb=document.getElementById('play-btn');
+  if(!video)return;
+  if(video.paused){video.play();vp.style.display='flex';pb.style.display='none';}
+  else{video.pause();vp.style.display='none';pb.style.display='flex';}
+}
+function stopVideo(){
+  const video=document.getElementById('alert-video'),vp=document.getElementById('video-playing'),pb=document.getElementById('play-btn'),pf=document.getElementById('progress-fill');
+  if(video){video.pause();video.currentTime=0;}
+  if(vp)vp.style.display='none';if(pb)pb.style.display='flex';if(pf)pf.style.width='0%';
+}
+(function(){
+  document.addEventListener('DOMContentLoaded',()=>{
+    const video=document.getElementById('alert-video');
+    if(!video)return;
+    video.addEventListener('timeupdate',()=>{const pf=document.getElementById('progress-fill');if(pf&&video.duration)pf.style.width=(video.currentTime/video.duration*100)+'%';});
+    video.addEventListener('ended',stopVideo);
+  });
+})();
+function openMonitor(){document.getElementById('home-view').style.display='none';document.getElementById('monitor-view').style.display='flex';}
+function closeMonitor(){document.getElementById('monitor-view').style.display='none';document.getElementById('home-view').style.display='flex';}
+</script>

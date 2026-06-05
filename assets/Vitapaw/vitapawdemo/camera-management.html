@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VitaPaw — Camera Management</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="icon-chevron-left" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"/>
+    </symbol>
+    <symbol id="icon-plus" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="5" x2="12" y2="19"/>
+      <line x1="5" y1="12" x2="19" y2="12"/>
+    </symbol>
+    <symbol id="icon-camera-off" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="1" y1="1" x2="23" y2="23"/>
+      <path d="M21 21H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3m3-3h6l2 3h4a2 2 0 0 1 2 2v9.34"/>
+      <circle cx="12" cy="13" r="3" stroke-dasharray="2 2"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="screen-wrap">
+  <div class="screen" style="background:#f2f4f8;">
+
+    <!-- Status bar -->
+    <div class="status-bar sb-light" style="background:#f2f4f8;">
+      <span>9:41</span>
+      <div class="status-icons">
+        <svg width="15" height="11" viewBox="0 0 15 11" fill="#171717"><rect x="0" y="4" width="3" height="7" rx="1"/><rect x="4" y="2.5" width="3" height="8.5" rx="1"/><rect x="8" y="1" width="3" height="10" rx="1"/><rect x="12" y="0" width="3" height="11" rx="1" opacity="0.25"/></svg>
+        <svg width="13" height="11" viewBox="0 0 13 11" fill="none" stroke="#171717" stroke-width="1.2"><path d="M6.5 4C8 2.5 10.2 2.5 11.7 4" opacity="0.35"/><path d="M6.5 4C5 2.5 2.8 2.5 1.3 4" opacity="0.35"/><path d="M4.5 6C5.3 5 7.7 5 8.5 6"/><circle cx="6.5" cy="8.5" r="1" fill="#171717" stroke="none"/></svg>
+        <svg width="23" height="11" viewBox="0 0 23 11" fill="none"><rect x="0.5" y="0.5" width="19" height="10" rx="3.5" stroke="#171717"/><path d="M20.5 3.5C21.8 3.8 22.5 4.5 22.5 5.5C22.5 6.5 21.8 7.2 20.5 7.5" stroke="#171717" stroke-width="1.1"/><rect x="2" y="2" width="15" height="7" rx="2" fill="#171717"/></svg>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <div class="ac-nav">
+      <div class="ac-back" onclick="history.back()">
+        <svg width="24" height="24"><use href="#icon-chevron-left" width="24" height="24" stroke="#2A282F"/></svg>
+      </div>
+      <span class="ac-title">Camera Management</span>
+      <button class="add-pet-btn" onclick="location.href='add-device.html'"><svg width="10" height="10" viewBox="0 0 14 14" fill="none"><line x1="7" y1="1" x2="7" y2="13" stroke="#6e76fe" stroke-width="2" stroke-linecap="round"/><line x1="1" y1="7" x2="13" y2="7" stroke="#6e76fe" stroke-width="2" stroke-linecap="round"/></svg></button>
+    </div>
+
+    <!-- Divider under nav -->
+    <div style="height:1px;background:#e4e7ee;flex-shrink:0;"></div>
+
+    <!-- Camera list -->
+    <div class="scroll-content" style="background:#f2f4f8;overflow-x:hidden;">
+      <div style="padding:16px 20px;display:flex;flex-direction:column;gap:12px;box-sizing:border-box;width:100%;" id="camera-list">
+        <!-- populated by JS -->
+      </div>
+    </div>
+
+    <!-- ── Overlay ── -->
+    <div class="ac-overlay" id="modal-overlay" onclick="closeModal()"></div>
+
+    <!-- ── Add Camera Modal ── -->
+    <div class="ac-sheet" id="add-modal">
+      <div class="ac-sheet-handle"></div>
+      <div class="ac-sheet-title">Add Camera</div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="ac-form-card">
+          <div class="ac-field">
+            <label class="ac-field-label">Camera Name</label>
+            <input class="ac-field-input" id="add-name" type="text" placeholder="e.g. Living Room Cam" autocomplete="off"/>
+          </div>
+          <div class="ac-field-divider"></div>
+          <div class="ac-field">
+            <label class="ac-field-label">Location</label>
+            <input class="ac-field-input" id="add-location" type="text" placeholder="e.g. Livingroom" autocomplete="off"/>
+          </div>
+        </div>
+      </div>
+      <button class="ac-sheet-done" onclick="addCamera()">Add Camera</button>
+    </div>
+
+    <!-- ── Edit Camera Modal ── -->
+    <div class="ac-sheet" id="edit-modal">
+      <div class="ac-sheet-handle"></div>
+      <div class="ac-sheet-title">Edit Camera</div>
+      <input type="hidden" id="edit-index"/>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="ac-form-card">
+          <div class="ac-field">
+            <label class="ac-field-label">Camera Name</label>
+            <input class="ac-field-input" id="edit-name" type="text" autocomplete="off"/>
+          </div>
+          <div class="ac-field-divider"></div>
+          <div class="ac-field">
+            <label class="ac-field-label">Location</label>
+            <input class="ac-field-input" id="edit-location" type="text" autocomplete="off"/>
+          </div>
+        </div>
+        <button class="cm-zone-btn" onclick="goToZone()">
+          <div class="cm-zone-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect x="2" y="2" width="16" height="16" rx="3" stroke="#6e76fe" stroke-width="1.6"/>
+              <rect x="4.5" y="4.5" width="5" height="5" rx="1.2" fill="#6e76fe" opacity="0.55"/>
+              <rect x="10.5" y="10.5" width="5" height="5" rx="1.2" fill="#6e76fe" opacity="0.55"/>
+            </svg>
+          </div>
+          <div style="flex:1;">
+            <div class="cm-zone-label">Set Pet Zones</div>
+            <div class="cm-zone-hint">Draw a zone to track your pet's feeding and toilet habits.</div>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="#c8cdd8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <button class="ac-sheet-done" onclick="saveEdit()">Save</button>
+      <button class="cm-delete-link" onclick="deleteCamera()">Remove camera</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  /* ── camera data ── */
+  let cameras = JSON.parse(sessionStorage.getItem('cameras') || 'null') || [
+    { name: 'Camera 1', location: 'Livingroom', online: true }
+  ];
+
+  function persist() {
+    sessionStorage.setItem('cameras', JSON.stringify(cameras));
+  }
+
+  /* ── render ── */
+  function render() {
+    const list = document.getElementById('camera-list');
+    if (cameras.length === 0) {
+      list.innerHTML = `
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 0;gap:12px;">
+          <svg width="48" height="48" opacity=".25"><use href="#icon-camera-off" width="48" height="48" stroke="#5F6C85"/></svg>
+          <div style="font-size:14px;color:#aab0bc;">No cameras added yet</div>
+        </div>`;
+      return;
+    }
+    list.innerHTML = cameras.map((cam, i) => `
+      <div class="cm-card" onclick="openEdit(${i})">
+        <div class="cm-card-body">
+          <div class="cm-cam-name">${cam.name}</div>
+          <div class="cm-cam-meta">
+            <span>Place: ${cam.location}</span>
+            <span style="margin-left:14px;">Status: ${cam.online ? 'Online' : 'Offline'}</span>
+          </div>
+        </div>
+        <div class="cm-status-dot ${cam.online ? 'cm-dot-on' : 'cm-dot-off'}"></div>
+      </div>
+    `).join('');
+  }
+
+  /* ── modals ── */
+  let activeModal = null;
+
+  function openModal(id) {
+    closeModal(true);
+    activeModal = id;
+    document.getElementById('modal-overlay').classList.add('active');
+    document.getElementById(id).classList.add('active');
+  }
+  function closeModal(silent) {
+    document.getElementById('modal-overlay').classList.remove('active');
+    document.querySelectorAll('.ac-sheet').forEach(s => s.classList.remove('active'));
+    if (!silent) activeModal = null;
+  }
+
+  function showAddModal() {
+    document.getElementById('add-name').value = '';
+    document.getElementById('add-location').value = '';
+    openModal('add-modal');
+    setTimeout(() => document.getElementById('add-name').focus(), 300);
+  }
+
+  function addCamera() {
+    const name = document.getElementById('add-name').value.trim();
+    const loc  = document.getElementById('add-location').value.trim();
+    if (!name) return;
+    cameras.push({ name, location: loc || 'Unknown', online: true });
+    persist();
+    render();
+    closeModal();
+  }
+
+  function openEdit(i) {
+    document.getElementById('edit-index').value = i;
+    document.getElementById('edit-name').value     = cameras[i].name;
+    document.getElementById('edit-location').value = cameras[i].location;
+    openModal('edit-modal');
+  }
+
+  function saveEdit() {
+    const i    = parseInt(document.getElementById('edit-index').value);
+    const name = document.getElementById('edit-name').value.trim();
+    const loc  = document.getElementById('edit-location').value.trim();
+    if (!name) return;
+    cameras[i].name     = name;
+    cameras[i].location = loc || cameras[i].location;
+    persist();
+    render();
+    closeModal();
+  }
+
+  function deleteCamera() {
+    const i = parseInt(document.getElementById('edit-index').value);
+    cameras.splice(i, 1);
+    persist();
+    render();
+    closeModal();
+  }
+
+  function goToZone() {
+    window.location.href = 'monitor.html?mode=zone';
+  }
+
+  render();
+</script>
+
+</body>
+</html>

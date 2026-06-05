@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VitaPaw — Notifications</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="icon-chevron-left" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="screen-wrap">
+  <div class="screen" style="background:#f2f4f8;">
+
+    <!-- Status bar -->
+    <div class="status-bar sb-light" style="background:#f2f4f8;">
+      <span>9:41</span>
+      <div class="status-icons">
+        <svg width="15" height="11" viewBox="0 0 15 11" fill="#171717"><rect x="0" y="4" width="3" height="7" rx="1"/><rect x="4" y="2.5" width="3" height="8.5" rx="1"/><rect x="8" y="1" width="3" height="10" rx="1"/><rect x="12" y="0" width="3" height="11" rx="1" opacity="0.25"/></svg>
+        <svg width="13" height="11" viewBox="0 0 13 11" fill="none" stroke="#171717" stroke-width="1.2"><path d="M6.5 4C8 2.5 10.2 2.5 11.7 4" opacity="0.35"/><path d="M6.5 4C5 2.5 2.8 2.5 1.3 4" opacity="0.35"/><path d="M4.5 6C5.3 5 7.7 5 8.5 6"/><circle cx="6.5" cy="8.5" r="1" fill="#171717" stroke="none"/></svg>
+        <svg width="23" height="11" viewBox="0 0 23 11" fill="none"><rect x="0.5" y="0.5" width="19" height="10" rx="3.5" stroke="#171717"/><path d="M20.5 3.5C21.8 3.8 22.5 4.5 22.5 5.5C22.5 6.5 21.8 7.2 20.5 7.5" stroke="#171717" stroke-width="1.1"/><rect x="2" y="2" width="15" height="7" rx="2" fill="#171717"/></svg>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <div class="ac-nav">
+      <div class="ac-back" onclick="history.back()">
+        <svg width="24" height="24"><use href="#icon-chevron-left" width="24" height="24" stroke="#2A282F"/></svg>
+      </div>
+      <span class="ac-title">Notifications</span>
+      <div style="width:32px;"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="scroll-content" style="background:#f2f4f8;overflow-x:hidden;">
+      <div style="padding:20px 20px 32px;display:flex;flex-direction:column;gap:28px;box-sizing:border-box;width:100%;">
+
+        <!-- ── Section 1: Notification Frequency ── -->
+        <div class="ns-section">
+          <div class="ns-section-title">Notification Frequency</div>
+          <div class="ac-form-card">
+
+            <div class="ns-radio-row" onclick="selectFreq('realtime')" id="freq-realtime">
+              <div class="ns-row-text">
+                <div class="ns-row-label">Real-time alerts</div>
+                <div class="ns-row-sub">Get notified immediately for every event</div>
+              </div>
+              <div class="ns-radio-outer" id="radio-realtime">
+                <div class="ns-radio-inner"></div>
+              </div>
+            </div>
+
+            <div class="ac-field-divider"></div>
+
+            <div class="ns-radio-row" onclick="selectFreq('batched')" id="freq-batched">
+              <div class="ns-row-text">
+                <div class="ns-row-label">Batched notifications</div>
+                <div class="ns-row-sub">Grouped and delivered every 30 minutes</div>
+              </div>
+              <div class="ns-radio-outer ns-radio-off" id="radio-batched">
+                <div class="ns-radio-inner"></div>
+              </div>
+            </div>
+
+            <div class="ac-field-divider"></div>
+
+            <div class="ns-radio-row" onclick="selectFreq('daily')" id="freq-daily">
+              <div class="ns-row-text">
+                <div class="ns-row-label">Daily summary only</div>
+                <div class="ns-row-sub">One digest at the end of each day</div>
+              </div>
+              <div class="ns-radio-outer ns-radio-off" id="radio-daily">
+                <div class="ns-radio-inner"></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ── Section 2: Quiet Hours ── -->
+        <div class="ns-section">
+          <div class="ns-section-title">Quiet Hours</div>
+          <div class="ac-form-card">
+
+            <div class="ns-toggle-row">
+              <div class="ns-row-text">
+                <div class="ns-row-label">Disable non-urgent alerts at night</div>
+                <div class="ns-row-sub">Silence low-priority notifications from 10 pm – 7 am</div>
+              </div>
+              <button class="ns-toggle ns-toggle-on" id="toggle-quiet" onclick="toggleSwitch('toggle-quiet')" aria-label="Disable non-urgent alerts at night"></button>
+            </div>
+
+            <div class="ac-field-divider"></div>
+
+            <div class="ns-toggle-row">
+              <div class="ns-row-text">
+                <div class="ns-row-label">Shelter night mode</div>
+                <div class="ns-row-sub">Reduce all alerts when pets are resting</div>
+              </div>
+              <button class="ns-toggle" id="toggle-shelter" onclick="toggleSwitch('toggle-shelter')" aria-label="Shelter night mode"></button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ── Section 3: Notification Style ── -->
+        <div class="ns-section">
+          <div class="ns-section-title">Notification Style</div>
+          <div class="ac-form-card">
+
+            <div class="ns-toggle-row">
+              <div class="ns-row-text">
+                <div class="ns-row-label">Banner</div>
+                <div class="ns-row-sub">Show pop-up banners on screen</div>
+              </div>
+              <button class="ns-toggle ns-toggle-on" id="toggle-banner" onclick="toggleSwitch('toggle-banner')" aria-label="Banner notifications"></button>
+            </div>
+
+            <div class="ac-field-divider"></div>
+
+            <div class="ns-toggle-row">
+              <div class="ns-row-text">
+                <div class="ns-row-label">Sound</div>
+                <div class="ns-row-sub">Play a sound when a notification arrives</div>
+              </div>
+              <button class="ns-toggle ns-toggle-on" id="toggle-sound" onclick="toggleSwitch('toggle-sound')" aria-label="Sound notifications"></button>
+            </div>
+
+            <div class="ac-field-divider"></div>
+
+            <div class="ns-toggle-row">
+              <div class="ns-row-text">
+                <div class="ns-row-label">Vibration</div>
+                <div class="ns-row-sub">Vibrate for incoming notifications</div>
+              </div>
+              <button class="ns-toggle" id="toggle-vibration" onclick="toggleSwitch('toggle-vibration')" aria-label="Vibration notifications"></button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ── frequency radio ── */
+  const freqKeys = ['realtime', 'batched', 'daily'];
+  let currentFreq = 'realtime';
+
+  function selectFreq(key) {
+    currentFreq = key;
+    freqKeys.forEach(k => {
+      const radio = document.getElementById('radio-' + k);
+      const row   = document.getElementById('freq-' + k);
+      const on    = k === key;
+      radio.classList.toggle('ns-radio-off', !on);
+      row.classList.toggle('ns-radio-row-selected', on);
+    });
+  }
+
+  /* ── toggle switches ── */
+  function toggleSwitch(id) {
+    const btn = document.getElementById(id);
+    btn.classList.toggle('ns-toggle-on');
+  }
+</script>
+
+</body>
+</html>

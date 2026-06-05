@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Anomify — Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Spectral:wght@400;500;600&family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="anomify-case.css" />
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">Muhua Qin</a>
+    <div class="links">
+      <a href="index.html#contact">About</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Case study</div>
+    <h1>Calibrating Trust in<br />AI-Driven Anomaly Alerts</h1>
+    <div class="rule"></div>
+    <p class="lead">Anomify is a B2B platform that uses AI to monitor supply-chain and inventory data for high-stakes e-commerce operations. I designed and evaluated a multi-dimensional <b>Explainable AI (XAI)</b> framework inside its alerting chatbot — turning opaque "black-box" warnings into explanations operations teams can actually act on.</p>
+    <dl class="metagrid">
+      <dt>Project Type</dt><dd>Industry research collaboration · Master's dissertation</dd>
+      <dt>My Role</dt><dd>UX Researcher &amp; Designer</dd>
+      <dt>Duration</dt><dd>3 Months</dd>
+      <dt>Tools</dt><dd>Voiceflow · ChatGPT API · Figma · statistical &amp; thematic analysis</dd>
+      <dt>Methods</dt><dd>Within-subjects experiment · Mixed methods</dd>
+      <dt>Outcome</dt><dd>71% distinction dissertation</dd>
+    </dl>
+    <div class="partner">Partnered with Anomify&nbsp;→</div>
+  </div>
+</header>
+
+<div class="divider"></div>
+
+<!-- ================= CONTEXT ================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Context</div>
+    <h2>AI watches the data. But can anyone trust what it says?</h2>
+    <p>In high-stakes B2B e-commerce, operations teams rely on AI to monitor data risks around the clock. But the black-box nature of AI alerts creates a severe trust gap: when a warning appears with no reasoning behind it, people can't tell what it means — or whether to believe it.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= CHALLENGE ================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The Challenge</div>
+    <h2>Opaque alerts push users to two unsafe extremes</h2>
+    <p>Faced with warnings they can't inspect, users swing between two failure modes —<b>over-relying</b> on the AI without scrutiny, or <b>dismissing</b> critical issues entirely. Neither is safe when a missed anomaly can mean a stalled shipment or a costly inventory error.</p>
+    <p class="pullquote">How might we design explanations so users trust AI alerts the <span class="mk">right amount</span> — neither too much nor too little?</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= MY FOCUS ================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">My Focus</div>
+    <h2>Designing for calibrated trust, not blind faith</h2>
+    <p>I designed and evaluated a multi-dimensional XAI framework within the chatbot, with one goal: <b>optimize decision efficiency through calibrated trust</b>. Rather than teaching users how the algorithm works, the explanations give them justifiable, business-centric reasons to act.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= EXPERIMENTAL DESIGN ================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Experimental Design</div>
+    <h2>Four conditions, one variable at a time</h2>
+    <p>To scientifically quantify how different explanation strategies affect trust, I ran a <b>within-subjects study</b> — every participant experienced every condition, eliminating individual variance. The study simulated a live B2B supply-chain monitoring environment and isolated two variables: whether the alert showed its <b>source data</b>, and whether it showed a <b>confidence score</b>.</p>
+    <figure>
+      <div class="panel matrix gridpaper">
+        <div class="mxgrid">
+          <div></div>
+          <div class="axis">Confidence&nbsp;—&nbsp;off</div>
+          <div class="axis">Confidence&nbsp;—&nbsp;on</div>
+
+          <div class="axis v">Source&nbsp;off</div>
+          <div class="cell">
+            <div class="cname">Baseline</div>
+            <div>
+              <div class="cnote">Alert only — no explanation</div>
+              <div class="ctag">control</div>
+            </div>
+          </div>
+          <div class="cell">
+            <div class="cname">Confidence-based</div>
+            <div>
+              <div class="cnote">Alert + a numerical certainty score</div>
+              <div class="ctag">92% confidence</div>
+            </div>
+          </div>
+
+          <div class="axis v">Source&nbsp;on</div>
+          <div class="cell">
+            <div class="cname">Source-based</div>
+            <div>
+              <div class="cnote">Alert + the data logs &amp; records behind it</div>
+              <div class="ctag">server evidence</div>
+            </div>
+          </div>
+          <div class="cell">
+            <div class="cname">Combined</div>
+            <div>
+              <div class="cnote">Source data + confidence score together</div>
+              <div class="ctag">multi-dimensional</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <figcaption>Fig. 1 — 2×2 experimental conditions, isolating source evidence and confidence scoring.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= TASKS & METRICS ================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Tasks &amp; Metrics</div>
+    <h2>Three tasks, three dimensions of the experience</h2>
+    <p>Participants played the role of e-commerce operations managers and completed three targeted tasks, each probing a different dimension of trust and decision-making.</p>
+    <figure>
+      <div class="tasks">
+        <div class="tcard">
+          <div class="tnum">01</div>
+          <div class="ttype">Source-based · Understanding</div>
+          <h4>Find the root cause</h4>
+          <p>Reviewing a stock-discrepancy alert, participants used the chatbot to trace the cause; it justified its finding by pointing to specific server logs and tracking records.</p>
+          <div class="metrics">
+            <div class="ml">Measures</div>
+            <ul>
+              <li>Knowledge acquisition</li>
+              <li>Perceived informativeness</li>
+              <li>Perceived credibility</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tcard">
+          <div class="tnum">02</div>
+          <div class="ttype">Confidence-based · Adherence</div>
+          <h4>Decide whether to act</h4>
+          <p>Facing a logistics alert (e.g. a severe shipping delay), participants asked the chatbot to verify; it returned a specific certainty metric for its diagnosis.</p>
+          <div class="metrics">
+            <div class="ml">Measures</div>
+            <ul>
+              <li>Behavioral intention</li>
+              <li>User self-confidence</li>
+              <li>Belief in system</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tcard">
+          <div class="tnum">03</div>
+          <div class="ttype">Combined · Decision efficiency</div>
+          <h4>Triage under load</h4>
+          <p>Under cognitive load, participants triaged a backlog of concurrent alerts and ranked them by severity, using a combined strategy to prioritize.</p>
+          <div class="metrics">
+            <div class="ml">Measures</div>
+            <ul>
+              <li>Perceived diagnosticity</li>
+              <li>Decision-making confidence</li>
+              <li>Overall trustworthiness</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <figcaption>Fig. 2 — Task structure and the survey dimensions measured in each.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= PROTOTYPING ================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">High-Fidelity Prototyping</div>
+    <h2>A working chatbot, not a static mockup</h2>
+    <p>To maximize <b>ecological validity</b> during testing, I engineered a fully reactive chatbot rather than clickable screens.</p>
+    <p><b>Conversation architecture</b> — built in Voiceflow to orchestrate multi-turn dialogue trees, conditional branching, and a dual-channel input system (guided buttons + free-text natural language). <b>Dynamic AI responses</b> — integrated the ChatGPT API with optimized prompt engineering to simulate realistic, human-like reasoning when the bot flagged logistics delays or inventory anomalies.</p>
+    <figure>
+      <div class="shot">
+        <img src="assets/Anomify/anombot-chat.png" alt="AnomBot — Voiceflow chatbot used in testing" />
+      </div>
+      <figcaption>Fig. 3 — AnomBot, the live test chatbot. Participants enter a Task ID, then investigate the alert through guided questions or free text.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= MIXED METHODS ================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Mixed-Methods Analysis</div>
+    <h2>A double-validation approach</h2>
+    <p>I paired numbers with narrative to make sure the insights held up under both lenses.</p>
+    <figure>
+      <div class="methods">
+        <div class="mcol">
+          <div class="mtag">Quantitative</div>
+          <h4>What the data showed</h4>
+          <p>Subjective ratings on Likert scales, tested with the non-parametric <b>Mann-Whitney U</b> test to validate statistically significant differences between conditions.</p>
+          <div class="stat mono">p &lt; 0.05 · n = 10 per condition</div>
+        </div>
+        <div class="mcol">
+          <div class="mtag">Qualitative</div>
+          <h4>Why it happened</h4>
+          <p>Semi-structured post-experiment interviews, transcribed and coded through a three-tier <b>thematic analysis</b> to map users' mental models of AI transparency.</p>
+          <div class="stat mono">3-tier coding · mental-model mapping</div>
+        </div>
+      </div>
+      <figcaption>Fig. 4 — Quantitative and qualitative tracks cross-validate each finding.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= KEY RESULTS ================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Key Results</div>
+    <h2>Trust didn't move the way the brief assumed</h2>
+    <p>The most interesting findings were the ones that complicated the hypothesis. Showing the AI's reasoning changed how much users <i>trusted</i> it far more than how much they <i>understood</i> — and a confidence number alone did surprisingly little.</p>
+
+    <!-- Result 1 -->
+    <div class="result" style="margin-top:40px;">
+      <div class="rhead">
+        <span class="rnum">01</span>
+        <h3>Source explanations build confidence and trust — but not understanding</h3>
+      </div>
+      <figure>
+        <table class="dtable">
+          <caption>Task 1 — source-based vs. control (n = 10 each), mean (SD)</caption>
+          <colgroup><col /><col /><col class="c-treat" /></colgroup>
+          <thead>
+            <tr><th>Measure</th><th>Control</th><th>Source-based</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>Confidence in decision</th><td class="num">6.20 (0.92)</td><td class="num treat">7.40 (2.27)</td></tr>
+            <tr><th>Confidence in chatbot support</th><td class="num">6.40 (1.71)</td><td class="num treat">7.90 (2.08)</td></tr>
+            <tr><th>Explanation seen as well-founded</th><td class="num">3.40 (0.70)</td><td class="num treat">4.20 (0.79)</td></tr>
+            <tr><th>Understanding of anomaly</th><td class="num">3.50 (0.85)</td><td class="num">3.90 (0.74)</td></tr>
+            <tr><th>Usefulness of source info</th><td class="num">N/A</td><td class="num treat">4.60 (0.52)</td></tr>
+          </tbody>
+        </table>
+        <figcaption>Fig. 5 — Source data lifted confidence and trust metrics; understanding stayed flat.</figcaption>
+      </figure>
+      <div class="finding">
+        <div class="fl">What it means</div>
+        <p>Pointing to server logs made people <b>more confident and more trusting</b>, and they rated the source information as highly useful (4.60/5). But it <b>didn't significantly improve their actual understanding</b> of the anomaly's cause. Transparency calibrated trust more than it transferred knowledge.</p>
+      </div>
+      <div class="voices">
+        <div class="vl">From the interviews</div>
+        <div class="qgrid">
+          <div class="qt">
+            <p class="qx">Having this source made it clear to me that he wasnn't making it up.</p>
+            <div class="qa"><b>P15</b> · source enhances credibility</div>
+          </div>
+          <div class="qt">
+            <p class="qx">This has happened before, so it shouldnn't be a big deal.</p>
+            <div class="qa"><b>P17</b> · risk judged from experience, not the data</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Result 2 -->
+    <div class="result" style="margin-top:48px;">
+      <div class="rhead">
+        <span class="rnum">02</span>
+        <h3>A confidence score felt credible — yet didn't change behavior</h3>
+      </div>
+      <figure>
+        <table class="dtable">
+          <caption>Task 2 — confidence-based vs. control (n = 10 each), mean (SD)</caption>
+          <colgroup><col /><col /><col class="c-treat" /></colgroup>
+          <thead>
+            <tr><th>Measure</th><th>Control</th><th>Confidence-based</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>Willingness to follow (10-pt)</th><td class="num">8.20 (0.92)</td><td class="num">8.30 (2.21)</td></tr>
+            <tr><th>System trust (10-pt)</th><td class="num">7.90 (0.88)</td><td class="num">7.20 (2.25)</td></tr>
+            <tr><th>Decision confidence (10-pt)</th><td class="num">8.50 (1.08)</td><td class="num">8.20 (1.40)</td></tr>
+            <tr><th>Confidence boosts willingness (5-pt)</th><td class="num">N/A</td><td class="num treat">4.20 (1.03)</td></tr>
+            <tr><th>Credibility of confidence info (5-pt)</th><td class="num">N/A</td><td class="num treat">4.10 (0.74)</td></tr>
+          </tbody>
+        </table>
+        <figcaption>Fig. 6 — No significant differences on the main measures, despite high perceived credibility.</figcaption>
+      </figure>
+      <div class="finding">
+        <div class="fl">What it means</div>
+        <p>Adding a certainty score produced <b>no significant differences</b> in willingness, trust, or decision confidence versus the control — even though users rated the score as credible (4.10/5) and said it boosted their willingness to act (4.20/5). A number on its own is easy to nod at and easy to ignore; <b>without context, it doesn't shift behavior</b> when baseline trust is already high.</p>
+      </div>
+      <div class="voices">
+        <div class="vl">From the interviews</div>
+        <div class="qgrid">
+          <div class="qt">
+            <p class="qx">92 per cent is already very high.</p>
+            <div class="qa"><b>P08</b> · the score reads as reassuring</div>
+          </div>
+          <div class="qt">
+            <p class="qx">92% — it's not labelled with a source, so I retain my own judgement.</p>
+            <div class="qa"><b>P15</b> · scepticism toward an unsourced number</div>
+          </div>
+          <div class="qt">
+            <p class="qx">It's consistent with my judgement, so I'm willing to listen.</p>
+            <div class="qa"><b>P05</b> · decisions anchored on personal judgement (n = 6)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Result 3 -->
+    <div class="result" style="margin-top:48px;">
+      <div class="rhead">
+        <span class="rnum">03</span>
+        <h3>Combined explanations were the most convincing under prioritization</h3>
+      </div>
+      <figure>
+        <table class="dtable">
+          <caption>Task 3 — confidence in explanation, by condition and by group, mean (SD)</caption>
+          <colgroup><col /><col /><col class="c-treat" /></colgroup>
+          <thead>
+            <tr><th>Comparison</th><th>Basic</th><th>Combined</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>Confidence in explanation (n = 20)</th><td class="num">7.00 (1.38)</td><td class="num treat">7.90 (1.12)</td></tr>
+            <tr><th>Group 1 — combined seen first</th><td class="num" colspan="1">6.90 (1.97)</td><td class="num">—</td></tr>
+            <tr><th>Group 2 — combined seen second</th><td class="num">—</td><td class="num treat">8.10 (1.20)</td></tr>
+          </tbody>
+        </table>
+        <figcaption>Fig. 7 — Combined explanations scored higher; an order effect sharpened the preference.</figcaption>
+      </figure>
+      <div class="finding">
+        <div class="fl">What it means</div>
+        <p>When triaging alerts, participants were <b>more confident in combined explanations</b> (source + confidence) than basic ones (7.90 vs 7.00). Order mattered: the group that met the combined alert <b>after</b> a basic one preferred it more strongly (8.10 vs 6.90). Pairing evidence with certainty was the most persuasive combination for high-stakes prioritization — and contrast made its value obvious.</p>
+      </div>
+      <div class="voices">
+        <div class="vl">From the interviews</div>
+        <div class="qgrid">
+          <div class="qt">
+            <p class="qx">Percentages plus tables give me more confidence in my decisions.</p>
+            <div class="qa"><b>P10</b> · evidence + certainty together (n = 6)</div>
+          </div>
+          <div class="qt">
+            <p class="qx">I'd trust it more if given a range — a single number is rather strange.</p>
+            <div class="qa"><b>P16</b> · a lone confidence figure still draws doubt</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= DESIGN PRINCIPLES ================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Outcome</div>
+    <h2>Three principles for explaining AI alerts</h2>
+    <p>Translating the findings into guidance the Anomify team could build against.</p>
+    <figure>
+      <div class="principles">
+        <div class="pcard">
+          <div class="pn">Principle 01</div>
+          <h4>Actionable progressive disclosure</h4>
+          <div class="pdiag">
+            <div class="d-disc">
+              <div class="mini"><i class="b"></i><i></i><i></i></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                <span class="arrow">→</span><span class="tap">"Why?"</span>
+              </div>
+              <div class="mini exp"><i class="b"></i><i class="a"></i><i></i><i class="a"></i><i></i></div>
+            </div>
+          </div>
+          <p>Keep the primary view to the alert alone. Surface source logs and confidence scores at a secondary level, on demand — so transparency is an active investigative tool, not passive interface noise.</p>
+        </div>
+        <div class="pcard">
+          <div class="pn">Principle 02</div>
+          <h4>Dynamic multi-dimensional tiering</h4>
+          <div class="pdiag">
+            <div class="d-tier">
+              <div class="row"><span class="pill hi">High-risk</span><span class="arrow">→</span><span class="bars"><span></span><span></span><span></span><span></span></span></div>
+              <div class="row"><span class="pill">Routine</span><span class="arrow">→</span><span class="bars"><span></span><span class="off"></span><span class="off"></span><span class="off"></span></span></div>
+            </div>
+          </div>
+          <p>Adapt explanation depth to the task's risk and cognitive load. High-risk, ambiguous alerts get full source + certainty for human-in-the-loop triage; routine ones stay lightweight and fast.</p>
+        </div>
+        <div class="pcard">
+          <div class="pn">Principle 03</div>
+          <h4>Design for trust calibration, not machine education</h4>
+          <div class="pdiag">
+            <div class="d-cal">
+              <div class="ends"><span>under-trust</span><span>over-trust</span></div>
+              <div class="track"><span class="mk"></span></div>
+              <div class="center">calibrated</div>
+            </div>
+          </div>
+          <p>Shift focus from how the algorithm works to justifiable, business-centric reasons to act. The goal of XAI isn't to make users data scientists — it's a partnership where they feel secure enough to act.</p>
+        </div>
+      </div>
+      <figcaption>Fig. 8 — Three design principles distilled from the study.</figcaption>
+    </figure>
+  </div>
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+<footer class="foot" data-screen-label="Footer">
+  <div class="wrap">
+    <a class="fbrand" href="index.html">Muhua Qin</a>
+    <div class="flinks">
+      <a href="index.html#contact">About</a>
+    </div>
+  </div>
+</footer>
+
+<div id="tweaks-root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="anomify-tweaks.jsx"></script>
+<script>
+  (function(){
+    var nav = document.querySelector('.nav');
+    if(!nav) return;
+    var onScroll = function(){
+      if (window.scrollY > 24) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, {passive:true});
+  })();
+</script>
+
+</body>
+</html>
+
+

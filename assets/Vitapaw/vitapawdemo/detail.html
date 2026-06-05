@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VitaPaw — Alarm Details</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- SVG symbol definitions -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="ca" viewBox="0 0 72 72"><circle cx="36" cy="36" r="36" fill="#e8d5c4"/><ellipse cx="36" cy="42" rx="18" ry="16" fill="#d4b89a"/><circle cx="28" cy="32" r="7" fill="#fff"/><circle cx="44" cy="32" r="7" fill="#fff"/><circle cx="29" cy="33" r="4" fill="#4a3728"/><circle cx="45" cy="33" r="4" fill="#4a3728"/><circle cx="30" cy="32" r="1.5" fill="#fff"/><circle cx="46" cy="32" r="1.5" fill="#fff"/><ellipse cx="36" cy="40" rx="4" ry="3" fill="#c9967a"/><path d="M32 44 Q36 47 40 44" stroke="#8b5e3c" stroke-width="1.2" fill="none" stroke-linecap="round"/><line x1="20" y1="38" x2="12" y2="36" stroke="#8b5e3c" stroke-width="1"/><line x1="20" y1="40" x2="11" y2="40" stroke="#8b5e3c" stroke-width="1"/><line x1="52" y1="38" x2="60" y2="36" stroke="#8b5e3c" stroke-width="1"/><line x1="52" y1="40" x2="61" y2="40" stroke="#8b5e3c" stroke-width="1"/><polygon points="18,14 24,26 12,26" fill="#e8d5c4"/><polygon points="54,14 60,26 48,26" fill="#e8d5c4"/><polygon points="19,16 23,24 15,24" fill="#f0a0a0"/><polygon points="53,16 57,24 49,24" fill="#f0a0a0"/></symbol>
+    <symbol id="cb" viewBox="0 0 72 72"><circle cx="36" cy="36" r="36" fill="#c8d8e8"/><ellipse cx="36" cy="42" rx="18" ry="16" fill="#aec4d8"/><circle cx="28" cy="32" r="7" fill="#fff"/><circle cx="44" cy="32" r="7" fill="#fff"/><circle cx="29" cy="33" r="4" fill="#2d4a6b"/><circle cx="45" cy="33" r="4" fill="#2d4a6b"/><circle cx="30" cy="32" r="1.5" fill="#fff"/><circle cx="46" cy="32" r="1.5" fill="#fff"/><ellipse cx="36" cy="40" rx="4" ry="3" fill="#e8a0b0"/><path d="M32 44 Q36 47 40 44" stroke="#6b8aaa" stroke-width="1.2" fill="none" stroke-linecap="round"/><line x1="20" y1="38" x2="12" y2="36" stroke="#6b8aaa" stroke-width="1"/><line x1="20" y1="40" x2="11" y2="40" stroke="#6b8aaa" stroke-width="1"/><line x1="52" y1="38" x2="60" y2="36" stroke="#6b8aaa" stroke-width="1"/><line x1="52" y1="40" x2="61" y2="40" stroke="#6b8aaa" stroke-width="1"/><polygon points="18,14 24,26 12,26" fill="#c8d8e8"/><polygon points="54,14 60,26 48,26" fill="#c8d8e8"/><polygon points="19,16 23,24 15,24" fill="#d0b0c8"/><polygon points="53,16 57,24 49,24" fill="#d0b0c8"/></symbol>
+    <symbol id="cc" viewBox="0 0 72 72"><circle cx="36" cy="36" r="36" fill="#d4c8b8"/><ellipse cx="36" cy="42" rx="18" ry="16" fill="#bfb0a0"/><circle cx="28" cy="32" r="7" fill="#fff"/><circle cx="44" cy="32" r="7" fill="#fff"/><circle cx="29" cy="33" r="4" fill="#3d2e1e"/><circle cx="45" cy="33" r="4" fill="#3d2e1e"/><circle cx="30" cy="32" r="1.5" fill="#fff"/><circle cx="46" cy="32" r="1.5" fill="#fff"/><ellipse cx="36" cy="40" rx="4" ry="3" fill="#c47060"/><path d="M32 44 Q36 47 40 44" stroke="#7a5a40" stroke-width="1.2" fill="none" stroke-linecap="round"/><line x1="20" y1="38" x2="12" y2="36" stroke="#7a5a40" stroke-width="1"/><line x1="20" y1="40" x2="11" y2="40" stroke="#7a5a40" stroke-width="1"/><line x1="52" y1="38" x2="60" y2="36" stroke="#7a5a40" stroke-width="1"/><line x1="52" y1="40" x2="61" y2="40" stroke="#7a5a40" stroke-width="1"/><polygon points="18,14 24,26 12,26" fill="#d4c8b8"/><polygon points="54,14 60,26 48,26" fill="#d4c8b8"/><polygon points="19,16 23,24 15,24" fill="#e8b090"/><polygon points="53,16 57,24 49,24" fill="#e8b090"/></symbol>
+    <symbol id="icon-chevron-right" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="9 18 15 12 9 6"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="screen-wrap">
+  <div class="screen" style="background:#fff;">
+
+    <!-- Status bar -->
+    <div class="status-bar sb-white">
+      <span>9:41</span>
+      <div class="status-icons">
+        <svg width="15" height="11" viewBox="0 0 15 11" fill="#171717"><rect x="0" y="4" width="3" height="7" rx="1"/><rect x="4" y="2.5" width="3" height="8.5" rx="1"/><rect x="8" y="1" width="3" height="10" rx="1"/><rect x="12" y="0" width="3" height="11" rx="1" opacity="0.25"/></svg>
+        <svg width="13" height="11" viewBox="0 0 13 11" fill="none" stroke="#171717" stroke-width="1.2"><path d="M6.5 4C8 2.5 10.2 2.5 11.7 4" opacity="0.35"/><path d="M6.5 4C5 2.5 2.8 2.5 1.3 4" opacity="0.35"/><path d="M4.5 6C5.3 5 7.7 5 8.5 6"/><circle cx="6.5" cy="8.5" r="1" fill="#171717" stroke="none"/></svg>
+        <svg width="23" height="11" viewBox="0 0 23 11" fill="none"><rect x="0.5" y="0.5" width="19" height="10" rx="3.5" stroke="#171717"/><path d="M20.5 3.5C21.8 3.8 22.5 4.5 22.5 5.5C22.5 6.5 21.8 7.2 20.5 7.5" stroke="#171717" stroke-width="1.1"/><rect x="2" y="2" width="15" height="7" rx="2" fill="#171717"/></svg>
+      </div>
+    </div>
+
+    <!-- Nav bar -->
+    <div class="detail-nav">
+      <div class="detail-back" onclick="history.back()">
+        <svg width="10" height="17" viewBox="0 0 10 17" fill="none"><path d="M9 1L1 8.5L9 16" stroke="#171717" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <span class="detail-title">Alarm details</span>
+    </div>
+
+    <!-- Video preview -->
+    <div id="video-section" class="chart-area" style="cursor:pointer;" onclick="toggleVideo()">
+      <video id="alert-video" src="127621-739144659.mp4" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" preload="metadata" playsinline></video>
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,0.18);"></div>
+      <div id="play-btn" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60px;height:60px;border-radius:50%;border:3px solid #868DFF;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;">
+        <svg width="28" height="28" viewBox="0 0 28 28"><polygon points="9,4 25,14 9,24" fill="#868DFF"/></svg>
+      </div>
+      <div id="video-playing" style="display:none;position:absolute;inset:0;background:rgba(0,0,0,0.3);align-items:center;justify-content:center;flex-direction:column;gap:10px;">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect x="8" y="8" width="7" height="20" rx="2" fill="#fff"/><rect x="21" y="8" width="7" height="20" rx="2" fill="#fff"/></svg>
+        <div style="width:80%;height:3px;background:rgba(255,255,255,.3);border-radius:2px;">
+          <div id="progress-fill" style="height:100%;background:#868DFF;border-radius:2px;width:0%;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chart (litter box) -->
+    <div id="chart-section" class="chart-area" style="display:none;">
+      <svg width="320" height="200" viewBox="0 0 320 200">
+        <rect width="320" height="200" fill="#f7fafe"/>
+        <text x="16" y="18" font-size="11" font-weight="700" fill="#2a282f" font-family="Inter,sans-serif">7-Day Litter Box</text>
+        <text x="304" y="18" font-size="10" fill="#bbb" font-family="Inter,sans-serif" text-anchor="end">times / day</text>
+        <line x1="30" y1="55" x2="304" y2="55" stroke="#edf0f7" stroke-width="1"/>
+        <line x1="30" y1="85" x2="304" y2="85" stroke="#edf0f7" stroke-width="1"/>
+        <line x1="30" y1="115" x2="304" y2="115" stroke="#edf0f7" stroke-width="1"/>
+        <line x1="30" y1="145" x2="304" y2="145" stroke="#edf0f7" stroke-width="1"/>
+        <line x1="30" y1="85" x2="304" y2="85" stroke="#868DFF" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+        <text x="308" y="89" font-size="8" fill="#868DFF" font-family="Inter,sans-serif">avg</text>
+        <text x="26" y="59" font-size="9" fill="#ccc" font-family="monospace" text-anchor="end">6</text>
+        <text x="26" y="89" font-size="9" fill="#ccc" font-family="monospace" text-anchor="end">4</text>
+        <text x="26" y="119" font-size="9" fill="#ccc" font-family="monospace" text-anchor="end">2</text>
+        <text x="26" y="149" font-size="9" fill="#ccc" font-family="monospace" text-anchor="end">0</text>
+        <path d="M39,55 h10 a6,6 0 0,1 6,6 v84 h-22 v-84 a6,6 0 0,1 6,-6 z" fill="#4EC1EB" opacity="0.85"/>
+        <path d="M78,55 h10 a6,6 0 0,1 6,6 v84 h-22 v-84 a6,6 0 0,1 6,-6 z" fill="#4EC1EB" opacity="0.85"/>
+        <path d="M117,25 h10 a6,6 0 0,1 6,6 v114 h-22 v-114 a6,6 0 0,1 6,-6 z" fill="#4EC1EB" opacity="0.85"/>
+        <path d="M156,25 h10 a6,6 0 0,1 6,6 v114 h-22 v-114 a6,6 0 0,1 6,-6 z" fill="#4EC1EB" opacity="0.85"/>
+        <path d="M195,85 h10 a6,6 0 0,1 6,6 v54 h-22 v-54 a6,6 0 0,1 6,-6 z" fill="#F9E66C"/>
+        <path d="M234,85 h10 a6,6 0 0,1 6,6 v54 h-22 v-54 a6,6 0 0,1 6,-6 z" fill="#ED9E59"/>
+        <path d="M273,115 h10 a6,6 0 0,1 6,6 v24 h-22 v-24 a6,6 0 0,1 6,-6 z" fill="#F5756C"/>
+        <text x="50" y="162" font-size="9" fill="#aaa" font-family="Inter,sans-serif" text-anchor="middle">Mon</text>
+        <text x="89" y="162" font-size="9" fill="#aaa" font-family="Inter,sans-serif" text-anchor="middle">Tue</text>
+        <text x="128" y="162" font-size="9" fill="#aaa" font-family="Inter,sans-serif" text-anchor="middle">Wed</text>
+        <text x="167" y="162" font-size="9" fill="#aaa" font-family="Inter,sans-serif" text-anchor="middle">Thu</text>
+        <text x="206" y="162" font-size="9" fill="#aaa" font-family="Inter,sans-serif" text-anchor="middle">Fri</text>
+        <text x="245" y="162" font-size="9" fill="#aaa" font-family="Inter,sans-serif" text-anchor="middle">Sat</text>
+        <text x="284" y="162" font-size="9" fill="#F5756C" font-weight="700" font-family="Inter,sans-serif" text-anchor="middle">Sun</text>
+        <text x="50" y="178" font-size="9" fill="#4EC1EB" font-family="monospace" text-anchor="middle">3</text>
+        <text x="89" y="178" font-size="9" fill="#4EC1EB" font-family="monospace" text-anchor="middle">3</text>
+        <text x="128" y="178" font-size="9" fill="#4EC1EB" font-family="monospace" text-anchor="middle">4</text>
+        <text x="167" y="178" font-size="9" fill="#4EC1EB" font-family="monospace" text-anchor="middle">4</text>
+        <text x="206" y="178" font-size="9" fill="#F9E66C" font-family="monospace" text-anchor="middle">2</text>
+        <text x="245" y="178" font-size="9" fill="#ED9E59" font-family="monospace" text-anchor="middle">2</text>
+        <text x="284" y="178" font-size="9" fill="#F5756C" font-weight="bold" font-family="monospace" text-anchor="middle">1</text>
+      </svg>
+    </div>
+
+    <!-- Detail body -->
+    <div class="detail-body">
+      <div class="alarm-title" id="detail-alarm-title"></div>
+      <div class="alarm-desc-row">
+        <svg style="width:16px;height:16px;flex-shrink:0;margin-top:2px;" viewBox="0 0 18 18" fill="none"><path d="M9 1.5C9 1.5 4 4 4 9.5V13H14V9.5C14 4 9 1.5 9 1.5Z" fill="#ffc847"/><path d="M7 13C7 14.1 7.9 15 9 15C10.1 15 11 14.1 11 13" stroke="#ffc847" stroke-width="1.2" fill="none"/></svg>
+        <span class="alarm-desc-text" id="detail-alarm-desc"></span>
+      </div>
+      <div class="section-title">Suggestion</div>
+      <div class="suggestion-list">
+        <div class="suggestion-item"><div class="green-dot"></div><span class="suggestion-text" id="sug1"></span></div>
+        <div class="suggestion-item"><div class="green-dot"></div><span class="suggestion-text" id="sug2"></span></div>
+        <div class="suggestion-item"><div class="green-dot"></div><span class="suggestion-text" id="sug3"></span></div>
+      </div>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="detail-footer">
+      <button id="ignore-btn" onclick="toggleIgnore()" style="flex:1;height:46px;border-radius:6px;border:2px solid #868DFF;background:#fff;color:#868DFF;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;">Ignore</button>
+      <button id="mark-btn" style="flex:2;height:46px;border-radius:6px;border:none;background:#868DFF;color:#fff;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;" onclick="toggleMark()">Mark as seen</button>
+    </div>
+
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="detail.js"></script>
+</body>
+</html>

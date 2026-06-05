@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Creative Sandbox —Muhua Qin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="home.css" />
+<link rel="stylesheet" href="sandbox.css" />
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html" style="color:var(--ink);">Muhua Qin</a>
+    <div class="links">
+      <a href="index.html#work">Work</a>
+      <a href="About.html">About</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="sb-hero" data-screen-label="Sandbox —hero">
+  <div class="wrap">
+    <div class="eyebrow">[ For the curious ]</div>
+    <h1>Creative <em>Sandbox</em></h1>
+    <p class="sub">The unpolished corner —illustrations I draw to unwind and the music videos I make on the side. No briefs, no specs. Just things I like making.</p>
+  </div>
+</header>
+
+<!-- ================= GALLERY ================= -->
+<section class="work" data-screen-label="Sandbox —gallery">
+  <div class="wrap">
+    <div class="filters" id="filters">
+      <button class="is-active" data-filter="all">All</button>
+      <button data-filter="illustration">Visual stuff</button>
+      <button data-filter="music">Music</button>
+    </div>
+
+    <div class="sb-grid" id="grid">
+
+      <!-- 1 -->
+      <a class="sb-card h-l" data-id="sb-1" data-type="illustration" data-cat="Visual stuff" data-embed="">
+        <div class="sb-media">
+          <image-slot id="sb-1" shape="rounded" radius="16" placeholder="Drop an illustration"></image-slot>
+        </div>
+        <div class="sb-meta"><span class="t">Late-night sketchbook</span><span class="c">Visual stuff</span></div>
+      </a>
+
+      <!-- 2 —video -->
+      <a class="sb-card h-m" data-id="sb-2" data-type="music" data-cat="Music video" data-embed="">
+        <div class="sb-media">
+          <image-slot id="sb-2" shape="rounded" radius="16" placeholder="Drop a video poster"></image-slot>
+          <div class="play"><span><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span></div>
+        </div>
+        <div class="sb-meta"><span class="t">Neon Drift —music video</span><span class="c">Music video</span></div>
+      </a>
+
+      <!-- 3 -->
+      <a class="sb-card h-m" data-id="sb-3" data-type="illustration" data-cat="Visual stuff" data-embed="">
+        <div class="sb-media">
+          <image-slot id="sb-3" shape="rounded" radius="16" placeholder="Drop an illustration"></image-slot>
+        </div>
+        <div class="sb-meta"><span class="t">Character studies</span><span class="c">Visual stuff</span></div>
+      </a>
+
+      <!-- 5 -->
+      <a class="sb-card h-m" data-id="sb-5" data-type="illustration" data-cat="Visual stuff" data-embed="">
+        <div class="sb-media">
+          <image-slot id="sb-5" shape="rounded" radius="16" placeholder="Drop an illustration"></image-slot>
+        </div>
+        <div class="sb-meta"><span class="t">City in the rain</span><span class="c">Visual stuff</span></div>
+      </a>
+
+      <!-- 6 —video -->
+      <a class="sb-card h-l" data-id="sb-6" data-type="music" data-cat="Music video" data-embed="">
+        <div class="sb-media">
+          <image-slot id="sb-6" shape="rounded" radius="16" placeholder="Drop a video poster"></image-slot>
+          <div class="play"><span><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span></div>
+        </div>
+        <div class="sb-meta"><span class="t">Sunset session —live loop</span><span class="c">Music video</span></div>
+      </a>
+
+      <!-- 7 -->
+      <a class="sb-card h-s" data-id="sb-7" data-type="illustration" data-cat="Visual stuff" data-embed="">
+        <div class="sb-media">
+          <image-slot id="sb-7" shape="rounded" radius="16" placeholder="Drop an illustration"></image-slot>
+        </div>
+        <div class="sb-meta"><span class="t">Botanical series</span><span class="c">Visual stuff</span></div>
+      </a>
+
+      <!-- 8 —video -->
+      <a class="sb-card h-m" data-id="sb-8" data-type="music" data-cat="Music video" data-embed="">
+        <div class="sb-media">
+          <image-slot id="sb-8" shape="rounded" radius="16" placeholder="Drop a video poster"></image-slot>
+          <div class="play"><span><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span></div>
+        </div>
+        <div class="sb-meta"><span class="t">Paper Boats —lyric video</span><span class="c">Music video</span></div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="foot" data-screen-label="Footer">
+  <div class="wrap">
+    <div class="fbrand">Muhua Qin</div>
+    <div class="flinks">
+      <a href="index.html#work">Work</a>
+      <a href="About.html">About</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= LIGHTBOX ================= -->
+<div class="lb" id="lb" aria-hidden="true">
+  <button class="lb-nav prev" id="lbPrev" aria-label="Previous">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <div class="lb-inner">
+    <button class="lb-close" id="lbClose" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+    <div class="lb-stage" id="lbStage"></div>
+    <div class="lb-cap">
+      <h2 class="lb-title" id="lbTitle"></h2>
+      <span class="lb-cat" id="lbCat"></span>
+    </div>
+    <div class="lb-note" id="lbNote"></div>
+  </div>
+  <button class="lb-nav next" id="lbNext" aria-label="Next">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</div>
+
+<script src="image-slot.js"></script>
+<script>
+(function(){
+  var grid    = document.getElementById('grid');
+  var cards   = Array.prototype.slice.call(grid.querySelectorAll('.sb-card'));
+  var filters = document.getElementById('filters');
+  var lb      = document.getElementById('lb');
+  var stage   = document.getElementById('lbStage');
+  var elTitle = document.getElementById('lbTitle');
+  var elCat   = document.getElementById('lbCat');
+  var elNote  = document.getElementById('lbNote');
+  var current = -1;
+
+  /* ---- filters ---- */
+  filters.addEventListener('click', function(e){
+    var b = e.target.closest('button'); if(!b) return;
+    filters.querySelectorAll('button').forEach(function(x){ x.classList.remove('is-active'); });
+    b.classList.add('is-active');
+    var f = b.getAttribute('data-filter');
+    cards.forEach(function(c){
+      var show = (f === 'all') || (c.getAttribute('data-type') === f);
+      c.classList.toggle('is-hidden', !show);
+    });
+  });
+
+  /* ---- build the detail media for a card ---- */
+  function buildStage(card){
+    stage.innerHTML = '';
+    var id    = card.getAttribute('data-id');
+    var type  = card.getAttribute('data-type');
+    var embed = (card.getAttribute('data-embed') || '').trim();
+
+    if (embed){
+      // music video / motion with a real embed link (YouTube / Vimeo / mp4)
+      var isFile = /\.(mp4|webm|mov)(\?|$)/i.test(embed);
+      if (isFile){
+        var v = document.createElement('video');
+        v.src = embed; v.controls = true; v.autoplay = true; v.playsInline = true;
+        stage.appendChild(v);
+      } else {
+        var fr = document.createElement('iframe');
+        fr.src = embed; fr.allow = 'autoplay; fullscreen; picture-in-picture';
+        fr.setAttribute('allowfullscreen','');
+        stage.appendChild(fr);
+      }
+      elNote.textContent = '';
+      return;
+    }
+
+    // no embed yet ->show the poster/artwork slot (same id as the card, so a
+    // dropped image appears here and on the card together)
+    var slot = document.createElement('image-slot');
+    slot.id = id;
+    slot.setAttribute('shape','rounded');
+    slot.setAttribute('radius','18');
+    slot.setAttribute('placeholder', type === 'illustration'
+      ? 'Drop your artwork' : 'Drop a poster frame');
+    stage.appendChild(slot);
+
+    if (type === 'music'){
+      var play = document.createElement('div');
+      play.className = 'play';
+      play.innerHTML = '<span><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>';
+      stage.appendChild(play);
+      elNote.textContent = 'Tip: drop a poster frame above, or ask to embed a YouTube / Vimeo link.';
+    } else {
+      elNote.textContent = '';
+    }
+  }
+
+  function visibleCards(){ return cards.filter(function(c){ return !c.classList.contains('is-hidden'); }); }
+
+  function open(card){
+    current = cards.indexOf(card);
+    buildStage(card);
+    var titleEl = card.querySelector('.sb-meta .t');
+    elTitle.textContent = titleEl ? titleEl.textContent : '';
+    elCat.textContent   = card.getAttribute('data-cat') || '';
+    lb.classList.add('is-open');
+    lb.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close(){
+    lb.classList.remove('is-open');
+    lb.setAttribute('aria-hidden','true');
+    stage.innerHTML = '';
+    document.body.style.overflow = '';
+    current = -1;
+  }
+
+  function step(dir){
+    var vis = visibleCards();
+    if(!vis.length) return;
+    var here = vis.indexOf(cards[current]);
+    var next = (here + dir + vis.length) % vis.length;
+    open(vis[next]);
+  }
+
+  /* ---- card open (ignore clicks on the slot's own controls) ---- */
+  cards.forEach(function(c){
+    c.addEventListener('click', function(e){
+      e.preventDefault();
+      open(c);
+    });
+  });
+
+  document.getElementById('lbClose').addEventListener('click', close);
+  document.getElementById('lbPrev').addEventListener('click', function(){ step(-1); });
+  document.getElementById('lbNext').addEventListener('click', function(){ step(1); });
+  lb.addEventListener('click', function(e){ if(e.target === lb) close(); });
+  document.addEventListener('keydown', function(e){
+    if(!lb.classList.contains('is-open')) return;
+    if(e.key === 'Escape') close();
+    else if(e.key === 'ArrowLeft') step(-1);
+    else if(e.key === 'ArrowRight') step(1);
+  });
+})();
+</script>
+
+</body>
+</html>

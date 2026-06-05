@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Anomify — Cover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500;1,6..72,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    /* Light editorial — soft violet wash, distinct from Supply Zone's blue */
+    --bg:#efe9f5;
+    --ink:#14110d;
+    --ink-soft:#46413a;
+    --ink-faint:#8a847b;
+    --line:#11100e;
+    --accent:oklch(0.55 0.14 252);
+    --anomaly:#c33b27;
+    --serif:"Newsreader",Georgia,"Times New Roman",serif;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{
+    background:#e7e3db;
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;font-family:var(--sans);
+  }
+  #stage{position:relative;}
+  .cover{
+    width:1600px;height:1200px;position:relative;overflow:hidden;
+    background-color:var(--bg);
+    background-image:
+      linear-gradient(rgba(20,17,13,0.045) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(20,17,13,0.045) 1px,transparent 1px),
+      linear-gradient(140deg,#f4eaf3 0%,#ece9f6 52%,#e6eef5 100%);
+    background-size:40px 40px,40px 40px,cover;
+    -webkit-font-smoothing:antialiased;
+    padding:104px 110px 90px;
+    display:flex;flex-direction:column;
+  }
+  /* corner ticks — blueprint trim */
+  .corner{position:absolute;width:26px;height:26px;border:2px solid var(--ink);}
+  .corner.tl{top:46px;left:50px;border-right:0;border-bottom:0;}
+  .corner.tr{top:46px;right:50px;border-left:0;border-bottom:0;}
+  .corner.bl{bottom:46px;left:50px;border-right:0;border-top:0;}
+  .corner.br{bottom:46px;right:50px;border-left:0;border-top:0;}
+
+  .top{display:flex;justify-content:space-between;align-items:baseline;}
+  .kicker{font-size:15px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);}
+  .tag{font-family:var(--mono);font-size:14px;letter-spacing:.06em;color:var(--accent);display:flex;align-items:center;gap:8px;}
+  .tag .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);}
+
+  h1{font-family:var(--serif);font-weight:500;color:var(--ink);
+    font-size:104px;line-height:0.98;letter-spacing:-0.02em;margin-top:54px;}
+  h1 em{font-style:normal;color:inherit;}
+  .rule{height:2px;background:var(--line);margin:46px 0 30px;}
+  .lead{font-size:24px;line-height:1.5;color:var(--ink-soft);max-width:46ch;}
+  .lead b{color:var(--ink);font-weight:600;}
+
+  /* illustration */
+  .fig{margin-top:auto;border:1.5px solid var(--line);border-radius:18px;overflow:hidden;
+    background-color:#fff;
+    background-image:
+      linear-gradient(rgba(20,17,13,0.05) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(20,17,13,0.05) 1px,transparent 1px);
+    background-size:32px 32px;}
+  .fig svg{display:block;width:100%;height:auto;}
+
+  .foot{display:flex;justify-content:space-between;align-items:baseline;margin-top:30px;
+    font-size:16px;color:var(--ink-soft);}
+  .foot .name{font-family:var(--serif);font-size:21px;color:var(--ink);font-weight:500;}
+  .foot .meta{font-family:var(--mono);font-size:14px;letter-spacing:.04em;color:var(--ink-faint);
+    display:flex;gap:22px;}
+  .foot .meta span b{color:var(--ink-soft);font-weight:500;}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="cover" id="cover">
+    <div class="corner tl"></div><div class="corner tr"></div>
+    <div class="corner bl"></div><div class="corner br"></div>
+
+    <div class="top">
+      <div class="kicker">Case Study · UX Research &amp; Design</div>
+      <div class="tag"><span class="dot"></span>Anomify · Explainable AI</div>
+    </div>
+
+    <h1>Calibrating <em>Trust</em> in<br />AI-Driven Anomaly Alerts</h1>
+
+    <div class="rule"></div>
+    <p class="lead">Turning opaque, black-box AI warnings into <b>explanations operations teams can actually act on.</b></p>
+
+    <!-- blueprint illustration: anomaly signal → trust calibration -->
+    <div class="fig">
+      <svg viewBox="0 0 1380 470" role="img" aria-label="Anomaly signal flagged, then trust calibrated">
+        <!-- band 1 label -->
+        <text x="60" y="56" font-family="'JetBrains Mono',monospace" font-size="15" letter-spacing="2" fill="#8a847b">01 · MONITORING SIGNAL</text>
+
+        <!-- baseline -->
+        <line x1="60" y1="150" x2="1320" y2="150" stroke="rgba(20,17,13,0.18)" stroke-width="1" stroke-dasharray="2 5"></line>
+        <!-- signal with a spike -->
+        <polyline fill="none" stroke="#14110d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"
+          points="60,150 150,158 240,144 330,154 410,150 470,150 510,150 545,58 580,150 650,156 740,146 830,156 920,148 1010,156 1100,146 1190,154 1280,150 1320,150"></polyline>
+
+        <!-- flagged anomaly -->
+        <circle cx="545" cy="58" r="30" fill="none" stroke="#c33b27" stroke-width="2.5"></circle>
+        <line x1="545" y1="18" x2="545" y2="40" stroke="#c33b27" stroke-width="2"></line>
+        <line x1="545" y1="76" x2="545" y2="98" stroke="#c33b27" stroke-width="2"></line>
+        <line x1="505" y1="58" x2="527" y2="58" stroke="#c33b27" stroke-width="2"></line>
+        <line x1="563" y1="58" x2="585" y2="58" stroke="#c33b27" stroke-width="2"></line>
+        <text x="600" y="52" font-family="'JetBrains Mono',monospace" font-size="15" fill="#c33b27" font-weight="500">anomaly detected</text>
+        <text x="600" y="74" font-family="'JetBrains Mono',monospace" font-size="13" fill="#8a847b">confidence 92%</text>
+
+        <!-- divider between bands -->
+        <line x1="60" y1="248" x2="1320" y2="248" stroke="rgba(20,17,13,0.12)" stroke-width="1"></line>
+
+        <!-- band 2 label -->
+        <text x="60" y="306" font-family="'JetBrains Mono',monospace" font-size="15" letter-spacing="2" fill="#8a847b">02 · TRUST CALIBRATION</text>
+
+        <!-- calibration track -->
+        <line x1="170" y1="392" x2="1210" y2="392" stroke="#14110d" stroke-width="2.5"></line>
+        <!-- end caps -->
+        <line x1="170" y1="376" x2="170" y2="408" stroke="#14110d" stroke-width="2.5"></line>
+        <line x1="1210" y1="376" x2="1210" y2="408" stroke="#14110d" stroke-width="2.5"></line>
+        <!-- center tick -->
+        <line x1="690" y1="368" x2="690" y2="416" stroke="oklch(0.55 0.14 252)" stroke-width="2"></line>
+        <!-- minor ticks -->
+        <line x1="430" y1="384" x2="430" y2="400" stroke="rgba(20,17,13,0.3)" stroke-width="1.5"></line>
+        <line x1="950" y1="384" x2="950" y2="400" stroke="rgba(20,17,13,0.3)" stroke-width="1.5"></line>
+        <!-- marker -->
+        <path d="M690 360 L708 392 L690 424 L672 392 Z" fill="oklch(0.55 0.14 252)"></path>
+
+        <!-- labels -->
+        <text x="170" y="446" font-family="'JetBrains Mono',monospace" font-size="14" fill="#8a847b">under-trust</text>
+        <text x="690" y="446" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="14" fill="oklch(0.55 0.14 252)" font-weight="500">calibrated</text>
+        <text x="1210" y="446" text-anchor="end" font-family="'JetBrains Mono',monospace" font-size="14" fill="#8a847b">over-trust</text>
+      </svg>
+    </div>
+
+    <div class="foot">
+      <div class="name">Muhua Qin</div>
+      <div class="meta">
+        <span><b>Role</b> UX Researcher &amp; Designer</span>
+        <span><b>Method</b> Within-subjects study</span>
+        <span><b>2025</b></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function fit(){
+    var s = document.getElementById('stage');
+    var scale = Math.min(window.innerWidth/1600, window.innerHeight/1200);
+    s.style.transform = 'scale('+scale+')';
+  }
+  window.addEventListener('resize', fit);
+  fit();
+</script>
+</body>
+</html>

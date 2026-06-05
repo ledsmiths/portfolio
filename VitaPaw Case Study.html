@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VitaPaw - Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="vitapaw-case.css" />
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">Muhua Qin</a>
+    <div class="links">
+      <a href="index.html#contact">About</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero" data-screen-label="Hero">
+  <div class="wrap">
+    <div class="kicker">Case study · UX / UI · AI pet health</div>
+    <h1>VitaPaw — reading a cat's<br />health through behavior</h1>
+    <div class="rule"></div>
+    <p class="lead">VitaPaw is an AI-powered system that monitors cats' health through behavior analysis. It helps caregivers detect early illness signs and make informed care decisions — turning continuous camera observation into clear, trustworthy health signals.</p>
+
+    <a class="award" href="https://ux-design-awards.com/winners/2025-2-vitapaw-ai-powered-cats-health-monitoring-system" target="_blank" rel="noopener">
+      <span class="aw-mark" aria-hidden="true">★</span>
+      <span class="aw-body">
+        <span class="aw-line">Nominated · UX Design Awards 2025</span>
+        <span class="aw-desc">Recognized for its innovative approach to AI-driven preventive pet care — for both user experience and animal welfare.</span>
+        <span class="aw-link">View on UX Design Awards →</span>
+      </span>
+    </a>
+
+    <dl class="metagrid">
+      <dt>Project Type</dt><dd>Academic group project (6 members)</dd>
+      <dt>My Role</dt><dd>Product Designer</dd>
+      <dt>Duration</dt><dd>3 Months (Jan 2025 - Apr 2025)</dd>
+      <dt>Tools</dt><dd>Figma · Claude Code</dd>
+    </dl>
+
+    <div class="livedemo">
+      <div class="ld-copy">
+        <div class="nl">Live demo</div>
+        <p>Beyond static screens, I vibe-coded a working prototype — a clickable browser build that simulates the alert feed, anomaly video playback, and health report.</p>
+        <a class="demobtn" href="assets/Vitapaw/vitapawdemo/index.html" target="_blank" rel="noopener"><span class="dot"></span>Try the live demo</a>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<div class="divider"></div>
+
+<!-- ================= BACKGROUND ================= -->
+<section data-screen-label="Background">
+  <div class="wrap">
+    <div class="eyebrow">Background</div>
+    <h2>Subtle signs, easy to miss</h2>
+    <div class="note">
+      <div class="nl">The premise</div>
+      <p>Cats hide illness well - early signs are subtle and behavioral, and caregivers rarely have time to watch continuously. VitaPaw uses vision-based behavior recognition to <b>surface those early signals and turn them into care decisions</b>.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= 1. DISCOVER ================= -->
+<section data-screen-label="Discover">
+  <div class="wrap">
+    <div class="phasehead"><span class="pidx">01</span><span class="eyebrow" style="margin:0;">Discover</span></div>
+    <h2>Research &amp; insights</h2>
+    <p>In the Discover phase, research and insights were gathered through a combination of secondary research and interviews with veterinarians and multi-cat caregivers. This helped identify the key challenges in multi-cat health management and uncover opportunities for AI-assisted monitoring.</p>
+
+    <figure>
+      <div class="frictiongrid" style="align-items:center;">
+        <div class="shot">
+          <img src="assets/Vitapaw/Secondary%20Research.png" alt="Secondary research: caregiving contexts and constraints" />
+        </div>
+        <div class="painblock">
+          <h4 style="color:var(--accent);">Secondary research</h4>
+          <ol style="margin:0;padding-left:20px;font-size:14.5px;line-height:1.7;color:var(--ink-soft);">
+            <li>Understand real-world caregiving contexts and constraints</li>
+            <li>Identify overlooked stress-related risks in multi-animal environments</li>
+            <li>Refine the core problem definition</li>
+          </ol>
+        </div>
+
+        <div class="painblock">
+          <h4 style="color:var(--accent);">Target user &amp; expert interviews</h4>
+          <p class="pp" style="margin-bottom:8px;"><b>Primary users:</b> cat caregivers &amp; rescue environments. &nbsp;<b>Secondary users:</b> veterinarians.</p>
+          <ol style="margin:0;padding-left:20px;font-size:14.5px;line-height:1.7;color:var(--ink-soft);">
+            <li>Understand current monitoring practices</li>
+            <li>Identify caregiving challenges</li>
+            <li>Explore expectations for AI support</li>
+          </ol>
+        </div>
+        <div class="shot">
+          <img src="assets/Vitapaw/Target%20user%20%26%20expert%20interviews.png" alt="Target user and expert interviews with caregivers and veterinarians" />
+        </div>
+      </div>
+    </figure>
+
+    <figure style="margin-top:44px;">
+      <div class="kf">
+        <div class="kf-head">
+          <h3 class="kf-ttl">Key findings</h3>
+          <div class="kf-sub">what we heard - 4 themes</div>
+        </div>
+        <div class="kf-grid">
+          <article class="kf-card k1" style="background-color: rgba(255, 255, 255, 0.5)">
+            <div class="kf-row"><span class="kf-num">01</span><span class="kf-ico">🔎</span></div>
+            <h4>Subtle symptoms slip through</h4>
+            <p>Early signs are often overlooked because monitoring relies on subjective, intermittent observation.</p>
+          </article>
+          <article class="kf-card k2" style="background-color: rgba(255, 255, 255, 0.5)">
+            <div class="kf-row"><span class="kf-num">02</span><span class="kf-ico">⏱️</span></div>
+            <h4>Monitoring is hard to sustain</h4>
+            <p>High workload and limited staff make continuous monitoring difficult, especially in rescue centers.</p>
+          </article>
+          <article class="kf-card k3" style="background-color: rgba(255, 255, 255, 0.5)">
+            <div class="kf-row"><span class="kf-num">03</span><span class="kf-ico">💡</span></div>
+            <h4>Explainability is essential</h4>
+            <p>Users need alerts that are transparent and trustworthy - not a black box they're asked to act on.</p>
+          </article>
+          <article class="kf-card k4" style="background-color: rgba(255, 255, 255, 0.5)">
+            <div class="kf-row"><span class="kf-num">04</span><span class="kf-ico">💬</span></div>
+            <h4>Plain language beats raw data</h4>
+            <p>Concise, intuitive feedback is preferred over medical terminology or dense charts.</p>
+          </article>
+        </div>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= 2. SCOPING ================= -->
+<section data-screen-label="Scoping">
+  <div class="wrap">
+    <div class="phasehead"><span class="pidx">02</span><span class="eyebrow" style="margin:0;">Scoping the problem space</span></div>
+    <h2>Grounding the problem in what's buildable</h2>
+    <p>To ground the problem definition, I first reviewed existing pet-camera products and assessed the technical feasibility of vision-based behavior recognition - to understand both market gaps and realistic system constraints.</p>
+    <div class="ovcards" style="grid-template-columns:1fr 1fr;">
+      <div class="card ovcard c2" style="background-color: rgba(255, 255, 255, 0.4)">
+        <div class="ovk">Competitive analysis</div>
+        <h3 class="ovt">A gap in health-oriented monitoring</h3>
+        <p>Existing pet cameras are primarily designed for entertainment or basic monitoring, offering limited support for individualized, health-oriented monitoring in multi-cat environments.</p>
+      </div>
+      <div class="card ovcard c3" style="background-color: rgba(255, 255, 255, 0.42)">
+        <div class="ovk">Technical feasibility</div>
+        <h3 class="ovt">Observable, behavior-driven signals</h3>
+        <p>A high-level review of vision-based animal behavior recognition helped constrain the design focus to observable, behavior-driven indicators rather than speculative or clinically invasive signals.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= IDEATION - USER JOURNEY ================= -->
+<section data-screen-label="User Journey">
+  <div class="wrap">
+    <div class="eyebrow">Ideation - user journey</div>
+    <h2>Mapping the caregiver's journey</h2>
+    <p>I mapped the end-to-end journey of a busy caregiver - from onboarding a pet to taking medical action - to locate where reassurance breaks down and where the AI needs to earn trust.</p>
+
+    <div class="persona">
+      <div class="pavatar">EV</div>
+      <div>
+        <div class="pname">Eleanor Vance - 32</div>
+        <div class="prole">Primary persona - data analyst</div>
+        <p class="pdesc">A busy professional caring for a senior pet with chronic health risks. She wants to stay on top of subtle changes without spending her limited time deciphering data.</p>
+        <div class="ptraits"><span>Efficiency-first</span><span>Time-poor</span><span>Detail-aware</span></div>
+      </div>
+    </div>
+
+    <figure class="journeyfig">
+      <div class="journey panel" style="padding:14px;">
+        <table class="jtable">
+          <thead>
+            <tr>
+              <th class="corner"></th>
+              <th>1 - Initialization<br />(onboarding)</th>
+              <th>2 - Routine<br />monitoring</th>
+              <th>3 - Anomaly<br />alert</th>
+              <th>4 - Deep<br />analysis</th>
+              <th>5 - Medical<br />action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="rowlab" style="background-color: rgba(224, 217, 254, 0.55)">Actions</td>
+              <td class="cellbox">Inputs pet's species, age &amp; health history</td>
+              <td class="cellbox">Occasionally checks the live feed; goes about the day</td>
+              <td class="cellbox">Receives a push notification for an immediate anomaly</td>
+              <td class="cellbox">Reviews the pet's health report</td>
+              <td class="cellbox">Exports a standardized health report for the vet</td>
+            </tr>
+            <tr>
+              <td class="rowlab">Thoughts</td>
+              <td class="cellbox">"Onboarding is a bit tedious, but worth it for accuracy."</td>
+              <td class="cellbox">"I don't need to worry - I feel reassured."</td>
+              <td class="cellbox">"Suddenly anxious - why exactly did it alert?"</td>
+              <td class="cellbox">"The charts are messy. Just tell me how serious it is."</td>
+              <td class="cellbox">"I hope this data helps the vet diagnose accurately."</td>
+            </tr>
+            <tr>
+              <td class="rowlab">Emotions</td>
+              <td class="emoji">🧐</td>
+              <td class="emoji">😌</td>
+              <td class="emoji">😟</td>
+              <td class="emoji">😕</td>
+              <td class="emoji">✅</td>
+            </tr>
+            <tr>
+              <td class="rowlab">Frustrations</td>
+              <td class="cellbox"><span class="pain">Tedious entry:</span> doesn't want to fill in too much manually.</td>
+              <td class="cellbox"><span class="pain">Invisible AI:</span> can't see it working, doubts it's effective.</td>
+              <td class="cellbox"><span class="pain">False alarms:</span> cats playing can trigger over-panic.</td>
+              <td class="cellbox"><span class="pain">Chart overload:</span> too dense to read the trend.</td>
+              <td class="cellbox"><span class="pain">Hard to convey:</span> can't describe subtle anomalies to the vet.</td>
+            </tr>
+            <tr>
+              <td class="rowlab">Opportunities</td>
+              <td class="opp"><span class="ol">Guided entry:</span> auto-suggest common risks by breed.</td>
+              <td class="opp"><span class="ol">One-click live feed</span> on the home screen for peace of mind.</td>
+              <td class="opp"><span class="ol">10s clip:</span> direct link to a snippet of the specific anomaly.</td>
+              <td class="opp"><span class="ol">Severity levels:</span> show which alert matters most at a glance.</td>
+              <td class="opp"><span class="ol">Export</span> a standardized health report.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <figcaption>Fig. 1 - Caregiver journey across five stages, with thoughts, frustrations, and opportunities per stage.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= IA ================= -->
+<section data-screen-label="Information Architecture">
+  <div class="wrap">
+    <div class="eyebrow">Information architecture</div>
+    <h2>An IA built around health signals</h2>
+    <p>The IA prioritizes clear health signals and efficient navigation, supporting fast awareness without unnecessary cognitive load. Three top-level areas keep alerts, pets, and setup distinct but reachable.</p>
+    <figure>
+      <div class="mmscroll">
+        <div class="mm">
+          <ul>
+            <li>
+              <span class="mm-rootbox">Vita<br />Paw</span>
+              <ul>
+                <li class="br-blue">
+                  <span class="mm-box">Alarm (main page)</span>
+                  <ul>
+                    <li>
+                      <span class="mm-box">View live monitoring</span>
+                      <ul>
+                        <li><span class="mm-box">Live monitor</span></li>
+                        <li><span class="mm-box">History record</span></li>
+                      </ul>
+                    </li>
+                    <li>
+                      <span class="mm-box">All alarm</span>
+                      <ul>
+                        <li>
+                          <span class="mm-box">Alarm information</span>
+                          <ul>
+                            <li><span class="mm-box">Mark as seen</span></li>
+                            <li><span class="mm-box">Alarm feedback</span></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li class="br-violet">
+                  <span class="mm-box">Pet management</span>
+                  <ul>
+                    <li>
+                      <span class="mm-box">Add pet</span>
+                      <ul>
+                        <li>
+                          <span class="mm-box">Add pet information</span>
+                          <ul>
+                            <li><span class="mm-box">Completed</span></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <span class="mm-box">Pet information &amp; health report</span>
+                      <ul>
+                        <li><span class="mm-box">Edit pet information</span></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li class="br-amber">
+                  <span class="mm-box">Setting</span>
+                  <ul>
+                    <li><span class="mm-box">Account setting</span></li>
+                    <li><span class="mm-box">Notifications setting</span></li>
+                    <li>
+                      <span class="mm-box">Device management</span>
+                      <ul>
+                        <li><span class="mm-box">Add device</span></li>
+                        <li><span class="mm-box">Device list</span></li>
+                      </ul>
+                    </li>
+                    <li>
+                      <span class="mm-box">Camera management</span>
+                      <ul>
+                        <li><span class="mm-box">Add camera</span></li>
+                        <li>
+                          <span class="mm-box">Camera list</span>
+                          <ul>
+                            <li><span class="mm-box">Define area</span></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <figcaption>Fig. 2 - Information architecture: Alarm, Pet management, and Settings as three top-level areas.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= 2.1 INDICATORS & NOTIFICATIONS ================= -->
+<section data-screen-label="Health Indicators">
+  <div class="wrap">
+    <div class="eyebrow">DEFINE HEALTH INDICATORS &amp; NOTIFICATION STRATEGY</div>
+    <h2>Four indicator types, grouped by urgency</h2>
+    <p>Based on expert interviews and literature, we identified four types of health indicators and grouped them by urgency to guide alert timing, prioritization, and trend-based monitoring design.</p>
+    <div class="twocol">
+      <div class="tcol">
+        <h3 class="tch">Indicator types</h3>
+        <div class="indgroup g1">
+          <h4>Activity &amp; mobility</h4>
+          <ol><li>Stiff gait or limp when walking</li><li>Weakness in walking</li><li>Activity level</li><li>Observable seizure events</li></ol>
+        </div>
+        <div class="indgroup g2">
+          <h4>Repetitive behaviours</h4>
+          <ol><li>Frequent scratching of specific areas</li><li>Excessive licking of fur</li></ol>
+        </div>
+        <div class="indgroup g3">
+          <h4>Food &amp; litter visits</h4>
+          <ol><li>Visit frequency changes</li></ol>
+        </div>
+        <div class="indgroup g4">
+          <h4>Posture &amp; body state</h4>
+          <ol><li>Repeated dry heaves</li></ol>
+        </div>
+      </div>
+      <div class="tcol">
+        <h3 class="tch">Notification strategy</h3>
+        <div class="notegrp">
+          <h4>Group A - Immediate observable indicators</h4>
+          <p class="gnote">Immediate indicators trigger instant notifications and are included in health reports.</p>
+          <ol><li>Stiff gait or limp when walking</li><li>Weakness in walking</li><li>Repeated dry-heaving episodes</li><li>Observable seizure events</li></ol>
+        </div>
+        <div class="notegrp b">
+          <h4>Group B - Trend-based behavioural indicators</h4>
+          <p class="gnote">Trend-based indicators are shown in health reports and only trigger notifications when sustained changes are detected.</p>
+          <ol><li>Activity level</li><li>Visit frequency of feeding &amp; litter areas</li><li>Frequent scratching of specific areas</li><li>Excessive licking of fur</li></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= 3. PROTOTYPE ================= -->
+<section data-screen-label="Prototype">
+  <div class="wrap">
+    <div class="phasehead"><span class="pidx">03</span><span class="eyebrow" style="margin:0;">Prototype &amp; functions</span></div>
+    <h2>From indicators to interface</h2>
+    <p>The prototype turns the indicator strategy into a calm, scannable interface - surfacing the single most urgent signal first, then giving caregivers the context to decide what to do next.</p>
+
+    <div class="specimen pc1">
+      <div class="spec-phone"><div class="phoneslot real"><img src="assets/Vitapaw/homepage.png" alt="VitaPaw homepage alarm overview screen" /></div></div>
+      <div class="spec-body">
+        <h3 class="spec-title">Homepage</h3>
+        <div class="spec-sub">Alarm Overview</div>
+        <div class="spec-fn">Functions</div>
+        <div class="spec-list">
+          <div class="si">A single highlighted alert surfaces the most urgent case</div>
+          <div class="si">Secondary alerts remain visible to preserve context</div>
+          <div class="si">New / Seen states support alert management over time</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="specimen flip pc2">
+      <div class="spec-phone"><div class="phoneslot real"><img src="assets/Vitapaw/alarm%20detial.png" alt="VitaPaw alarm details screen with video and suggestion" /></div></div>
+      <div class="spec-body">
+        <h3 class="spec-title">Alarm Details</h3>
+        <div class="spec-sub">Alert Explanation &amp; Follow-up</div>
+        <div class="spec-fn">Functions</div>
+        <div class="spec-list">
+          <div class="si">A short video clip provides visual context for the detected abnormal behaviour</div>
+          <div class="si">The alert description focuses on observable movement changes, avoiding diagnostic claims</div>
+          <div class="si">Clear, actionable suggestions guide users on what to observe or check next</div>
+          <div class="si">Users can mark the alert as seen or provide feedback to support system learning</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="specimen pc3">
+      <div class="spec-phone"><div class="phoneslot real"><img src="assets/Vitapaw/My%20pets.png" alt="VitaPaw My Pets profile list screen" /></div></div>
+      <div class="spec-body">
+        <h3 class="spec-title">My Pets</h3>
+        <div class="spec-sub">Pet Profile Management</div>
+        <div class="spec-fn">Functions</div>
+        <div class="spec-list">
+          <div class="si">Pets with recent alarms are prioritised at the top of the list</div>
+          <div class="si">Each card displays core profile information</div>
+          <div class="si">Recent abnormal events are surfaced to support quick status checks</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="specimen flip pc4">
+      <div class="spec-phone"><div class="phoneslot real"><img src="assets/Vitapaw/pet%20information.png" alt="VitaPaw pet information health report screen" /></div></div>
+      <div class="spec-body">
+        <h3 class="spec-title">Pet Information</h3>
+        <div class="spec-sub">Individual Health Overview</div>
+        <div class="spec-fn">Key functions</div>
+        <div class="spec-list">
+          <div class="si">Core pet data is presented at the top for quick reference</div>
+          <div class="si">Recent alerts are surfaced with visual evidence to support context review</div>
+          <div class="si">Health reports summarise behavioural trends over different time ranges</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= 4. ITERATION ================= -->
+<section class="iteration" data-screen-label="Iteration">
+  <div class="wrap">
+    <div class="phasehead"><span class="pidx">04</span><span class="eyebrow" style="margin:0;">Iteration</span></div>
+    <h2>From surface polish to a better decision model</h2>
+    <p>Early usability testing focused on improving clarity, navigation flow, and information hierarchy. We simplified the homepage, reduced visual noise, refined error feedback, and improved feature discoverability. The final iteration shifted focus from surface-level refinement to <b>rethinking the alert decision model</b>.</p>
+
+    <figure>
+      <div class="baframe">
+        <div class="bacol before">
+          <div class="balabel">Before</div>
+          <div class="phoneslot real"><img src="assets/Vitapaw/before%20homepage.png" alt="Before homepage with Pending and Completed tabs" /></div>
+        </div>
+        <div class="bacol after">
+          <div class="balabel">After</div>
+          <div class="phoneslot real"><img src="assets/Vitapaw/after%20homepage.png" alt="After homepage with a single feed and colour-coded severity" /></div>
+        </div>
+      </div>
+      <div class="decisions">
+        <h4>Iteration 1 - Homepage - key decisions</h4>
+        <div class="dlist">
+          <div class="di"><div class="dn">1</div><div class="dt"><b>Simplifying alert handling.</b> Replaced Pending / Completed categorisation with a single "Mark as seen" action to reduce unnecessary decision-making.</div></div>
+          <div class="di"><div class="dn">2</div><div class="dt"><b>Clarifying visual severity.</b> Introduced colour-coded indicators - orange for high-priority alerts, blue for standard - to improve scanability.</div></div>
+          <div class="di"><div class="dn">3</div><div class="dt"><b>Improving the mental model.</b> Moved the alert-state toggle to the top to reinforce that all alerts belong to one system, differentiated by priority rather than structure.</div></div>
+        </div>
+      </div>
+      <figcaption>Fig. 3 - Homepage iteration: one feed, severity by colour, fewer decisions.</figcaption>
+    </figure>
+
+    <figure style="margin-top:48px;">
+      <div class="baframe">
+        <div class="bacol before">
+          <div class="balabel">Before</div>
+          <div class="phoneslot real"><img src="assets/Vitapaw/before%20alert%20detial.png" alt="Before alert details with Add to Pending and Complete actions" /></div>
+        </div>
+        <div class="bacol after">
+          <div class="balabel">After</div>
+          <div class="phoneslot real"><img src="assets/Vitapaw/after%20alert%20detial.png" alt="After alert details with feedback and a single Mark as seen action" /></div>
+        </div>
+      </div>
+      <div class="decisions">
+        <h4>Iteration 2 - Alarm Details - key decisions</h4>
+        <div class="dlist">
+          <div class="di"><div class="dn">1</div><div class="dt"><b>Removed "Add to Pending."</b> Cut the action to reduce unnecessary decision-making.</div></div>
+          <div class="di"><div class="dn">2</div><div class="dt"><b>Reframed the model.</b> Shifted alerts from task management to lightweight health signals.</div></div>
+          <div class="di"><div class="dn">3</div><div class="dt"><b>One clear action.</b> Introduced a single "Mark as seen" to support quick acknowledgment and a clearer decision flow.</div></div>
+        </div>
+      </div>
+      <figcaption>Fig. 4 - Alarm-details iteration: alerts become signals to acknowledge, not tasks to manage.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= OUTCOME ================= -->
+<section class="endnote" data-screen-label="Outcome">
+  <div class="wrap">
+    <div class="card outcard">
+      <div class="eyebrow">Outcome</div>
+      <h2>Continuous watching, calm decisions</h2>
+      <p>By grounding the design in observable behaviour, grouping indicators by urgency, and rebuilding the alert model around a single acknowledge action, VitaPaw turns always-on camera monitoring into a small number of clear, trustworthy signals - so a time-poor caregiver can tell, at a glance, whether today needs their attention.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="foot" data-screen-label="Footer">
+  <div class="wrap">
+    <a class="fbrand" href="index.html">Muhua Qin</a>
+    <div class="flinks">
+      <a href="index.html#contact">About</a>
+    </div>
+  </div>
+</footer>
+
+<div id="tweaks-root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="vitapaw-tweaks.jsx"></script>
+<script>
+  (function(){
+    var nav = document.querySelector('.nav');
+    if(!nav) return;
+    var onScroll = function(){
+      if (window.scrollY > 24) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, {passive:true});
+  })();
+</script>
+
+</body>
+</html>
